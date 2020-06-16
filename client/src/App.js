@@ -6,6 +6,7 @@ import NavBar from './components/NavBar';
 import NoMatch from './components/NoMatch'
 import Products from './components/Products';
 import Home from './components/Home';
+import ProductView from './components/ProductView'
 
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
      <Switch>
        <Route exact path='/' component={Home}></Route>
        <Route exact path='/products' component={Products}></Route>
+       <Route exact path='/products/:id' component={ProductView}></Route>       
        <Route component={NoMatch}></Route>
      </Switch>
    </Container>
