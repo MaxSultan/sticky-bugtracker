@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react'
 import { AuthContext } from '../providers/AuthProvider'
 import Axios from 'axios';
 
-export default function FetchUser({ props }) {
+export default function FetchUser(props) {
     const [loaded, setLoaded] = useState(false);
     const auth = useContext(AuthContext)
 

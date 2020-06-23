@@ -10,6 +10,7 @@ import ProductView from './components/ProductView'
 import Login from './components/Login';
 import Register from './components/Register';
 import FetchUser from './components/FetchUser'
+import ProtectedRoute from './components/ProtectedRoute';
 
 
 function App() {
@@ -19,11 +20,11 @@ function App() {
    <FetchUser>
    <Container>
      <Switch>
-       <Route exact path='/' component={Home}></Route>
+       <ProtectedRoute exact path='/' component={Home}/>
        <Route exact path="/login" component={Login} />
         <Route exact path="/register" component={Register} />
-       <Route exact path='/products' component={Products}></Route>
-       <Route exact path='/products/:id' component={ProductView}></Route>       
+       <ProtectedRoute exact path='/products' component={Products}/>
+       <ProtectedRoute exact path='/products/:id' component={ProductView}/>     
        <Route component={NoMatch}></Route>
      </Switch>
    </Container>
