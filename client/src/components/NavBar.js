@@ -12,7 +12,7 @@ const NavBar = ({ props }) => {
     const rightNavItems = () => {
         // const { auth: { user, handleLogout}, location, } = props;
     
-        if(auth.user){
+        if(auth.authenticated){
             return (
                 <Menu.Menu position='right'>
                   <Menu.Item
