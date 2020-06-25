@@ -47,15 +47,21 @@ const NavBar = ({ props }) => {
         <Menu pointing secondary {...props} auth={auth}>
             <Link to='/'>
                 <Menu.Item
-                name='Home'
+                icon='home'
                 id='Home'
                 active={location.pathname === '/'}
                 />
             </Link>
-            <Link to='/products'>
+            <Link to='/projects'>
                 <Menu.Item
-                name="Products"
-                active={location.pathname === '/products'}
+                icon='bug'
+                active={location.pathname === '/projects'}
+                />
+            </Link>
+            <Link to='/reports'>
+                <Menu.Item
+                icon='chart line'
+                active={location.pathname === '/reports'}
                 />
             </Link>
             {rightNavItems()}

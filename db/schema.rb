@@ -10,16 +10,39 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_22_211124) do
+ActiveRecord::Schema.define(version: 2020_06_25_204751) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "products", force: :cascade do |t|
+  create_table "bugs", force: :cascade do |t|
+    t.bigint "project_id", null: false
+    t.string "title"
+    t.text "description"
+    t.text "steps"
+    t.string "result"
+    t.string "assignedTo"
+    t.string "severity"
+    t.string "screenShots"
+    t.string "startDate"
+    t.string "dueDate"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["project_id"], name: "index_bugs_on_project_id"
+  end
+
+  create_table "chats", force: :cascade do |t|
+    t.bigint "bug_id", null: false
+    t.string "username"
+    t.text "content"
+    t.string "postTime"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["bug_id"], name: "index_chats_on_bug_id"
+  end
+
+  create_table "projects", force: :cascade do |t|
     t.string "name"
-    t.string "description"
-    t.string "department"
-    t.float "price"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -54,4 +77,6 @@ ActiveRecord::Schema.define(version: 2020_06_22_211124) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
+  add_foreign_key "bugs", "projects"
+  add_foreign_key "chats", "bugs"
 end

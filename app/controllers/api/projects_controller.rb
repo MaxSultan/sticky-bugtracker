@@ -1,0 +1,25 @@
+class Api::ProjectsController < ApplicationController
+
+    def index 
+        render json: @projects = Project.all
+    end 
+
+    def show
+        project = Project.find(params[:id])
+        render json: project
+    end 
+
+    def create
+       project = Project.new(project_params)
+       if project.save
+        render json: project
+       else
+        render json: {errors: project.errors, status: 422}
+       end 
+    end
+
+    private
+    def project_params
+        params.require(:project).permit(:name)
+    end 
+end

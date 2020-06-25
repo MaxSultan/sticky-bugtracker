@@ -1,0 +1,25 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  project: one
+  title: MyString
+  description: MyText
+  steps: MyText
+  result: MyString
+  assignedTo: MyString
+  severity: MyString
+  screenShots: MyString
+  startDate: MyString
+  dueDate: MyString
+
+two:
+  project: two
+  title: MyString
+  description: MyText
+  steps: MyText
+  result: MyString
+  assignedTo: MyString
+  severity: MyString
+  screenShots: MyString
+  startDate: MyString
+  dueDate: MyString
