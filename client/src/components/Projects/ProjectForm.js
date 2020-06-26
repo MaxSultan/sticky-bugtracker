@@ -3,7 +3,7 @@ import { Form, Header, Icon, } from "semantic-ui-react";
 import axios from 'axios';
 
 class ProductsForm extends React.Component {
-  defaultValues = { name: "", price: "", description: "", department: "", };
+  defaultValues = { name: "" };
   state = { ...this.defaultValues, };
   handleSubmit = (e) => {
     e.preventDefault();

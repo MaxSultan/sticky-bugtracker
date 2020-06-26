@@ -115,7 +115,6 @@ class ProductsForm extends React.Component {
               placeholder="Enter the name of a dev/QA"
               value={screenShots}
               onChange={this.handleChange}
-              required
             />
           </Form.Group>
           <Form.Button color="blue">Submit</Form.Button>
