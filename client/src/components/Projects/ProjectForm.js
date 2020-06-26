@@ -21,13 +21,20 @@ class ProductsForm extends React.Component {
     this.setState({ [name]: value, });
   }
 
+  handleClose = () => {
+    const { id, setShowForm, setEditForm, showForm, editForm } = this.props
+    setEditForm(false)
+    setShowForm(false)
+    
+  }
+
   render() {
     const { name, } = this.state;
     return (
       <div style={styles.divform}>
         <Form onSubmit={this.handleSubmit} style={styles.formform}>
-        <Icon style={styles.formbutton} name='close' onClick={() => this.props.setShowForm(!this.props.showForm)}/>
-        <Header as="h1">Add New Project</Header>
+        <Icon style={styles.formbutton} name='close' onClick={() => this.handleClose}/>
+        <Header as="h1">{this.props.id ? 'Edit Project' : 'Add New Project'}</Header>
           <Form.Group widths="equal">
             <Form.Input
               label="Name"

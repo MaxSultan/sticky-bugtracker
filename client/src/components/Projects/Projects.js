@@ -4,12 +4,14 @@ import { Card, Button, Container, Menu, } from 'semantic-ui-react';
 import { Link, Switch, Route } from 'react-router-dom';
 import ProjectForm from './ProjectForm';
 import ProjectsNav from './ProjectsNav';
+import Project from './Project'
 
 
 
-const Project = (props) => {
-    const [Projects, setProjects] = useState([])
+const Projects = (props) => {
+    const [projects, setProjects] = useState([])
     const [showForm, setShowForm] = useState(false)
+
     
     useEffect(()=>{
         axios.get('/api/projects')
@@ -29,40 +31,26 @@ const Project = (props) => {
       })
     } 
 
+    const updateProject = (project_id) => {
+      axios.put(`/api/projects/${project_id}`)
+      .then(res => console.log(res))
+      .catch(err => console.log(err))
+    }
+
     const renderProject = () => {
         if (Projects.length <= 0)
-          return <h2>No Project</h2>
-        return Projects.map( Project => (
-          <Card key={`Project-${Project.id}`}>
-            <Card.Content>
-              <Card.Header>{ Project.name }</Card.Header>
-              <Card.Meta>{ Project.department }</Card.Meta>
-              <Card.Description>
-                { Project.description }
-              </Card.Description>
-            </Card.Content>
-            <Card.Content extra>
-              <Button as={Link} to={`/project/${Project.id}`} color='blue'>
-                
-                View
-              </Button>
-              <Button onClick={()=> deleteProject(Project.id)}>Delete</Button>
-              <Button>Edit</Button>
-            </Card.Content>
-          </Card>
-        ))
+          return <h2>No Projects</h2>
+        return projects.map(p => <Project p={p} update={updateProject} deleteProject={deleteProject}/>)
       }
 
     return(
         <Container>
             <ProjectsNav showForm={showForm} setShowForm={setShowForm}/>
             <h1>Projects</h1>
-            {showForm && <ProjectForm add={addProject} showForm={showForm} setShowForm={setShowForm}/>}
-            <Card.Group>
+            {showForm && <ProjectForm add={addProject} showForm={showForm} setShowForm={setShowForm} />}
                 {renderProject()}
-            </Card.Group>
-          </Container>
+        </Container>
     )
 } 
 
-export default Project;
+export default Projects;
