@@ -35,7 +35,7 @@ export default function BugView(props) {
                     </Card.Group>
                 </Card.Content>
         </Card>
-        {chat && <Chats />}
+        {chat && <Chats project_id={props.project_id} bug_id={props.id}/>}
        </div>
     //    description: "", 
     //    steps: "", 
@@ -56,7 +56,7 @@ const styles = {
         left: '0px',
         backgroundColor: '#d6d6d6',
         display: 'flex',
-        justifyContent: 'center',
+        justifyContent: 'space-around',
         alignItems: 'center',
     },
     buttons: {
