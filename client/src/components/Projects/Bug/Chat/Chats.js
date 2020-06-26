@@ -41,8 +41,11 @@ export default function Chats(props) {
                     value={content}
                     onChange={(e) => setContent(e.target.value)}/>
                     <Icon 
-                    name='close' 
-                    color='white' 
+                    
+                    name='add'
+                    size='big' 
+                    color='red'
+                    circular='true' 
                     onClick={() => addMessage(props.project_id, props.bug_id, {username: user.email, content: content, postTime: time})}/>
                 </Form.Group>
             </Form>
@@ -60,7 +63,7 @@ const styles = {
         padding: '20px',
         borderRadius: '50px',
         overflowY: 'scroll',
-        height: 'auto',
+        maxHeight: '500px',
         width:'auto',
     }
 }

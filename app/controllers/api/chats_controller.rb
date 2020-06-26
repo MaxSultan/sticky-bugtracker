@@ -6,7 +6,7 @@ class Api::ChatsController < ApplicationController
      end
 
      def create
-        chat = @bug.chat.new(chat_params)
+        chat = @bug.chats.new(chat_params)
         render json: chat
      end 
 
