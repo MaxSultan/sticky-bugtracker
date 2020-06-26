@@ -49,7 +49,7 @@ export default function BugView(props) {
 
 const styles = {
     views: {
-        height: '100%',
+        height: '100vh',
         width: '100vw',
         position: 'absolute',
         top: '0px',

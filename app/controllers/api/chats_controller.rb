@@ -1,13 +1,18 @@
 class Api::ChatsController < ApplicationController
     before_action :set_project, only: [:index, :create]
     before_action :set_bug, only: [:index, :create]
+
     def index
         render json: @chats = @bug.chats.all
      end
 
      def create
         chat = @bug.chats.new(chat_params)
-        render json: chat
+        if chat.save
+            render json: chat
+        else
+            render json: {errors: chat.errors, state: 422}
+        end 
      end 
 
      private

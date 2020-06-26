@@ -19,9 +19,11 @@ export default function Chats(props) {
     
     const addMessage = (project_id, bug_id, chatObj) => {
         Axios.post(`/api/projects/${project_id}/bugs/${bug_id}/chats`, chatObj)
-        .then(res => setMessages([...messages, res.data]))
+        .then(res => {
+            console.log(res.data)
+            setMessages([...messages, res.data]
+                )})
         .catch(err => console.log(err))
-
     }
 
     useEffect(() => {
@@ -34,19 +36,19 @@ export default function Chats(props) {
             <div>
             {messages.map(m => <Message {...m}/>)}
             </div>
-            <Form style={styles.chatContainer}>
+            <Form style={styles.chatContainer} onSubmit={() => addMessage(props.project_id, props.bug_id, {username: user.email, content: content, postTime: time})}>
                 <Form.Group>
                     <Form.Input
                     name='content'
                     value={content}
                     onChange={(e) => setContent(e.target.value)}/>
-                    <Icon 
-                    
+                    <Button 
+                    icon='add' 
                     name='add'
                     size='big' 
                     color='red'
                     circular='true' 
-                    onClick={() => addMessage(props.project_id, props.bug_id, {username: user.email, content: content, postTime: time})}/>
+                    />
                 </Form.Group>
             </Form>
         </div>
