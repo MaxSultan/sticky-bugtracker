@@ -22,8 +22,11 @@ export default function ProductView(props){
     },[])
 
     const addBug = (bugObj) => {
-        console.log(bugObj)
         setBugs([bugObj, ...bugs])
+    }
+
+    const deleteBug = (id) => {
+        setBugs(bugs.filter(b => b.id !== id))
     }
 
     return(
@@ -42,14 +45,14 @@ export default function ProductView(props){
                 </Table.Row>
                 </Table.Header>
                 <Table.Body>
-                {bugs.map(b => <Bug {...b}/>)}
+                {bugs.map(b => <Bug {...b} delete={deleteBug}/>)}
                 </Table.Body>
                 </Table>
                 <Button onClick={()=> setBugForm(!bugForm)}>Add New Bug</Button>
                 {bugForm && <BugForm add={addBug} bugForm={bugForm} setBugForm={setBugForm} id={props.match.params.id}/>}
                 <br/>
                 <br/>
-                <Button color='black' onClick={props.history.goBack}>Back</Button>
+                <Button color='black' onClick={() => props.history.push('/projects')}>Back</Button>
             </Segment>
 
         </div>

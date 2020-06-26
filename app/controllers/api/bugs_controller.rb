@@ -14,7 +14,12 @@ class Api::BugsController < ApplicationController
             render json: {errors: bug.errors, status: 422}
         end 
     end
-    
+
+    def destroy
+        bug = Bug.find(params[:id])
+        render json: bug.destroy
+    end 
+
     private
     def bug_params
         params.require(:bug).permit(
