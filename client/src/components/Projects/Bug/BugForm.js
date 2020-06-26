@@ -47,7 +47,7 @@ class ProductsForm extends React.Component {
       <div style={styles.divform}>
         <Form onSubmit={this.handleSubmit} style={styles.formform}>
         <Icon style={styles.formbutton} name='close' onClick={() => this.props.setBugForm(!this.props.bugForm)}/>
-        <Header as="h1">Add New Project</Header>
+        <Header as="h1">Add New Bug</Header>
           <Form.Group widths="equal">
             <Form.Input
               label="Bug Title"

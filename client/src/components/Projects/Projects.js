@@ -8,24 +8,31 @@ import ProjectsNav from './ProjectsNav';
 
 
 const Project = (props) => {
-    const [Project, setProject] = useState([])
+    const [Projects, setProjects] = useState([])
     const [showForm, setShowForm] = useState(false)
     
     useEffect(()=>{
         axios.get('/api/projects')
-        .then( res => setProject(res.data))
+        .then( res => setProjects(res.data))
         .catch( err => console.log(err))
     },[])
 
     const addProject = (projectObj) => {
         console.log(projectObj)
-        setProject([projectObj, ...Project])
+        setProjects([projectObj, ...Projects])
     }
 
+    const deleteProject = (project_id) => {
+      axios.delete(`/api/projects/${project_id}`)
+      .then(res => {
+       setProjects(Projects.filter(p => p.id !== res.data.id))
+      })
+    } 
+
     const renderProject = () => {
-        if (Project.length <= 0)
+        if (Projects.length <= 0)
           return <h2>No Project</h2>
-        return Project.map( Project => (
+        return Projects.map( Project => (
           <Card key={`Project-${Project.id}`}>
             <Card.Content>
               <Card.Header>{ Project.name }</Card.Header>
@@ -36,8 +43,11 @@ const Project = (props) => {
             </Card.Content>
             <Card.Content extra>
               <Button as={Link} to={`/project/${Project.id}`} color='blue'>
+                
                 View
               </Button>
+              <Button onClick={()=> deleteProject(Project.id)}>Delete</Button>
+              <Button>Edit</Button>
             </Card.Content>
           </Card>
         ))

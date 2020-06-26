@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Card, Header, Icon, Button } from 'semantic-ui-react'
 import Axios from 'axios'
+import Chats from './Chat/Chats'
 
 export default function BugView(props) {
+    const [chat, toggleChat] = useState(false)
 
     const deleteBugFromDb = (project_id, bug_id) => {
         Axios.delete(`/api/projects/${project_id}/bugs/${bug_id}`)
@@ -29,10 +31,11 @@ export default function BugView(props) {
                     <Card.Group>
                         <Button style={styles.buttons}>Edit</Button>
                         <Button style={styles.buttons} onClick={() => deleteBugFromDb(props.project_id, props.id)}>Delete</Button>
-                        <Button style={styles.buttons}>View Chat</Button>
+                        <Button style={styles.buttons} onClick={() => toggleChat(!chat)}>View Chat</Button>
                     </Card.Group>
                 </Card.Content>
         </Card>
+        {chat && <Chats />}
        </div>
     //    description: "", 
     //    steps: "", 
