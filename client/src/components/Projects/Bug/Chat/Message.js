@@ -23,5 +23,9 @@ const styles = {
         borderRadius: '20px',
         margin: '10px',
         color: 'white',
+        whiteSpace: 'wrap',
+        maxWidth: '240px',
+        textOverflow: 'elipses',
+        wordWrap:'break-word'
     }
 }

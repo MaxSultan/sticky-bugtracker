@@ -30,13 +30,18 @@ export default function Chats(props) {
       getMessages(props.project_id, props.bug_id)  
     },[])
 
+    const handleSubmit = () => {
+        addMessage(props.project_id, props.bug_id, {username: user.email, content: content, postTime: time})
+        setContent('')
+    }
+
     return (
         <div style={styles.chatBackground}>
             chats
             <div>
             {messages.map(m => <Message {...m}/>)}
             </div>
-            <Form style={styles.chatContainer} onSubmit={() => addMessage(props.project_id, props.bug_id, {username: user.email, content: content, postTime: time})}>
+            <Form style={styles.chatContainer} onSubmit={() => handleSubmit()}>
                 <Form.Group>
                     <Form.Input
                     name='content'
