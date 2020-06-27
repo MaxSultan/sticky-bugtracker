@@ -6,7 +6,7 @@ import ProjectForm from './ProjectForm'
 export default function Project(props) {
     const [editForm, setEditForm] =  useState(false)
 
-    const {p, updateProject, deleteProject} = props
+    const {p, deleteProject} = props
     return (
         <Card key={`Project-${p.id}`}>
             <Card.Content>
@@ -22,7 +22,7 @@ export default function Project(props) {
                 </Button>
                 <Button onClick={()=> deleteProject(p.id)}>Delete</Button>
                 <Button onClick={()=> setEditForm(!editForm)} >Edit</Button>
-                {editForm && <ProjectForm id={p.id} update={updateProject}/>}
+                {editForm && <ProjectForm id={p.id} initName={p.name} update={props.update} editForm={editForm} setEditForm={setEditForm}/>}
             </Card.Content>
       </Card>
     )

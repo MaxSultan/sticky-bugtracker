@@ -4,18 +4,24 @@ import axios from 'axios';
 
 class ProductsForm extends React.Component {
   defaultValues = { 
-      title: "", 
-      description: "", 
-      steps: "", 
-      results: "", 
-      assignedTo:"", 
-      severity:"", 
-      screenShots:"",
-      dueDate: "",   
+      title: this.props.initTitle ? this.props.initTitle : "", 
+      description: this.props.initDescription ? this.props.initDescription : "", 
+      steps: this.props.initSteps ? this.props.initSteps : "", 
+      result: this.props.initResult ? this.props.initResult : "", 
+      assignedTo:this.props.initAssignedTo ? this.props.initAssignedTo : "", 
+      severity:this.props.initSeverity ? this.props.initSeverity : "", 
+      screenShots:this.props.initScreenShots ? this.props.initScreenShots : "",
+      dueDate: this.props.initDueDate ? this.props.initDueDate : "",   
     };
   state = { ...this.defaultValues, };
  
   handleSubmit = (e) => {
+    if(this.props.bug_id){
+      axios.put(`/api/projects/${this.props.project_edit_id}/bugs/${this.props.bug_id}`, {...this.state})
+      .then(res => {
+        this.props.updateBugUi(res)
+      }).catch(err => console.log(err))
+    }
     e.preventDefault();
     const { id } = this.props
     axios.post(`/api/projects/${id}/bugs`, {...this.state})
@@ -37,7 +43,7 @@ class ProductsForm extends React.Component {
         title, 
         description, 
         steps, 
-        results, 
+        result, 
         assignedTo, 
         severity, 
         screenShots,
@@ -46,7 +52,7 @@ class ProductsForm extends React.Component {
     return (
       <div style={styles.divform}>
         <Form onSubmit={this.handleSubmit} style={styles.formform}>
-        <Icon style={styles.formbutton} name='close' onClick={() => this.props.setBugForm(!this.props.bugForm)}/>
+        <Icon style={styles.formbutton} name='close' onClick={() => this.props.bug_id ? this.props.setEditing(!this.props.editing) : this.props.setBugForm(!this.props.bugForm)}/>
         <Header as="h1">Add New Bug</Header>
           <Form.Group widths="equal">
             <Form.Input
@@ -76,10 +82,10 @@ class ProductsForm extends React.Component {
             </Form.Group>
             <Form.Group widths="equal">
             <Form.Input
-              label="Expected Results after bug is fixed"
-              name="results"
+              label="Expected Result after bug is fixed"
+              name="result"
               placeholder="Name"
-              value={results}
+              value={result}
               onChange={this.handleChange}
               required
             />

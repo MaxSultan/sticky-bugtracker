@@ -21,19 +21,26 @@ const Projects = (props) => {
 
     const addProject = (projectObj) => {
         console.log(projectObj)
-        setProjects([projectObj, ...Projects])
+        setProjects([projectObj, ...projects])
     }
 
     const deleteProject = (project_id) => {
       axios.delete(`/api/projects/${project_id}`)
       .then(res => {
-       setProjects(Projects.filter(p => p.id !== res.data.id))
+       setProjects(projects.filter(p => p.id !== res.data.id))
       })
     } 
 
-    const updateProject = (project_id) => {
-      axios.put(`/api/projects/${project_id}`)
-      .then(res => console.log(res))
+    const updateProject = (project_id, projectObj) => {
+      axios.put(`/api/projects/${project_id}`, projectObj)
+      .then(res => {
+        const updatedProjects = projects.map(p => {
+        if (p.id == project_id) 
+          return res.data
+        return p
+      })
+      setProjects(updatedProjects)
+    })
       .catch(err => console.log(err))
     }
 

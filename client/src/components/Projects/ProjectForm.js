@@ -3,17 +3,23 @@ import { Form, Header, Icon, } from "semantic-ui-react";
 import axios from 'axios';
 
 class ProductsForm extends React.Component {
-  defaultValues = { name: "" };
+  defaultValues = { name: this.props.initName? this.props.initName : "" };
   state = { ...this.defaultValues, };
+
   handleSubmit = (e) => {
-    e.preventDefault();
-    axios.post(`api/projects`, {...this.state})
-    .then( res => {
-        this.props.add(res.data)
-        this.props.setShowForm(!this.props.showForm)
-    })
-    .catch(err => console.log(err))
-    this.setState({ ...this.defaultValues, });
+    if(this.props.id){
+      this.props.update(this.props.id, {name: this.state.name})
+      this.props.setEditForm(false)
+    } else {
+      e.preventDefault();
+      axios.post(`api/projects`, {...this.state})
+      .then( res => {
+          this.props.add(res.data)
+          this.props.setShowForm(false)
+      })
+      .catch(err => console.log(err))
+    }
+    this.setState({ name: '' });
   }
 
   handleChange = (e) => {
@@ -22,10 +28,9 @@ class ProductsForm extends React.Component {
   }
 
   handleClose = () => {
-    const { id, setShowForm, setEditForm, showForm, editForm } = this.props
-    setEditForm(false)
-    setShowForm(false)
-    
+    if(this.props.setEditForm){
+      this.props.setEditForm(false)
+    }else {this.props.setShowForm(false)}
   }
 
   render() {
@@ -33,7 +38,7 @@ class ProductsForm extends React.Component {
     return (
       <div style={styles.divform}>
         <Form onSubmit={this.handleSubmit} style={styles.formform}>
-        <Icon style={styles.formbutton} name='close' onClick={() => this.handleClose}/>
+        <Icon style={styles.formbutton} name='close' onClick={() => this.handleClose()}/>
         <Header as="h1">{this.props.id ? 'Edit Project' : 'Add New Project'}</Header>
           <Form.Group widths="equal">
             <Form.Input

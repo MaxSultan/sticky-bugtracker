@@ -29,6 +29,15 @@ export default function ProductView(props){
         setBugs(bugs.filter(b => b.id !== id))
     }
 
+    const updateBugUi = (res) => {
+        const updatedBugs = bugs.map(b => {
+            if(b.id == res.data.id)
+                    return res.data
+                return b
+        })
+        setBugs(updatedBugs)
+    }
+
     return(
         <div>
             <Segment>
@@ -45,7 +54,7 @@ export default function ProductView(props){
                 </Table.Row>
                 </Table.Header>
                 <Table.Body>
-                {bugs.map(b => <Bug {...b} delete={deleteBug}/>)}
+                {bugs.map(b => <Bug {...b} delete={deleteBug} updateBugUi={updateBugUi}/>)}
                 </Table.Body>
                 </Table>
                 <Button onClick={()=> setBugForm(!bugForm)}>Add New Bug</Button>
