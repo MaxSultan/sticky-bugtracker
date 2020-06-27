@@ -14,6 +14,16 @@ class Api::BugsController < ApplicationController
             render json: {errors: bug.errors, status: 422}
         end 
     end
+    
+    def update
+        @project = Project.find(params[:project_id])
+        bug = Bug.find(params[:id])
+        if bug.update(bug_params)
+            render json: bug
+        else
+            render json: {errors: bug.errors, status: 422}
+        end 
+    end
 
     def destroy
         bug = Bug.find(params[:id])

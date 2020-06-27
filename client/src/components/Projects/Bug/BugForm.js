@@ -12,25 +12,33 @@ class ProductsForm extends React.Component {
       severity:this.props.initSeverity ? this.props.initSeverity : "", 
       screenShots:this.props.initScreenShots ? this.props.initScreenShots : "",
       dueDate: this.props.initDueDate ? this.props.initDueDate : "",   
-    };
+  };
+
+  resetValues = {
+    title:"", description:"", steps:"", result:"", assignedTo:"", severity:"", screenShots:"",dueDate:"", 
+  }
+
   state = { ...this.defaultValues, };
  
   handleSubmit = (e) => {
     if(this.props.bug_id){
-      axios.put(`/api/projects/${this.props.project_edit_id}/bugs/${this.props.bug_id}`, {...this.state})
+      axios.put(`/api/projects/${this.props.projectEditId}/bugs/${this.props.bug_id}`, {...this.state})
       .then(res => {
-        this.props.updateBugUi(res)
+        console.log(res)
+        this.props.update(res)
+        // this.props.setEditing(false)
       }).catch(err => console.log(err))
+    }else {
+      e.preventDefault();
+      const { id } = this.props
+      axios.post(`/api/projects/${id}/bugs`, {...this.state})
+      .then( res => {
+          this.props.add(res.data)
+          this.props.setBugForm(!this.props.bugForm)
+      })
+      .catch(err => console.log(err))
     }
-    e.preventDefault();
-    const { id } = this.props
-    axios.post(`/api/projects/${id}/bugs`, {...this.state})
-    .then( res => {
-        this.props.add(res.data)
-        this.props.setBugForm(!this.props.bugForm)
-    })
-    .catch(err => console.log(err))
-    this.setState({ ...this.defaultValues, });
+    this.setState({ ...this.resetValues, });
   }
 
   handleChange = (e) => {
@@ -101,7 +109,7 @@ class ProductsForm extends React.Component {
               label="How severe is the bug?"
               name="severity"
               placeholder="not sure how you measure severity"
-              value={ severity}
+              value={severity}
               onChange={this.handleChange}
               required
             />

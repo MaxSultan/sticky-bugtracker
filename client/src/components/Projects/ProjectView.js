@@ -54,7 +54,7 @@ export default function ProductView(props){
                 </Table.Row>
                 </Table.Header>
                 <Table.Body>
-                {bugs.map(b => <Bug {...b} delete={deleteBug} updateBugUi={updateBugUi}/>)}
+                {bugs.map(b => <Bug {...b} delete={deleteBug} update={updateBugUi}/>)}
                 </Table.Body>
                 </Table>
                 <Button onClick={()=> setBugForm(!bugForm)}>Add New Bug</Button>

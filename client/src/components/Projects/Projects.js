@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
-import { Card, Button, Container, Menu, } from 'semantic-ui-react';
+import { Card, Button, Container, Menu, Header, Grid, } from 'semantic-ui-react';
 import { Link, Switch, Route } from 'react-router-dom';
 import ProjectForm from './ProjectForm';
 import ProjectsNav from './ProjectsNav';
@@ -53,11 +53,21 @@ const Projects = (props) => {
     return(
         <Container>
             <ProjectsNav showForm={showForm} setShowForm={setShowForm}/>
-            <h1>Projects</h1>
             {showForm && <ProjectForm add={addProject} showForm={showForm} setShowForm={setShowForm} />}
-                {renderProject()}
+            <Header as='h1' textAlign='center'>Projects</Header>
+            <div style={styles.divGrid}>
+              {renderProject()}
+            </div>
         </Container>
     )
 } 
 
 export default Projects;
+
+const styles = {
+  divGrid: {
+    display:'flex',
+    flexWrap:'wrap',
+    justifyContent:'space-around',
+  }
+}

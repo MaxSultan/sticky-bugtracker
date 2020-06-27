@@ -12,7 +12,7 @@ export default function Bug(props) {
             <Table.Cell>{props.assignedTo}</Table.Cell>
             <Table.Cell>{props.created_at}</Table.Cell>
             <Table.Cell>{props.dueDate}</Table.Cell>
-            {toggle && <BugView {...props} setToggle={setToggle} toggle={toggle} delete={props.delete} updateBugUi={props.updateBugUi}/>}
+            {toggle && <BugView {...props} setToggle={setToggle} toggle={toggle} delete={props.delete} update={props.update}/>}
         </Table.Row>
     )
 }

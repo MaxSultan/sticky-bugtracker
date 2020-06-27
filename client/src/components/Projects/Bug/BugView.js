@@ -26,6 +26,7 @@ export default function BugView(props) {
         <Card>
             <Icon name='close' onClick={() => props.setToggle(!props.toggle)}/>
             <Header>Bug Title: {props.title}</Header>
+            {console.log(props.project_id)}
             <Card.Content>Severity: {props.severity}</Card.Content>
                 <Card.Content>Description:<br/> {props.description}</Card.Content>
                 <Card.Content>Steps to Recreate:<br/> {props.steps}</Card.Content>
@@ -43,7 +44,7 @@ export default function BugView(props) {
         </Card>
         {editing && <BugForm 
         bug_id={props.id} 
-        project_edit_id={props.project_id}
+        projectEditId={props.project_id}
         editBug={editBug} 
         initTitle={props.title}
         initSeverity={props.severity}
@@ -51,10 +52,11 @@ export default function BugView(props) {
         initSteps={props.steps}
         initResult={props.result}
         initAssignedTo={props.assignedTo}
-        initScreenShots={props.screentShots}
+        initScreenShots={props.screenShots}
         initDueDate={props.dueDate}
         editing={editing}
         setEditing={setEditing}
+        update={props.update}
         />}
         {chat && <Chats project_id={props.project_id} bug_id={props.id}/>}
        </div>
