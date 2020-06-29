@@ -26,7 +26,7 @@ class ProductsForm extends React.Component {
       .then(res => {
         console.log(res)
         this.props.update(res)
-        // this.props.setEditing(false)
+        this.props.setEditing(false)
       }).catch(err => console.log(err))
     }else {
       e.preventDefault();

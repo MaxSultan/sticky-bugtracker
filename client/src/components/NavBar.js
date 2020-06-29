@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { Menu, Image, } from 'semantic-ui-react';
 import { Link, useLocation, useHistory, } from 'react-router-dom';
 import { AuthContext } from '../providers/AuthProvider';
-import froggy from './img/froggy.png'
+import froggy_copy_no_letters from './img/froggy_copy_no_letters.png'
 
 
 const NavBar = ({ props }) => {
@@ -16,7 +16,7 @@ const NavBar = ({ props }) => {
         if(auth.authenticated){
             return (
                 <Menu.Menu position='right'>
-                  <Image src={froggy} style={{maxHeight:'40px'}}/>
+                  <Image src={froggy_copy_no_letters} style={{maxHeight:'40px'}}/>
                   <Menu.Item
                     name='logout'
                     onClick={ () => auth.handleLogout(history) }
