@@ -41,7 +41,11 @@ class Api::BugsController < ApplicationController
             :severity, 
             :screenShots, 
             :startDate, 
-            :dueDate
+            :dueDate,
+            :date_assigned,
+            :date_work_began,
+            :status,
+            :current_stage,
         )
     end 
 end

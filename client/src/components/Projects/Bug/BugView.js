@@ -34,6 +34,10 @@ export default function BugView(props) {
                 <Card.Content>Currently Assigned to:<br/> {props.assignedTo}</Card.Content>
                 <Card.Content>Screenshots:<br/> {props.screentShots}</Card.Content>
                 <Card.Content>Due Date:<br/> {props.dueDate}</Card.Content>
+                <Card.Content>Date Assigned:<br/> {props.date_assigned}</Card.Content>
+                <Card.Content>Date Work Began:<br/> {props.date_work_began}</Card.Content>
+                <Card.Content>Status:<br/> {props.status}</Card.Content>
+                <Card.Content>Current Stage:<br/> {props.current_stage}</Card.Content>
                 <Card.Content extra>
                     <Card.Group>
                         <Button style={styles.buttons} onClick={() => setEditing(!editing)}>Edit</Button>
@@ -54,19 +58,16 @@ export default function BugView(props) {
         initAssignedTo={props.assignedTo}
         initScreenShots={props.screenShots}
         initDueDate={props.dueDate}
+        init_date_assigned={props.date_assigned}
+        init_date_work_began={props.date_work_began}
+        initStatus={props.status}
+        init_current_stage={props.current_stage}
         editing={editing}
         setEditing={setEditing}
         update={props.update}
         />}
         {chat && <Chats project_id={props.project_id} bug_id={props.id}/>}
        </div>
-    //    description: "", 
-    //    steps: "", 
-    //    results: "", 
-    //    assignedTo:"", 
-    //    severity:"", 
-    //    screenShots:"",
-    //    dueDate: "",  
     )
 }
 

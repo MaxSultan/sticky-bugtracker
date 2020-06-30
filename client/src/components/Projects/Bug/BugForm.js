@@ -12,10 +12,25 @@ class ProductsForm extends React.Component {
       severity:this.props.initSeverity ? this.props.initSeverity : "", 
       screenShots:this.props.initScreenShots ? this.props.initScreenShots : "",
       dueDate: this.props.initDueDate ? this.props.initDueDate : "",   
+      date_assigned: this.props.init_date_assigned ? this.props.init_date_assigned : "",  
+      date_work_began: this.props.init_date_work_began ? this.props.init_date_work_began : "",  
+      status: this.props.initStatus ? this.props.initStatus : "",  
+      current_stage: this.props.init_current_stage ? this.props.init_current_stage : "",  
   };
 
   resetValues = {
-    title:"", description:"", steps:"", result:"", assignedTo:"", severity:"", screenShots:"",dueDate:"", 
+    title:"", 
+    description:"", 
+    steps:"", 
+    result:"", 
+    assignedTo:"", 
+    severity:"", 
+    screenShots:"",
+    dueDate:"",
+    date_assigned:"",
+    date_work_began:"",
+    status:"",
+    current_stage:"", 
   }
 
   state = { ...this.defaultValues, };
@@ -56,6 +71,10 @@ class ProductsForm extends React.Component {
         severity, 
         screenShots,
         dueDate, 
+        date_assigned,
+        date_work_began,
+        status,
+        current_stage,
     } = this.state;
     return (
       <div style={styles.divform}>
@@ -126,8 +145,36 @@ class ProductsForm extends React.Component {
              <Form.Input
               label="Attach any helpful screenshots of the bug"
               name="screenShots"
-              placeholder="Enter the name of a dev/QA"
+              placeholder="Enter screenshots here"
               value={screenShots}
+              onChange={this.handleChange}
+            />
+            <Form.Input
+              label="Enter the date the bug was assigned"
+              name="date_assigned"
+              placeholder="What day was the bug assigned?"
+              value={date_assigned}
+              onChange={this.handleChange}
+            />
+            <Form.Input
+              label="Enter date the work began on the bug"
+              name="date_work_began"
+              placeholder="What day did the dev begin work on the bug?"
+              value={date_work_began}
+              onChange={this.handleChange}
+            />
+            <Form.Input
+              label="What is the bugs current status"
+              name="status"
+              placeholder="Enter bug status"
+              value={status}
+              onChange={this.handleChange}
+            />
+            <Form.Input
+              label="What stage is the bug in?"
+              name="current_stage"
+              placeholder="Enter bug stage"
+              value={current_stage}
               onChange={this.handleChange}
             />
           </Form.Group>
