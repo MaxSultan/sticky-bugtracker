@@ -11,9 +11,8 @@ export default function Project(props) {
         <Card key={`Project-${p.id}`}>
             <Card.Content>
                 <Card.Header>{p.name }</Card.Header>
-                <Card.Meta>{p.department }</Card.Meta>
                 <Card.Description>
-                    {p.description }
+                    {p.status}
                 </Card.Description>
                 </Card.Content>
                 <Card.Content extra>
@@ -22,7 +21,7 @@ export default function Project(props) {
                 </Button>
                 <Button onClick={()=> deleteProject(p.id)}>Delete</Button>
                 <Button onClick={()=> setEditForm(!editForm)} >Edit</Button>
-                {editForm && <ProjectForm id={p.id} initName={p.name} update={props.update} editForm={editForm} setEditForm={setEditForm}/>}
+                {editForm && <ProjectForm id={p.id} initName={p.name} initStatus={p.status} update={props.update} editForm={editForm} setEditForm={setEditForm}/>}
             </Card.Content>
       </Card>
     )

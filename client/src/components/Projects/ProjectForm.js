@@ -3,12 +3,12 @@ import { Form, Header, Icon, } from "semantic-ui-react";
 import axios from 'axios';
 
 class ProductsForm extends React.Component {
-  defaultValues = { name: this.props.initName? this.props.initName : "" };
+  defaultValues = { name: this.props.initName? this.props.initName : "", status: this.props.initStatus? this.props.initStatus : '' };
   state = { ...this.defaultValues, };
 
   handleSubmit = (e) => {
     if(this.props.id){
-      this.props.update(this.props.id, {name: this.state.name})
+      this.props.update(this.props.id, {name: this.state.name, status: this.state.status})
       this.props.setEditForm(false)
     } else {
       e.preventDefault();
@@ -19,7 +19,7 @@ class ProductsForm extends React.Component {
       })
       .catch(err => console.log(err))
     }
-    this.setState({ name: '' });
+    this.setState({ name: '', status: '' });
   }
 
   handleChange = (e) => {
@@ -34,7 +34,7 @@ class ProductsForm extends React.Component {
   }
 
   render() {
-    const { name, } = this.state;
+    const { name, status } = this.state;
     return (
       <div style={styles.divform}>
         <Form onSubmit={this.handleSubmit} style={styles.formform}>
@@ -46,6 +46,15 @@ class ProductsForm extends React.Component {
               name="name"
               placeholder="Name"
               value={name}
+              onChange={this.handleChange}
+              required
+            />
+
+              <Form.Input
+              label="Status"
+              name="status"
+              placeholder="Project Status"
+              value={status}
               onChange={this.handleChange}
               required
             />

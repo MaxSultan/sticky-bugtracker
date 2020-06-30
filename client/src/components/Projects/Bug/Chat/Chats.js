@@ -72,5 +72,6 @@ const styles = {
         overflowY: 'scroll',
         maxHeight: '500px',
         width:'auto',
+        margin: '20px',
     }
 }
