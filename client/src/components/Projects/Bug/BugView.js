@@ -23,21 +23,18 @@ export default function BugView(props) {
 
     return (
         <div style={styles.views}>
-        <Card>
+        <Card raised='true'>
             <Icon name='close' onClick={() => props.setToggle(!props.toggle)}/>
-            <Header>Bug Title: {props.title}</Header>
-            {console.log(props.project_id)}
-            <Card.Content>Severity: {props.severity}</Card.Content>
-                <Card.Content>Description:<br/> {props.description}</Card.Content>
-                <Card.Content>Steps to Recreate:<br/> {props.steps}</Card.Content>
-                <Card.Content>Desired Result:<br/> {props.result}</Card.Content>
-                <Card.Content>Currently Assigned to:<br/> {props.assignedTo}</Card.Content>
-                <Card.Content>Screenshots:<br/> {props.screenShots}</Card.Content>
-                <Card.Content>Due Date:<br/> {props.dueDate}</Card.Content>
-                <Card.Content>Date Assigned:<br/> {props.date_assigned}</Card.Content>
-                <Card.Content>Date Work Began:<br/> {props.date_work_began}</Card.Content>
-                <Card.Content>Status:<br/> {props.status}</Card.Content>
-                <Card.Content>Current Stage:<br/> {props.current_stage}</Card.Content>
+            <Header as='h1'> {props.title}</Header>
+            <Card.Meta>Status: {props.status}<br/>Severity: {props.severity}<br/> Current Stage: {props.current_stage}</Card.Meta>
+                <Card.Content>Description: {props.description}</Card.Content>
+                <Card.Content>Steps to Recreate: {props.steps}</Card.Content>
+                <Card.Content>Desired Result: {props.result}</Card.Content>
+                <Card.Content>Currently Assigned to: {props.assignedTo}</Card.Content>
+                <Card.Content>Screenshots: {props.screenShots}</Card.Content>
+                <Card.Content>Due Date: {props.dueDate}</Card.Content>
+                <Card.Content>Date Assigned: {props.date_assigned}</Card.Content>
+                <Card.Content>Date Work Began: {props.date_work_began}</Card.Content>
                 <Card.Content extra>
                     <Card.Group>
                         <Button style={styles.buttons} onClick={() => setEditing(!editing)}>Edit</Button>

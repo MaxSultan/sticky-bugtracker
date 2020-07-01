@@ -1,6 +1,7 @@
 import React from 'react';
 import { Form, Header, Icon, } from "semantic-ui-react";
 import axios from 'axios';
+import DateTimePicker from 'react-datetime-picker'
 
 class ProductsForm extends React.Component {
   defaultValues = { 
@@ -63,6 +64,10 @@ class ProductsForm extends React.Component {
 
   handleSelectChange = (e, {name, value}) => {
     this.setState({ [name]: value, })
+  }
+
+  handleDateTimeChange = (e) => {
+    this.setState({dueDate: e})
   }
 
   render() {
@@ -164,14 +169,26 @@ class ProductsForm extends React.Component {
             />
             </Form.Group>
             <Form.Group widths="equal">
-            <Form.Input
+            {/* <Form.Input
               label="When should the bug be completed?"
               name="dueDate"
               placeholder="Enter a future date"
               value={dueDate}
               onChange={this.handleChange}
               required
+            /> */}
+            </Form.Group>
+            <Form.Group widths="equal">
+            <DateTimePicker
+             label="When should the bug be completed?"
+             name="dueDate"
+             placeholder="Enter a future date"
+             value={dueDate}
+             onChange={this.handleDateTimeChange}
+             required
             />
+            </Form.Group>
+            <Form.Group widths="equal">
              <Form.Input
               label="Attach any helpful screenshots of the bug"
               name="screenShots"
