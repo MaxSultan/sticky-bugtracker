@@ -2,6 +2,7 @@ import React from 'react';
 import { Form, Header, Icon, Label, } from "semantic-ui-react";
 import axios from 'axios';
 import DatePicker from 'react-date-picker'
+import Axios from 'axios';
 
 class ProductsForm extends React.Component {
   defaultValues = { 
@@ -33,9 +34,7 @@ class ProductsForm extends React.Component {
     status:"",
     current_stage:"", 
   }
-
   state = { ...this.defaultValues, };
- 
   handleSubmit = (e) => {
     if(this.props.bug_id){
       axios.put(`/api/projects/${this.props.projectEditId}/bugs/${this.props.bug_id}`, {...this.state})
@@ -66,8 +65,6 @@ class ProductsForm extends React.Component {
     this.setState({ [name]: value, })
   }
 
-
-//Currently only works for the dueDate input
   handleDueDateTimeChange = (e) => {
     this.setState({dueDate: e})
   }
@@ -193,6 +190,7 @@ class ProductsForm extends React.Component {
             <Form.Input
               label="Who is the bug assigned to in this stage?"
               name="assignedTo"
+
               placeholder="Enter the name of a dev/QA"
               value={assignedTo}
               onChange={this.handleChange}
