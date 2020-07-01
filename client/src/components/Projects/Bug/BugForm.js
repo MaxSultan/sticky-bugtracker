@@ -66,6 +66,8 @@ class ProductsForm extends React.Component {
     this.setState({ [name]: value, })
   }
 
+
+//Currently only works for the dueDate input
   handleDateTimeChange = (e) => {
     this.setState({dueDate: e})
   }
