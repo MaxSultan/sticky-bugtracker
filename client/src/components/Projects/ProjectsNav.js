@@ -9,7 +9,7 @@ export default function ProjectsNav({ showForm, setShowForm}) {
     return (
       <Menu tabular>
         <Menu.Item
-          name='active projects'
+          name='all projects'
           active={activeItem === 'active projects'}
           onClick={() => handleItemClick}
         />
@@ -19,13 +19,8 @@ export default function ProjectsNav({ showForm, setShowForm}) {
           onClick={() => handleItemClick, () => setShowForm(!showForm)}
         />
          <Menu.Item
-          name='archived projects'
+          name='filter projects by'
           active={activeItem === 'archived projects'}
-          onClick={() => handleItemClick}
-        />
-         <Menu.Item
-          name='photos'
-          active={activeItem === 'add'}
           onClick={() => handleItemClick}
         />
       </Menu>

@@ -40,7 +40,6 @@ class ProductsForm extends React.Component {
         <Form onSubmit={this.handleSubmit} style={styles.formform}>
         <Icon style={styles.formbutton} name='close' onClick={() => this.handleClose()}/>
         <Header as="h1">{this.props.id ? 'Edit Project' : 'Add New Project'}</Header>
-          <Form.Group widths="equal">
             <Form.Input
               label="Name"
               name="name"
@@ -49,7 +48,6 @@ class ProductsForm extends React.Component {
               onChange={this.handleChange}
               required
             />
-
               <Form.Input
               label="Status"
               name="status"
@@ -58,7 +56,6 @@ class ProductsForm extends React.Component {
               onChange={this.handleChange}
               required
             />
-          </Form.Group>
           <Form.Button color="blue">Submit</Form.Button>
         </Form>
       </div>

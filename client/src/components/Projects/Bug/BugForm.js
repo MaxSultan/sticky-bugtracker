@@ -156,6 +156,8 @@ class ProductsForm extends React.Component {
               value={date_assigned}
               onChange={this.handleChange}
             />
+            </Form.Group>
+            <Form.Group widths="equal">
             <Form.Input
               label="Enter date the work began on the bug"
               name="date_work_began"
@@ -201,7 +203,7 @@ const styles = {
   formform: {
     zIndex: '2',
     height: 'auto',
-    width: "800px",
+    width: "1000px",
     padding: '20px',
     backgroundColor: 'white',
     display: 'flex',
