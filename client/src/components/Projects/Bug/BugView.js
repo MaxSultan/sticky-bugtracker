@@ -24,9 +24,11 @@ export default function BugView(props) {
     return (
         <div style={styles.views}>
         <Card raised='true'>
-            <Icon name='close' onClick={() => props.setToggle(!props.toggle)}/>
+            <div style={styles.grid}>
             <Header as='h1'> {props.title}</Header>
-            <Card.Meta>Status: {props.status}<br/>Severity: {props.severity}<br/> Current Stage: {props.current_stage}</Card.Meta>
+            <Icon name='close' onClick={() => props.setToggle(!props.toggle)} style={{marginTop:'5px'}}/>
+            </div>
+            <Card.Meta style={{marginLeft:'12px'}}>Status: {props.status}<br/>Severity: {props.severity}<br/> Current Stage: {props.current_stage}</Card.Meta>
                 <Card.Content>Description: {props.description}</Card.Content>
                 <Card.Content>Steps to Recreate: {props.steps}</Card.Content>
                 <Card.Content>Desired Result: {props.result}</Card.Content>
@@ -82,5 +84,10 @@ const styles = {
     },
     buttons: {
         margin: '10px 2px',
+    },
+    grid:{
+        display:'flex',
+        justifyContent:'space-between',
+        margin:'5px'
     }
 }
