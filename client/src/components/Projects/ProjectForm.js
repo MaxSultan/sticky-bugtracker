@@ -41,8 +41,8 @@ class ProductsForm extends React.Component {
     const { name, status } = this.state;
     const status_options = [
       {key: 'a', value:'active', text: 'active'},
-      {key: 'a', value:'inactive', text: 'inactive'},
-      {key: 'a', value:'paused', text: 'paused'},
+      {key: 'i', value:'inactive', text: 'inactive'},
+      {key: 'p', value:'paused', text: 'paused'},
      ]
     return (
       <div style={styles.divform}>

@@ -32,7 +32,7 @@ export default function BugView(props) {
                 <Card.Content>Steps to Recreate:<br/> {props.steps}</Card.Content>
                 <Card.Content>Desired Result:<br/> {props.result}</Card.Content>
                 <Card.Content>Currently Assigned to:<br/> {props.assignedTo}</Card.Content>
-                <Card.Content>Screenshots:<br/> {props.screentShots}</Card.Content>
+                <Card.Content>Screenshots:<br/> {props.screenShots}</Card.Content>
                 <Card.Content>Due Date:<br/> {props.dueDate}</Card.Content>
                 <Card.Content>Date Assigned:<br/> {props.date_assigned}</Card.Content>
                 <Card.Content>Date Work Began:<br/> {props.date_work_began}</Card.Content>

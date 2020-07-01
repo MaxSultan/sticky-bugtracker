@@ -61,6 +61,10 @@ class ProductsForm extends React.Component {
     this.setState({ [name]: value, });
   }
 
+  handleSelectChange = (e, {name, value}) => {
+    this.setState({ [name]: value, })
+  }
+
   render() {
     const { 
         title, 
@@ -76,6 +80,32 @@ class ProductsForm extends React.Component {
         status,
         current_stage,
     } = this.state;
+
+    const severity_options = [
+      {key: 'm', value:'mild', text: 'mild'},
+      {key: 'med', value:'medium', text: 'medium'},
+      {key: 's', value:'severe', text: 'severe'},
+      {key: 'im', value:'imediate attention', text: 'imediate attention'},
+    ]
+
+    const status_options = [
+      {key: 'b', value:'backlog', text: 'backlog'},
+      {key: 'd', value:'on deck', text: 'on deck'},
+      {key: 'i', value:'in progress', text: 'in progress'},
+      {key: 'p', value:'paused', text: 'paused'},
+      {key: 'c', value:'complete', text: 'complete'},
+    ]
+
+    const stage_options = [
+      {key: 'n', value:'new bug', text: 'new bug'},
+      {key: 'r', value:'rejected', text: 'rejected'},
+      {key: 'v', value:'verified', text: 'verified'},
+      {key: 'bf', value:'being fixed', text: 'being fixed'},
+      {key: 'rft', value:'ready for testing', text: 'ready for testing'},
+      {key: 't', value:'testing', text: 'testing'},
+      {key: 'f', value:'fixed', text: 'fixed'},
+    ]
+
     return (
       <div style={styles.divform}>
         <Form onSubmit={this.handleSubmit} style={styles.formform}>
@@ -124,12 +154,12 @@ class ProductsForm extends React.Component {
               onChange={this.handleChange}
               required
             />
-            <Form.Input
+            <Form.Select
               label="How severe is the bug?"
               name="severity"
-              placeholder="not sure how you measure severity"
+              options={severity_options}
               value={severity}
-              onChange={this.handleChange}
+              onChange={this.handleSelectChange}
               required
             />
             </Form.Group>
@@ -165,19 +195,21 @@ class ProductsForm extends React.Component {
               value={date_work_began}
               onChange={this.handleChange}
             />
-            <Form.Input
+            <Form.Select
               label="What is the bugs current status"
               name="status"
+              options={status_options}
               placeholder="Enter bug status"
               value={status}
-              onChange={this.handleChange}
+              onChange={this.handleSelectChange}
             />
-            <Form.Input
+            <Form.Select
               label="What stage is the bug in?"
               name="current_stage"
+              options={stage_options}
               placeholder="Enter bug stage"
               value={current_stage}
-              onChange={this.handleChange}
+              onChange={this.handleSelectChange}
             />
           </Form.Group>
           <Form.Button color="blue">Submit</Form.Button>
