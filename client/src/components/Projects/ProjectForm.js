@@ -27,6 +27,10 @@ class ProductsForm extends React.Component {
     this.setState({ [name]: value, });
   }
 
+  handleSelectChange = (e, {name, value}) => {
+    this.setState({ [name]: value, })
+  }
+
   handleClose = () => {
     if(this.props.setEditForm){
       this.props.setEditForm(false)
@@ -35,6 +39,11 @@ class ProductsForm extends React.Component {
 
   render() {
     const { name, status } = this.state;
+    const status_options = [
+      {key: 'a', value:'active', text: 'active'},
+      {key: 'a', value:'inactive', text: 'inactive'},
+      {key: 'a', value:'paused', text: 'paused'},
+     ]
     return (
       <div style={styles.divform}>
         <Form onSubmit={this.handleSubmit} style={styles.formform}>
@@ -48,12 +57,13 @@ class ProductsForm extends React.Component {
               onChange={this.handleChange}
               required
             />
-              <Form.Input
+              <Form.Select
               label="Status"
               name="status"
+              options={status_options}
               placeholder="Project Status"
               value={status}
-              onChange={this.handleChange}
+              onChange={this.handleSelectChange}
               required
             />
           <Form.Button color="blue">Submit</Form.Button>
