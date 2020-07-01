@@ -68,9 +68,16 @@ class ProductsForm extends React.Component {
 
 
 //Currently only works for the dueDate input
-  handleDateTimeChange = (e) => {
+  handleDueDateTimeChange = (e) => {
     this.setState({dueDate: e})
   }
+  handleDateAssignedTimeChange = (e) => {
+    this.setState({date_assigned: e})
+  }
+  handleDateWorkBeganTimeChange = (e) => {
+    this.setState({date_work_began: e})
+  }
+
 
   render() {
     const { 
@@ -118,7 +125,6 @@ class ProductsForm extends React.Component {
         <Form onSubmit={this.handleSubmit} style={styles.formform}>
         <Icon style={styles.formbutton} name='close' onClick={() => this.props.bug_id ? this.props.setEditing(!this.props.editing) : this.props.setBugForm(!this.props.bugForm)}/>
         <Header as="h1">Add New Bug</Header>
-          <Form.Group widths="equal">
             <Form.Input
               label="Bug Title"
               name="title"
@@ -151,8 +157,6 @@ class ProductsForm extends React.Component {
               onChange={this.handleChange}
               required
             />
-            </Form.Group>
-            <Form.Group widths="equal">
             <Form.Select
               label="How severe is the bug?"
               name="severity"
@@ -185,9 +189,7 @@ class ProductsForm extends React.Component {
               value={screenShots}
               onChange={this.handleChange}
             />
-            </Form.Group>
             <Form.Group widths="equal"><div style={{height:'5%'}}></div></Form.Group>
-            <Form.Group widths='equal'>
             <Form.Input
               label="Who is the bug assigned to in this stage?"
               name="assignedTo"
@@ -196,37 +198,34 @@ class ProductsForm extends React.Component {
               onChange={this.handleChange}
               required
             />
+            <Label for='date_assigned'>What day was the bug assigned?</Label>
             <DatePicker
              label="What day was the bug assigned?"
              name="date_assigned"
              placeholder="Enter date bug was assigned"
              value={date_assigned}
-             onChange={this.handleDateTimeChange}
+             onChange={this.handleDateAssignedTimeChange}
             />
-            </Form.Group>
-            <Form.Group widths="equal"><div style={{height:'5%'}}></div></Form.Group>
-            <Form.Group widths="equal">
+            <div style={{height:'22px'}}></div>
+            <Label for='date_work_began'>Enter date the work began on the bug</Label>
             <DatePicker
-            calendarAriaLabel="Enter date the work began on the bug"
              label="Enter date the work began on the bug"
              name="date_work_began"
              placeholder="What day did the dev begin work on the bug?"
              value={date_work_began}
-             onChange={this.handleDateTimeChange}
+             onChange={this.handleDateWorkBeganTimeChange}
             />
+            <div style={{height:'22px'}}></div>
             <Label for='dueDate'>When should the bug be completed?</Label>
             <DatePicker
-            calendarAriaLabel="When should the bug be completed?"
-            calendarIcon={null}
              label="When should the bug be completed?"
              name="dueDate"
              placeholder="Enter a future date"
              value={dueDate}
-             onChange={this.handleDateTimeChange}
+             onChange={this.handleDueDateTimeChange}
              required
             />
-          </Form.Group>
-          <Form.Group widths="equal"><div style={{height:'5%'}}></div></Form.Group>
+            <div style={{height:'22px'}}></div>
           <Form.Button color="blue">Submit</Form.Button>
         </Form>
       </div>
@@ -250,13 +249,16 @@ const styles = {
   formform: {
     zIndex: '2',
     height: 'auto',
-    width: "1000px",
+    width: "700px",
     padding: '20px',
     backgroundColor: 'white',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'column',
+    overflowY: 'scroll',
+    position:'relative',
+    top: '300px',
 
   },
   formbutton: {
