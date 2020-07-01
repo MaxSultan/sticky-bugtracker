@@ -1,7 +1,7 @@
 import React from 'react';
-import { Form, Header, Icon, } from "semantic-ui-react";
+import { Form, Header, Icon, Label, } from "semantic-ui-react";
 import axios from 'axios';
-import DateTimePicker from 'react-datetime-picker'
+import DatePicker from 'react-date-picker'
 
 class ProductsForm extends React.Component {
   defaultValues = { 
@@ -141,76 +141,24 @@ class ProductsForm extends React.Component {
               onChange={this.handleChange}
               required
             />
-            </Form.Group>
-            <Form.Group widths="equal">
             <Form.Input
               label="Expected Result after bug is fixed"
               name="result"
-              placeholder="Name"
+              placeholder="Describe result"
               value={result}
               onChange={this.handleChange}
               required
             />
-            <Form.Input
-              label="Who is the bug assigned to in this stage?"
-              name="assignedTo"
-              placeholder="Enter the name of a dev/QA"
-              value={assignedTo}
-              onChange={this.handleChange}
-              required
-            />
+            </Form.Group>
+            <Form.Group widths="equal">
             <Form.Select
               label="How severe is the bug?"
               name="severity"
+              placeholder='Enter severity'
               options={severity_options}
               value={severity}
               onChange={this.handleSelectChange}
               required
-            />
-            </Form.Group>
-            <Form.Group widths="equal">
-            {/* <Form.Input
-              label="When should the bug be completed?"
-              name="dueDate"
-              placeholder="Enter a future date"
-              value={dueDate}
-              onChange={this.handleChange}
-              required
-            /> */}
-            </Form.Group>
-            <Form.Group widths="equal">
-            <DateTimePicker
-             label="When should the bug be completed?"
-             name="dueDate"
-             placeholder="Enter a future date"
-             value={dueDate}
-             onChange={this.handleDateTimeChange}
-             required
-            />
-            </Form.Group>
-            <Form.Group widths="equal">
-             <Form.Input
-              label="Attach any helpful screenshots of the bug"
-              name="screenShots"
-              placeholder="Enter screenshots here"
-              value={screenShots}
-              onChange={this.handleChange}
-            />
-            <Form.Input
-              label="Enter the date the bug was assigned"
-              name="date_assigned"
-              placeholder="What day was the bug assigned?"
-              value={date_assigned}
-              onChange={this.handleChange}
-            />
-            </Form.Group>
-            <Form.Group widths="equal">
-            <Form.Input
-              label="Enter date the work began on the bug"
-              name="date_work_began"
-              placeholder="What day did the dev begin work on the bug?"
-              value={date_work_began}
-              onChange={this.handleChange}
             />
             <Form.Select
               label="What is the bugs current status"
@@ -228,7 +176,55 @@ class ProductsForm extends React.Component {
               value={current_stage}
               onChange={this.handleSelectChange}
             />
+             <Form.Input
+              label="Attach any helpful screenshots of the bug"
+              name="screenShots"
+              placeholder="Enter screenshots here"
+              value={screenShots}
+              onChange={this.handleChange}
+            />
+            </Form.Group>
+            <Form.Group widths="equal"><div style={{height:'5%'}}></div></Form.Group>
+            <Form.Group widths='equal'>
+            <Form.Input
+              label="Who is the bug assigned to in this stage?"
+              name="assignedTo"
+              placeholder="Enter the name of a dev/QA"
+              value={assignedTo}
+              onChange={this.handleChange}
+              required
+            />
+            <DatePicker
+             label="What day was the bug assigned?"
+             name="date_assigned"
+             placeholder="Enter date bug was assigned"
+             value={date_assigned}
+             onChange={this.handleDateTimeChange}
+            />
+            </Form.Group>
+            <Form.Group widths="equal"><div style={{height:'5%'}}></div></Form.Group>
+            <Form.Group widths="equal">
+            <DatePicker
+            calendarAriaLabel="Enter date the work began on the bug"
+             label="Enter date the work began on the bug"
+             name="date_work_began"
+             placeholder="What day did the dev begin work on the bug?"
+             value={date_work_began}
+             onChange={this.handleDateTimeChange}
+            />
+            <Label for='dueDate'>When should the bug be completed?</Label>
+            <DatePicker
+            calendarAriaLabel="When should the bug be completed?"
+            calendarIcon={null}
+             label="When should the bug be completed?"
+             name="dueDate"
+             placeholder="Enter a future date"
+             value={dueDate}
+             onChange={this.handleDateTimeChange}
+             required
+            />
           </Form.Group>
+          <Form.Group widths="equal"><div style={{height:'5%'}}></div></Form.Group>
           <Form.Button color="blue">Submit</Form.Button>
         </Form>
       </div>
@@ -264,7 +260,7 @@ const styles = {
   formbutton: {
     justifySelf:'flex-end',
     alignSelf: 'flex-end',
-  }
+  },
 }
 
 export default ProductsForm;
