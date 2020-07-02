@@ -35,15 +35,25 @@ class ProductsForm extends React.Component {
     status:"",
     current_stage:"", 
   }
-  state = { ...this.defaultValues, };
+  state = { ...this.defaultValues };
   handleSubmit = (e) => {
     if(this.props.bug_id){
-      axios.put(`/api/projects/${this.props.projectEditId}/bugs/${this.props.bug_id}`, {...this.state})
-      .then(res => {
-        console.log(res)
-        this.props.update(res)
-        this.props.setEditing(false)
-      }).catch(err => console.log(err))
+      // axios.put(`/api/projects/${this.props.projectEditId}/bugs/${this.props.bug_id}`, {...this.state})
+      // .then(res => {
+      //   this.props.update(res)
+      //   this.props.setEditing(false)
+      // }).catch(err => console.log(err))
+        let data = new FormData();
+        data.append('file', this.state.screenShots);
+        axios.put(
+          `/api/users/${this.props.bug_idid}?title=${this.state.title}&description=${this.state.description}&steps=${this.state.steps}&result=${this.state.result}&assignedTo=${this.state.assignedTo}&severity=${this.state.severity}&dueDate=${this.state.dueDate}&date_assigned=${this.state.date_assigned}&date_work_began=${this.state.date_work_began}&status=${this.state.status}&current_stage=${this.state.current_stage}`, data
+          )
+          .then( res => {
+            console.log(res.data)
+            this.setState(res.data) 
+            this.props.update(res)
+            this.props.setEditing(false)
+          })
     }else {
       e.preventDefault();
       const { id } = this.props
@@ -76,7 +86,7 @@ class ProductsForm extends React.Component {
     this.setState({date_work_began: e})
   }
   onDrop = (e) => {
-    console.log(e)
+    this.setState({ ...this.state, screenShots: e[0] });
   }
 
 
