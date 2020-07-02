@@ -3,6 +3,7 @@ import { Form, Header, Icon, Label, } from "semantic-ui-react";
 import axios from 'axios';
 import DatePicker from 'react-date-picker'
 import Axios from 'axios';
+import Dropzone from 'react-dropzone'
 
 class ProductsForm extends React.Component {
   defaultValues = { 
@@ -73,6 +74,9 @@ class ProductsForm extends React.Component {
   }
   handleDateWorkBeganTimeChange = (e) => {
     this.setState({date_work_began: e})
+  }
+  onDrop = (e) => {
+    console.log(e)
   }
 
 
@@ -186,7 +190,26 @@ class ProductsForm extends React.Component {
               value={screenShots}
               onChange={this.handleChange}
             />
-            <Form.Group widths="equal"><div style={{height:'5%'}}></div></Form.Group>
+            <Dropzone
+                onDrop={this.onDrop}
+                multiple={false}
+              >
+                {({ getRootProps, getInputProps, isDragActive }) => {
+                  return (
+                    <div
+                      {...getRootProps()}
+                      style={styles.dropzone}
+                    >
+                      <input {...getInputProps()} />
+                      {
+                        isDragActive ?
+                          <p>Drop files here...</p> :
+                          <p>Try dropping some files here, or click to select files to upload.</p>
+                      }
+                    </div>
+                  )
+                }}
+            </Dropzone>
             <Form.Input
               label="Who is the bug assigned to in this stage?"
               name="assignedTo"
@@ -263,6 +286,16 @@ const styles = {
     justifySelf:'flex-end',
     alignSelf: 'flex-end',
   },
+  dropzone:{
+    height: "50px",
+    width: "240px",
+    border: "1px dashed black",
+    borderRadius: "5px",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    padding: "10px",
+  }
 }
 
 export default ProductsForm;
