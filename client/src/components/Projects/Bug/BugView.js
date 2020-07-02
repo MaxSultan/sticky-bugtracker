@@ -17,8 +17,9 @@ export default function BugView(props) {
         })
     }
 
-    const editBug = () => {
-
+    const toHumanDate = (date) => {
+        let newDate = new Date(date).toDateString()
+        return newDate
     }
 
     return (
@@ -34,9 +35,9 @@ export default function BugView(props) {
                 <Card.Content>Desired Result: {props.result}</Card.Content>
                 <Card.Content>Currently Assigned to: {props.assignedTo}</Card.Content>
                 <Card.Content>Screenshots: {props.screenShots}</Card.Content>
-                <Card.Content>Due Date: {props.dueDate}</Card.Content>
-                <Card.Content>Date Assigned: {props.date_assigned}</Card.Content>
-                <Card.Content>Date Work Began: {props.date_work_began}</Card.Content>
+                <Card.Content>Due Date: {toHumanDate(props.dueDate)}</Card.Content>
+                <Card.Content>Date Assigned: {toHumanDate(props.date_assigned)}</Card.Content>
+                <Card.Content>Date Work Began: {toHumanDate(props.date_work_began)}</Card.Content>
                 <Card.Content extra>
                     <Card.Group>
                         <Button style={styles.buttons} onClick={() => setEditing(!editing)}>Edit</Button>
@@ -48,7 +49,7 @@ export default function BugView(props) {
         {editing && <BugForm 
         bug_id={props.id} 
         projectEditId={props.project_id}
-        editBug={editBug} 
+        // editBug={editBug} 
         initTitle={props.title}
         initSeverity={props.severity}
         initDescription={props.description}
