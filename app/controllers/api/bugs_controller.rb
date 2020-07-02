@@ -29,7 +29,7 @@ class Api::BugsController < ApplicationController
     # :current_stage,
     
     def update
-        @project = Project.find(params[:project_id])
+        # @project = Project.find(params[:project_id])
         bug = Bug.find(params[:id])
         bug.title = params[:title] ? params[:title] : bug.title
         bug.description = params[:description] ? params[:description] : bug.description
@@ -57,7 +57,7 @@ class Api::BugsController < ApplicationController
             end
           end
 
-        if bug.update(bug_params)
+        if bug.save
             render json: bug
         else
             render json: {errors: bug.errors, status: 422}

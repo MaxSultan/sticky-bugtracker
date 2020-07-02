@@ -43,13 +43,13 @@ class ProductsForm extends React.Component {
       //   this.props.update(res)
       //   this.props.setEditing(false)
       // }).catch(err => console.log(err))
-        let data = new FormData();
+        let data  = new FormData();
         data.append('file', this.state.screenShots);
         axios.put(
-          `/api/users/${this.props.bug_idid}?title=${this.state.title}&description=${this.state.description}&steps=${this.state.steps}&result=${this.state.result}&assignedTo=${this.state.assignedTo}&severity=${this.state.severity}&dueDate=${this.state.dueDate}&date_assigned=${this.state.date_assigned}&date_work_began=${this.state.date_work_began}&status=${this.state.status}&current_stage=${this.state.current_stage}`, data
+          `/api/projects/${this.props.projectEditId}/bugs/${this.props.bug_id}?title=${this.state.title}&description=${this.state.description}&steps=${this.state.steps}&result=${this.state.result}&assignedTo=${this.state.assignedTo}&severity=${this.state.severity}&dueDate=${this.state.dueDate}&date_assigned=${this.state.date_assigned}&date_work_began=${this.state.date_work_began}&status=${this.state.status}&current_stage=${this.state.current_stage}`, data
           )
           .then( res => {
-            console.log(res.data)
+            console.log(res)
             this.setState(res.data) 
             this.props.update(res)
             this.props.setEditing(false)
@@ -85,8 +85,8 @@ class ProductsForm extends React.Component {
   handleDateWorkBeganTimeChange = (e) => {
     this.setState({date_work_began: e})
   }
-  onDrop = (e) => {
-    this.setState({ ...this.state, screenShots: e[0] });
+  onDrop = (file) => {
+    this.setState({ ...this.state, screenShots: file[0] });
   }
 
 
@@ -193,16 +193,17 @@ class ProductsForm extends React.Component {
               value={current_stage}
               onChange={this.handleSelectChange}
             />
-             <Form.Input
+             {/* <Form.Input
               label="Attach any helpful screenshots of the bug"
               name="screenShots"
               placeholder="Enter screenshots here"
               value={screenShots}
               onChange={this.handleChange}
-            />
+            /> */}
             <Dropzone
                 onDrop={this.onDrop}
                 multiple={false}
+                value={screenShots}
               >
                 {({ getRootProps, getInputProps, isDragActive }) => {
                   return (
