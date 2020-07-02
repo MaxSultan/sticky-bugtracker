@@ -5,14 +5,39 @@ import { Link } from 'react-router-dom'
 
 export default function Bug(props) {
     const [toggle, setToggle] = useState(false)
+    var today = new Date();
+    var startDate = new Date(props.date_work_began)
+    const diffTime = Math.abs(startDate - today);
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
+    const status = () => {
+        if (diffDays >= 30){
+            return (
+                <Table.Row negative>
+                    <Table.Cell><Link onClick={() => setToggle(!toggle)}>{props.title}</Link></Table.Cell>
+                    <Table.Cell>{props.severity}</Table.Cell>
+                    <Table.Cell>{props.assignedTo}</Table.Cell>
+                    <Table.Cell>{props.created_at}</Table.Cell>
+                    <Table.Cell>{props.dueDate}</Table.Cell>
+                    {toggle && <BugView {...props} setToggle={setToggle} toggle={toggle} delete={props.delete} update={props.update}/>}
+                </Table.Row>
+            )
+        }else{
+            return (
+                <Table.Row >
+                    <Table.Cell><Link onClick={() => setToggle(!toggle)}>{props.title}</Link></Table.Cell>
+                    <Table.Cell>{props.severity}</Table.Cell>
+                    <Table.Cell>{props.assignedTo}</Table.Cell>
+                    <Table.Cell>{props.created_at}</Table.Cell>
+                    <Table.Cell>{props.dueDate}</Table.Cell>
+                    {toggle && <BugView {...props} setToggle={setToggle} toggle={toggle} delete={props.delete} update={props.update}/>}
+                </Table.Row>
+            )
+        }
+    }
+
     return (
-        <Table.Row>
-            <Table.Cell><Link onClick={() => setToggle(!toggle)}>{props.title}</Link></Table.Cell>
-            <Table.Cell>{props.severity}</Table.Cell>
-            <Table.Cell>{props.assignedTo}</Table.Cell>
-            <Table.Cell>{props.created_at}</Table.Cell>
-            <Table.Cell>{props.dueDate}</Table.Cell>
-            {toggle && <BugView {...props} setToggle={setToggle} toggle={toggle} delete={props.delete} update={props.update}/>}
-        </Table.Row>
+        <>
+        {status()}
+        </>
     )
 }
