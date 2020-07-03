@@ -193,7 +193,6 @@ class ProductsForm extends React.Component {
               placeholder="Enter the name of a dev/QA"
               value={assignedTo}
               onChange={this.handleChange}
-              required
             />
             <Label for='date_assigned'>What day was the bug assigned?</Label>
             <DatePicker

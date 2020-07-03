@@ -19,7 +19,18 @@ export default function Bug(props) {
                     <Table.Cell>{props.severity}</Table.Cell>
                     <Table.Cell>{props.assignedTo}</Table.Cell>
                     <Table.Cell>{diffDays}</Table.Cell>
-                    <Table.Cell>{humanDueDate}</Table.Cell>
+                    <Table.Cell>{props.current_stage}</Table.Cell>
+                    {toggle && <BugView {...props} setToggle={setToggle} toggle={toggle} delete={props.delete} update={props.update}/>}
+                </Table.Row>
+            )
+        }else if (diffDays >= 7){
+            return(
+                <Table.Row style={{backgroundColor: '#ffffe0', color:'#cccc00'}}>
+                    <Table.Cell><Link onClick={() => setToggle(!toggle)}>{props.title}</Link></Table.Cell>
+                    <Table.Cell>{props.severity}</Table.Cell>
+                    <Table.Cell>{props.assignedTo}</Table.Cell>
+                    <Table.Cell>{diffDays}</Table.Cell>
+                    <Table.Cell>{props.current_stage}</Table.Cell>
                     {toggle && <BugView {...props} setToggle={setToggle} toggle={toggle} delete={props.delete} update={props.update}/>}
                 </Table.Row>
             )
@@ -30,7 +41,7 @@ export default function Bug(props) {
                     <Table.Cell>{props.severity}</Table.Cell>
                     <Table.Cell>{props.assignedTo}</Table.Cell>
                     <Table.Cell>{diffDays}</Table.Cell>
-                    <Table.Cell>{humanDueDate}</Table.Cell>
+                    <Table.Cell>{props.current_stage}</Table.Cell>
                     {toggle && <BugView {...props} setToggle={setToggle} toggle={toggle} delete={props.delete} update={props.update}/>}
                 </Table.Row>
             )

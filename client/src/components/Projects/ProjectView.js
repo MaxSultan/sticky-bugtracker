@@ -50,7 +50,7 @@ export default function ProductView(props){
                     <Table.HeaderCell>Severity</Table.HeaderCell>
                     <Table.HeaderCell>Assigned to:</Table.HeaderCell>
                     <Table.HeaderCell>Days worked on:</Table.HeaderCell>
-                    <Table.HeaderCell>Date Due</Table.HeaderCell>
+                    <Table.HeaderCell>Current Stage</Table.HeaderCell>
                 </Table.Row>
                 </Table.Header>
                 <Table.Body>

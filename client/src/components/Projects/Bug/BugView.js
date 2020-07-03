@@ -83,6 +83,7 @@ const styles = {
         display: 'flex',
         justifyContent: 'space-around',
         alignItems: 'center',
+        color: 'black',
     },
     buttons: {
         margin: '10px 2px',
