@@ -18,7 +18,7 @@ export default function Bug(props) {
                     <Table.Cell><Link onClick={() => setToggle(!toggle)}>{props.title}</Link></Table.Cell>
                     <Table.Cell>{props.severity}</Table.Cell>
                     <Table.Cell>{props.assignedTo}</Table.Cell>
-                    <Table.Cell>{createDate}</Table.Cell>
+                    <Table.Cell>{diffDays}</Table.Cell>
                     <Table.Cell>{humanDueDate}</Table.Cell>
                     {toggle && <BugView {...props} setToggle={setToggle} toggle={toggle} delete={props.delete} update={props.update}/>}
                 </Table.Row>
@@ -29,7 +29,7 @@ export default function Bug(props) {
                     <Table.Cell><Link onClick={() => setToggle(!toggle)}>{props.title}</Link></Table.Cell>
                     <Table.Cell>{props.severity}</Table.Cell>
                     <Table.Cell>{props.assignedTo}</Table.Cell>
-                    <Table.Cell>{createDate}</Table.Cell>
+                    <Table.Cell>{diffDays}</Table.Cell>
                     <Table.Cell>{humanDueDate}</Table.Cell>
                     {toggle && <BugView {...props} setToggle={setToggle} toggle={toggle} delete={props.delete} update={props.update}/>}
                 </Table.Row>

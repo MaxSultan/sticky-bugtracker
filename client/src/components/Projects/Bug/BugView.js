@@ -36,6 +36,7 @@ export default function BugView(props) {
                 <Card.Content>Currently Assigned to: {props.assignedTo}</Card.Content>
                 <Card.Content>Screenshots: {props.screenShots}</Card.Content>
                 <Card.Content>Due Date: {toHumanDate(props.dueDate)}</Card.Content>
+                <Card.Content>Date Created: {toHumanDate(props.created_at)}</Card.Content>
                 <Card.Content>Date Assigned: {toHumanDate(props.date_assigned)}</Card.Content>
                 <Card.Content>Date Work Began: {toHumanDate(props.date_work_began)}</Card.Content>
                 <Card.Content extra>
