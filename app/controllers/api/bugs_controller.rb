@@ -30,6 +30,10 @@ class Api::BugsController < ApplicationController
         render json: bug.destroy
     end 
 
+    def all 
+        render json: Bug.all
+    end
+
     private
     def bug_params
         params.require(:bug).permit(

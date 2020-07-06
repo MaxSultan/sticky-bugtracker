@@ -1,5 +1,6 @@
 import React, { useState} from 'react'
 import { Menu } from 'semantic-ui-react'
+import { Link } from 'react-router-dom'
 
 export default function ProjectsNav({ showForm, setShowForm}) {
   const [activeItem, setActiveItem] = useState('projects')
@@ -23,6 +24,12 @@ export default function ProjectsNav({ showForm, setShowForm}) {
           active={activeItem === 'archived projects'}
           onClick={() => handleItemClick}
         />
+         <Menu.Item
+          name='View all bugs'
+          active={activeItem === 'View all bugs'}
+          onClick={() => handleItemClick}
+          
+        ><Link to='/bugs'>View all Bugs</Link></Menu.Item>
       </Menu>
     )
 }

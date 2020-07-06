@@ -11,6 +11,7 @@ import Login from './components/Login';
 import Register from './components/Register';
 import FetchUser from './components/FetchUser'
 import ProtectedRoute from './components/ProtectedRoute';
+import AllBugs from './components/Projects/Bug/AllBugs';
 
 
 function App() {
@@ -24,7 +25,8 @@ function App() {
        <Route exact path="/login" component={Login} />
         <Route exact path="/register" component={Register} />
        <ProtectedRoute exact path='/projects' component={Projects}/>
-       <ProtectedRoute exact path='/project/:id' component={ProjectView}/>     
+       <ProtectedRoute exact path='/project/:id' component={ProjectView}/>
+       <ProtectedRoute exact path='/bugs' component={AllBugs}/>      
        <Route component={NoMatch}></Route>
      </Switch>
    </Container>
