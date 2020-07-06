@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  get '/bugs/all', to: 'bugs#all' 
+  get '/bugs/all', to: 'api/bugs#all' 
   mount_devise_token_auth_for 'User', at: 'api/auth'
 
   namespace :api do
