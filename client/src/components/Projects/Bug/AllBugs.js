@@ -14,7 +14,7 @@ export default function AllBugs() {
 
     useEffect( () => {
         getAllBugs()
-    }, [bugs])
+    }, [])
 
     return (
         <Table celled>
