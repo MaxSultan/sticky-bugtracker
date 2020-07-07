@@ -66,8 +66,6 @@ class ProductsForm extends React.Component {
     this.setState({ [name]: value, })
   }
 
-
-//Currently only works for the dueDate input
   handleDueDateTimeChange = (e) => {
     this.setState({dueDate: e})
   }
@@ -77,7 +75,6 @@ class ProductsForm extends React.Component {
   handleDateWorkBeganTimeChange = (e) => {
     this.setState({date_work_began: e})
   }
-
 
   render() {
     const { 
@@ -196,7 +193,6 @@ class ProductsForm extends React.Component {
               placeholder="Enter the name of a dev/QA"
               value={assignedTo}
               onChange={this.handleChange}
-              required
             />
             <Label for='date_assigned'>What day was the bug assigned?</Label>
             <DatePicker
