@@ -31,7 +31,7 @@ class Api::BugsController < ApplicationController
     end 
 
     def all 
-        render json: Bug.all
+        render json: Bug.get_bug_with_project
     end
 
     private

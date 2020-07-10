@@ -15,6 +15,7 @@ export default function Bug(props) {
         if (diffDays >= 30){
             return (
                 <Table.Row negative>
+                    {props.project_name && <Table.Cell>{props.project_name}</Table.Cell>}
                     <Table.Cell><Link onClick={() => setToggle(!toggle)}>{props.title}</Link></Table.Cell>
                     <Table.Cell>{props.severity}</Table.Cell>
                     <Table.Cell>{props.assignedTo}</Table.Cell>
@@ -26,6 +27,7 @@ export default function Bug(props) {
         }else if (diffDays >= 7){
             return(
                 <Table.Row style={{backgroundColor: '#ffffe0', color:'#cccc00'}}>
+                    {props.project_name && <Table.Cell>{props.project_name}</Table.Cell>}
                     <Table.Cell><Link onClick={() => setToggle(!toggle)}>{props.title}</Link></Table.Cell>
                     <Table.Cell>{props.severity}</Table.Cell>
                     <Table.Cell>{props.assignedTo}</Table.Cell>
@@ -37,6 +39,7 @@ export default function Bug(props) {
         }else{
             return (
                 <Table.Row >
+                    {props.project_name && <Table.Cell>{props.project_name}</Table.Cell>}
                     <Table.Cell><Link onClick={() => setToggle(!toggle)}>{props.title}</Link></Table.Cell>
                     <Table.Cell>{props.severity}</Table.Cell>
                     <Table.Cell>{props.assignedTo}</Table.Cell>
