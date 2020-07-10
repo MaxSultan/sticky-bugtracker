@@ -1,9 +1,10 @@
 import React from 'react';
 import { Form, Header, Icon, Label, } from "semantic-ui-react";
 import axios from 'axios';
-import DatePicker from 'react-date-picker'
-import Axios from 'axios';
+import DatePicker from "react-datepicker";
 import Dropzone from 'react-dropzone'
+
+import "react-datepicker/dist/react-datepicker.css";
 
 class ProductsForm extends React.Component {
   defaultValues = { 
@@ -14,9 +15,9 @@ class ProductsForm extends React.Component {
       assignedTo:this.props.initAssignedTo ? this.props.initAssignedTo : "", 
       severity:this.props.initSeverity ? this.props.initSeverity : "", 
       screenShots:this.props.initScreenShots ? this.props.initScreenShots : "",
-      dueDate: this.props.initDueDate ? this.props.initDueDate : "",   
-      date_assigned: this.props.init_date_assigned ? this.props.init_date_assigned : "",  
-      date_work_began: this.props.init_date_work_began ? this.props.init_date_work_began : "",  
+      dueDate: this.props.initDueDate ? new Date(this.props.initDueDate) : "",   
+      date_assigned: this.props.init_date_assigned ? new Date(this.props.init_date_assigned) : "",  
+      date_work_began: this.props.init_date_work_began ? new Date(this.props.init_date_work_began) : "",  
       status: this.props.initStatus ? this.props.initStatus : "",  
       current_stage: this.props.init_current_stage ? this.props.init_current_stage : "",  
   };
@@ -37,18 +38,19 @@ class ProductsForm extends React.Component {
   }
   state = { ...this.defaultValues };
   handleSubmit = (e) => {
+    const {projectEditId, bug_id, bugForm, id} = this.props
+    let data  = new FormData();
+    data.append('file', this.state.screenShots);
     if(this.props.bug_id){
       // axios.put(`/api/projects/${this.props.projectEditId}/bugs/${this.props.bug_id}`, {...this.state})
       // .then(res => {
       //   this.props.update(res)
       //   this.props.setEditing(false)
       // }).catch(err => console.log(err))
-        let data  = new FormData();
-        data.append('file', this.state.screenShots);
         axios.put(
           `/api/projects/${this.props.projectEditId}/bugs/${this.props.bug_id}?title=${this.state.title}&description=${this.state.description}&steps=${this.state.steps}&result=${this.state.result}&assignedTo=${this.state.assignedTo}&severity=${this.state.severity}&dueDate=${this.state.dueDate}&date_assigned=${this.state.date_assigned}&date_work_began=${this.state.date_work_began}&status=${this.state.status}&current_stage=${this.state.current_stage}`, data
           )
-          .then( res => {
+          .then(res => {
             console.log(res)
             this.setState(res.data) 
             this.props.update(res)
@@ -56,11 +58,10 @@ class ProductsForm extends React.Component {
           })
     }else {
       e.preventDefault();
-      const { id } = this.props
-      axios.post(`/api/projects/${id}/bugs`, {...this.state})
+      axios.post(`/api/projects/${id}/bugs?title=${this.state.title}&description=${this.state.description}&steps=${this.state.steps}&result=${this.state.result}&assignedTo=${this.state.assignedTo}&severity=${this.state.severity}&dueDate=${this.state.dueDate}&date_assigned=${this.state.date_assigned}&date_work_began=${this.state.date_work_began}&status=${this.state.status}&current_stage=${this.state.current_stage}`, data)
       .then( res => {
           this.props.add(res.data)
-          this.props.setBugForm(!this.props.bugForm)
+          this.props.setBugForm(!bugForm)
       })
       .catch(err => console.log(err))
     }
@@ -88,7 +89,6 @@ class ProductsForm extends React.Component {
   onDrop = (file) => {
     this.setState({ ...this.state, screenShots: file[0] });
   }
-
 
   render() {
     const { 
@@ -200,6 +200,7 @@ class ProductsForm extends React.Component {
               value={screenShots}
               onChange={this.handleChange}
             /> */}
+            <Label for='screenShots'>When should the bug be completed?</Label>
             <Dropzone
                 onDrop={this.onDrop}
                 multiple={false}
@@ -228,32 +229,31 @@ class ProductsForm extends React.Component {
               placeholder="Enter the name of a dev/QA"
               value={assignedTo}
               onChange={this.handleChange}
-              required
             />
             <Label for='date_assigned'>What day was the bug assigned?</Label>
             <DatePicker
-             label="What day was the bug assigned?"
-             name="date_assigned"
-             placeholder="Enter date bug was assigned"
-             value={date_assigned}
+            //  label="What day was the bug assigned?"
+            //  name="date_assigned"
+            //  placeholder="Enter date bug was assigned"
+             selected={date_assigned}
              onChange={this.handleDateAssignedTimeChange}
             />
             <div style={{height:'22px'}}></div>
             <Label for='date_work_began'>Enter date the work began on the bug</Label>
             <DatePicker
-             label="Enter date the work began on the bug"
-             name="date_work_began"
-             placeholder="What day did the dev begin work on the bug?"
-             value={date_work_began}
+            //  label="Enter date the work began on the bug"
+            //  name="date_work_began"
+            //  placeholder="What day did the dev begin work on the bug?"
+             selected={date_work_began}
              onChange={this.handleDateWorkBeganTimeChange}
             />
             <div style={{height:'22px'}}></div>
             <Label for='dueDate'>When should the bug be completed?</Label>
             <DatePicker
-             label="When should the bug be completed?"
-             name="dueDate"
-             placeholder="Enter a future date"
-             value={dueDate}
+            //  label="When should the bug be completed?"
+            //  name="dueDate"
+            //  placeholder="Enter a future date"
+             selected={dueDate}
              onChange={this.handleDueDateTimeChange}
              required
             />
