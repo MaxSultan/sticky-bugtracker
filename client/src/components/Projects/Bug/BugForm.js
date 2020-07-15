@@ -42,13 +42,8 @@ class ProductsForm extends React.Component {
     let data  = new FormData();
     data.append('file', this.state.screenShots);
     if(this.props.bug_id){
-      // axios.put(`/api/projects/${this.props.projectEditId}/bugs/${this.props.bug_id}`, {...this.state})
-      // .then(res => {
-      //   this.props.update(res)
-      //   this.props.setEditing(false)
-      // }).catch(err => console.log(err))
         axios.put(
-          `/api/projects/${this.props.projectEditId}/bugs/${this.props.bug_id}?title=${this.state.title}&description=${this.state.description}&steps=${this.state.steps}&result=${this.state.result}&assignedTo=${this.state.assignedTo}&severity=${this.state.severity}&dueDate=${this.state.dueDate}&date_assigned=${this.state.date_assigned}&date_work_began=${this.state.date_work_began}&status=${this.state.status}&current_stage=${this.state.current_stage}`, data
+          `/api/projects/${this.props.projectEditId}/bugs/${bug_id}?title=${this.state.title}&description=${this.state.description}&steps=${this.state.steps}&result=${this.state.result}&assignedTo=${this.state.assignedTo}&severity=${this.state.severity}&dueDate=${this.state.dueDate}&date_assigned=${this.state.date_assigned}&date_work_began=${this.state.date_work_began}&status=${this.state.status}&current_stage=${this.state.current_stage}`, data
           )
           .then(res => {
             console.log(res)
@@ -61,7 +56,7 @@ class ProductsForm extends React.Component {
       axios.post(`/api/projects/${id}/bugs?title=${this.state.title}&description=${this.state.description}&steps=${this.state.steps}&result=${this.state.result}&assignedTo=${this.state.assignedTo}&severity=${this.state.severity}&dueDate=${this.state.dueDate}&date_assigned=${this.state.date_assigned}&date_work_began=${this.state.date_work_began}&status=${this.state.status}&current_stage=${this.state.current_stage}`, data)
       .then( res => {
           this.props.add(res.data)
-          this.props.setBugForm(!bugForm)
+          this.props.setBugForm(!this.props.bugForm)
       })
       .catch(err => console.log(err))
     }
@@ -135,7 +130,7 @@ class ProductsForm extends React.Component {
       <div style={styles.divform}>
         <Form onSubmit={this.handleSubmit} style={styles.formform}>
         <Icon style={styles.formbutton} name='close' onClick={() => this.props.bug_id ? this.props.setEditing(!this.props.editing) : this.props.setBugForm(!this.props.bugForm)}/>
-        <Header as="h1">Add New Bug</Header>
+        <Header as="h1">{this.props.bug_id ? 'Edit Bug' : 'Add New Bug' }</Header>
             <Form.Input
               label="Bug Title"
               name="title"
@@ -232,27 +227,18 @@ class ProductsForm extends React.Component {
             />
             <Label for='date_assigned'>What day was the bug assigned?</Label>
             <DatePicker
-            //  label="What day was the bug assigned?"
-            //  name="date_assigned"
-            //  placeholder="Enter date bug was assigned"
              selected={date_assigned}
              onChange={this.handleDateAssignedTimeChange}
             />
             <div style={{height:'22px'}}></div>
             <Label for='date_work_began'>Enter date the work began on the bug</Label>
             <DatePicker
-            //  label="Enter date the work began on the bug"
-            //  name="date_work_began"
-            //  placeholder="What day did the dev begin work on the bug?"
              selected={date_work_began}
              onChange={this.handleDateWorkBeganTimeChange}
             />
             <div style={{height:'22px'}}></div>
             <Label for='dueDate'>When should the bug be completed?</Label>
             <DatePicker
-            //  label="When should the bug be completed?"
-            //  name="dueDate"
-            //  placeholder="Enter a future date"
              selected={dueDate}
              onChange={this.handleDueDateTimeChange}
              required
