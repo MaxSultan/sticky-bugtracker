@@ -7,7 +7,7 @@ export default function ProjectsNav({ showForm, setShowForm}) {
   const handleItemClick = (e) => setActiveItem(e.target.name)
 
     return (
-      <Menu tabular>
+      <Menu tabular style={styles.projectMenu}>
         <Menu.Item
           name='all projects'
           active={activeItem === 'active projects'}
@@ -25,4 +25,10 @@ export default function ProjectsNav({ showForm, setShowForm}) {
         />
       </Menu>
     )
+}
+
+const styles = {
+  projectMenu: {
+    backgroundColor: '#909aa7'
+  }
 }

@@ -267,11 +267,11 @@ class ProductsForm extends React.Component {
 
 const styles = {
   divform: {
-    height: '100vh',
-    width: '100vw',
+    height: 'auto',
+    width: '100%',
     backgroundColor: '#e6e6e6', 
     position: 'absolute',
-    top: '0px',
+    top: '-10px',
     left: '0px',
     zIndex:'1',
     display: 'flex',
@@ -290,7 +290,7 @@ const styles = {
     flexDirection: 'column',
     overflowY: 'scroll',
     position:'relative',
-    top: '300px',
+    top: '30px',
 
   },
   formbutton: {
