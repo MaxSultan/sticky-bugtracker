@@ -43,7 +43,7 @@ export default function ProductView(props){
             <Segment style={styles.contain}>
                 <Header as='h1' textAlign='center'>{product.name}</Header>
                 <h3>Bugs</h3>
-                <Table celled style={styles.table}>
+                <Table celled>
                 <Table.Header>
                 <Table.Row >
                     <Table.HeaderCell style={styles.table}>Title</Table.HeaderCell>

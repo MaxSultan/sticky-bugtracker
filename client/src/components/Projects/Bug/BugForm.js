@@ -20,7 +20,6 @@ class ProductsForm extends React.Component {
       date_work_began: this.props.init_date_work_began ? new Date(this.props.init_date_work_began) : "",  
       status: this.props.initStatus ? this.props.initStatus : "",  
       current_stage: this.props.init_current_stage ? this.props.init_current_stage : "",  
-      screenShotUrl: this.props.screenShotUrl ? this.props.screenShotUrl : "",
   };
 
   resetValues = {
@@ -36,7 +35,6 @@ class ProductsForm extends React.Component {
     date_work_began:"",
     status:"",
     current_stage:"", 
-    screenShotUrl:"",
   }
   state = { ...this.defaultValues };
   handleSubmit = (e) => {
@@ -49,7 +47,20 @@ class ProductsForm extends React.Component {
           )
           .then(res => {
             console.log(res)
-            this.setState(res.data) 
+            this.setState({
+              title: res.data.title, 
+              description: res.data.description, 
+              steps:res.data.steps, 
+              result:res.data.result, 
+              assignedTo:res.data.assignedTo, 
+              severity:res.data.severity, 
+              screenShots: res.data.screenShots,
+              dueDate:new Date(res.data.dueDate),
+              date_assigned: new Date(res.data.date_assigned),
+              date_work_began:new Date(res.data.date_work_began),
+              status: res.data.status,
+              current_stage: res.data.current_stage, 
+              }) 
             this.props.update(res)
             this.props.setEditing(false)
           })
