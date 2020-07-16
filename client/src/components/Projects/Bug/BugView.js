@@ -7,6 +7,7 @@ import BugForm from './BugForm'
 export default function BugView(props) {
     const [chat, toggleChat] = useState(false)
     const [editing, setEditing] = useState(false)
+    const [showImage, setShowImage] = useState(false)
 
     const deleteBugFromDb = (project_id, bug_id) => {
         Axios.delete(`/api/projects/${project_id}/bugs/${bug_id}`)
@@ -34,11 +35,15 @@ export default function BugView(props) {
                 <Card.Content>Steps to Recreate: {props.steps}</Card.Content>
                 <Card.Content>Desired Result: {props.result}</Card.Content>
                 <Card.Content>Currently Assigned to: {props.assignedTo}</Card.Content>
-                <Card.Content>Screenshots: <Image src={props.screenShots} style={{maxHeight: '150px', maxWidth:'150px'}}/></Card.Content>
+                <Card.Content>Screenshots: {props.screenShots !== null ? <Button onClick={() => setShowImage(!showImage)}>View Screenshots</Button> : "No Screenshots"} </Card.Content>
                 <Card.Content>Due Date: {toHumanDate(props.dueDate)}</Card.Content>
                 <Card.Content>Date Created: {toHumanDate(props.created_at)}</Card.Content>
                 <Card.Content>Date Assigned: {toHumanDate(props.date_assigned)}</Card.Content>
                 <Card.Content>Date Work Began: {toHumanDate(props.date_work_began)}</Card.Content>
+                {showImage && <div style={styles.imgContainer}>
+                    <div style={styles.imgHeader}><Icon name='window close' onClick={() => setShowImage(false)}/></div>
+                    <Image src={props.screenShots} style={{height: '80vh', width:'80vw'}}/>
+                </div>}
                 <Card.Content extra>
                     <Card.Group>
                         <Button style={styles.buttons} onClick={() => setEditing(!editing)}>Edit</Button>
@@ -93,5 +98,23 @@ const styles = {
         display:'flex',
         justifyContent:'space-between',
         margin:'5px'
+    },
+    imgContainer:{
+        position: 'fixed',
+        top:'0px',
+        left:'0px',
+        height:'100vh',
+        width: '100vw',
+        display: 'flex',
+        justifyContent:'center',
+        alignItems:'center',
+        backgroundColor:'#909aa7'
+    },
+    imgHeader:{
+        position: 'fixed',
+        top:'0px',
+        width: '100vw',
+        display: 'flex',
+        justifyContent:'flex-end',
     }
 }
