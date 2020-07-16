@@ -39,31 +39,45 @@ export default function ProductView(props){
     }
 
     return(
-        <div>
-            <Segment>
+        <div style={styles.contain}>
+            <Segment style={styles.contain}>
                 <Header as='h1' textAlign='center'>{product.name}</Header>
                 <h3>Bugs</h3>
-                <Table celled>
+                <Table celled style={styles.table}>
                 <Table.Header>
-                <Table.Row>
-                    <Table.HeaderCell>Title</Table.HeaderCell>
-                    <Table.HeaderCell>Severity</Table.HeaderCell>
-                    <Table.HeaderCell>Assigned to:</Table.HeaderCell>
-                    <Table.HeaderCell>Days worked on:</Table.HeaderCell>
-                    <Table.HeaderCell>Current Stage</Table.HeaderCell>
+                <Table.Row >
+                    <Table.HeaderCell style={styles.table}>Title</Table.HeaderCell>
+                    <Table.HeaderCell style={styles.table}>Severity</Table.HeaderCell>
+                    <Table.HeaderCell style={styles.table}>Assigned to:</Table.HeaderCell>
+                    <Table.HeaderCell style={styles.table}>Days worked on:</Table.HeaderCell>
+                    <Table.HeaderCell style={styles.table}>Current Stage</Table.HeaderCell>
                 </Table.Row>
                 </Table.Header>
                 <Table.Body>
                 {bugs.map(b => <Bug {...b} delete={deleteBug} update={updateBugUi}/>)}
                 </Table.Body>
                 </Table>
-                <Button onClick={()=> setBugForm(!bugForm)}>Add New Bug</Button>
+                <Button style={{backgroundColor:'#58694e', color:'#d6d6e1'}}onClick={()=> setBugForm(!bugForm)}>Add New Bug</Button>
                 {bugForm && <BugForm add={addBug} bugForm={bugForm} setBugForm={setBugForm} id={props.match.params.id}/>}
                 <br/>
                 <br/>
-                <Button color='black' onClick={() => props.history.push('/projects')}>Back</Button>
+                <Button style={styles.button} onClick={() => props.history.push('/projects')}>Back</Button>
             </Segment>
 
         </div>
     )
+}
+
+const styles = {
+    button: {
+        backgroundColor: '#3f5164',
+        color: '#d6d6e1',
+    },
+    contain: {
+        backgroundColor: '#e5e3eb'
+    },
+    table: {
+        backgroundColor:'#101c17',
+        color:'#d6d6e1',
+    }
 }

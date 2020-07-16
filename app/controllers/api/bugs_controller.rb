@@ -30,7 +30,7 @@ class Api::BugsController < ApplicationController
     end
     
     def update
-        @bug = @project.bugs.update(bug_query_params)
+        @bug.update(bug_query_params)
     #    @bug.title = params[:title] ? params[:title] :@bug.title
     #    @bug.description = params[:description] ? params[:description] :@bug.description
     #    @bug.steps = params[:steps] ? params[:steps] :@bug.steps
@@ -55,7 +55,7 @@ class Api::BugsController < ApplicationController
               render json: { errors: e }, status: 422
               return
             end
-          end
+        end
 
         if bug.save
             render json: @bug
@@ -93,6 +93,8 @@ class Api::BugsController < ApplicationController
             :date_work_began,
             :status,
             :current_stage,
+            :id,
+            :project_id,
         )
     end 
 end

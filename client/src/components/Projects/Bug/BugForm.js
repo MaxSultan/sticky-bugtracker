@@ -53,7 +53,9 @@ class ProductsForm extends React.Component {
           })
     }else {
       e.preventDefault();
-      axios.post(`/api/projects/${id}/bugs?title=${this.state.title}&description=${this.state.description}&steps=${this.state.steps}&result=${this.state.result}&assignedTo=${this.state.assignedTo}&severity=${this.state.severity}&dueDate=${this.state.dueDate}&date_assigned=${this.state.date_assigned}&date_work_began=${this.state.date_work_began}&status=${this.state.status}&current_stage=${this.state.current_stage}`, data)
+      axios.post(
+        `/api/projects/${id}/bugs?title=${this.state.title}&description=${this.state.description}&steps=${this.state.steps}&result=${this.state.result}&assignedTo=${this.state.assignedTo}&severity=${this.state.severity}&dueDate=${this.state.dueDate}&date_assigned=${this.state.date_assigned}&date_work_began=${this.state.date_work_began}&status=${this.state.status}&current_stage=${this.state.current_stage}`, data
+        )
       .then( res => {
           this.props.add(res.data)
           this.props.setBugForm(!this.props.bugForm)
