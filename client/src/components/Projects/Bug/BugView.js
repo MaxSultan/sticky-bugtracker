@@ -80,7 +80,7 @@ const styles = {
         position: 'absolute',
         top: '0px',
         left: '0px',
-        backgroundColor: '#d6d6d6',
+        backgroundColor: '#e5e3eb',
         display: 'flex',
         justifyContent: 'space-around',
         alignItems: 'center',
