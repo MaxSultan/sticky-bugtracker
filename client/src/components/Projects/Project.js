@@ -16,13 +16,20 @@ export default function Project(props) {
                 </Card.Description>
                 </Card.Content>
                 <Card.Content extra>
-                <Button as={Link} to={`/project/${p.id}`} color='blue'>
+                <Button as={Link} to={`/project/${p.id}`} style={styles.button}>
                     View
                 </Button>
                 <Button onClick={()=> deleteProject(p.id)}>Delete</Button>
                 <Button onClick={()=> setEditForm(!editForm)} >Edit</Button>
-                {editForm && <ProjectForm id={p.id} initName={p.name} initStatus={p.status} update={props.update} editForm={editForm} setEditForm={setEditForm}/>}
             </Card.Content>
+            {editForm && <ProjectForm id={p.id} initName={p.name} initStatus={p.status} update={props.update} editForm={editForm} setEditForm={setEditForm}/>}
       </Card>
     )
+}
+
+const styles = { 
+    button: {
+        backgroundColor: '#3f5164',
+        color: '#d6d6e1',
+    }
 }

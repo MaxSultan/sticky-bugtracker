@@ -46,7 +46,7 @@ const NavBar = ({ props }) => {
     }
 
     return(
-        <Menu pointing secondary {...props} auth={auth}>
+        <Menu pointing secondary {...props} auth={auth} style={styles.menu}>
             <Link to='/'>
                 <Menu.Item
                 icon='home'
@@ -69,6 +69,12 @@ const NavBar = ({ props }) => {
             {rightNavItems()}
         </Menu>
     )
+}
+
+const styles = {
+  menu: {
+    backgroundColor: '#93a081'
+  }
 }
 
 export default NavBar;

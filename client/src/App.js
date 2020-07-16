@@ -15,7 +15,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
   return (
-   <>
+   <div style={styles.color}>
    <NavBar/>
    <FetchUser>
    <Container>
@@ -29,8 +29,16 @@ function App() {
      </Switch>
    </Container>
    </FetchUser>
-   </>
+   </div>
   );
+}
+
+const styles = {
+  color: {
+    backgroundColor: '#d6d6e1', 
+    minHeight: '100vh',
+    minWidth: '100vw',
+  }
 }
 
 export default App;

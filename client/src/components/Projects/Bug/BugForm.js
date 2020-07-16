@@ -2,6 +2,7 @@ import React from 'react';
 import { Form, Header, Icon, Label, } from "semantic-ui-react";
 import axios from 'axios';
 import DatePicker from "react-datepicker";
+import Dropzone from 'react-dropzone'
 
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -13,7 +14,7 @@ class ProductsForm extends React.Component {
       result: this.props.initResult ? this.props.initResult : "", 
       assignedTo:this.props.initAssignedTo ? this.props.initAssignedTo : "", 
       severity:this.props.initSeverity ? this.props.initSeverity : "", 
-      screenShots:this.props.initScreenShots ? this.props.initScreenShots : "",
+      screenShots: null,
       dueDate: this.props.initDueDate ? new Date(this.props.initDueDate) : "",   
       date_assigned: this.props.init_date_assigned ? new Date(this.props.init_date_assigned) : "",  
       date_work_began: this.props.init_date_work_began ? new Date(this.props.init_date_work_began) : "",  
@@ -28,31 +29,49 @@ class ProductsForm extends React.Component {
     result:"", 
     assignedTo:"", 
     severity:"", 
-    screenShots:"",
+    screenShots: null,
     dueDate:"",
     date_assigned:"",
     date_work_began:"",
     status:"",
     current_stage:"", 
   }
-
-  state = { ...this.defaultValues, };
- 
+  state = { ...this.defaultValues };
   handleSubmit = (e) => {
     const {projectEditId, bug_id, bugForm, id} = this.props
+    let data  = new FormData();
+    if (this.state.screenShots) data.append('file', this.state.screenShots);
     if(this.props.bug_id){
-      axios.put(`/api/projects/${projectEditId}/bugs/${bug_id}`, {...this.state})
-      .then(res => {
-        console.log(res)
-        this.props.update(res)
-        this.props.setEditing(false)
-      }).catch(err => console.log(err))
+        axios.put(
+          `/api/projects/${this.props.projectEditId}/bugs/${bug_id}?title=${this.state.title}&description=${this.state.description}&steps=${this.state.steps}&result=${this.state.result}&assignedTo=${this.state.assignedTo}&severity=${this.state.severity}&dueDate=${this.state.dueDate}&date_assigned=${this.state.date_assigned}&date_work_began=${this.state.date_work_began}&status=${this.state.status}&current_stage=${this.state.current_stage}`, data
+          )
+          .then(res => {
+            console.log(res)
+            this.setState({
+              title: res.data.title, 
+              description: res.data.description, 
+              steps:res.data.steps, 
+              result:res.data.result, 
+              assignedTo:res.data.assignedTo, 
+              severity:res.data.severity, 
+              screenShots: res.data.screenShots,
+              dueDate:new Date(res.data.dueDate),
+              date_assigned: new Date(res.data.date_assigned),
+              date_work_began:new Date(res.data.date_work_began),
+              status: res.data.status,
+              current_stage: res.data.current_stage, 
+              }) 
+            this.props.update(res)
+            this.props.setEditing(false)
+          })
     }else {
       e.preventDefault();
-      axios.post(`/api/projects/${id}/bugs`, {...this.state})
+      axios.post(
+        `/api/projects/${id}/bugs?title=${this.state.title}&description=${this.state.description}&steps=${this.state.steps}&result=${this.state.result}&assignedTo=${this.state.assignedTo}&severity=${this.state.severity}&dueDate=${this.state.dueDate}&date_assigned=${this.state.date_assigned}&date_work_began=${this.state.date_work_began}&status=${this.state.status}&current_stage=${this.state.current_stage}`, data
+        )
       .then( res => {
           this.props.add(res.data)
-          this.props.setBugForm(!bugForm)
+          this.props.setBugForm(!this.props.bugForm)
       })
       .catch(err => console.log(err))
     }
@@ -77,6 +96,10 @@ class ProductsForm extends React.Component {
   handleDateWorkBeganTimeChange = (e) => {
     this.setState({date_work_began: e})
   }
+  onDrop = (file) => {
+    this.setState({ ...this.state, screenShots: file[0] });
+  }
+
 
   render() {
     const { 
@@ -123,7 +146,7 @@ class ProductsForm extends React.Component {
       <div style={styles.divform}>
         <Form onSubmit={this.handleSubmit} style={styles.formform}>
         <Icon style={styles.formbutton} name='close' onClick={() => this.props.bug_id ? this.props.setEditing(!this.props.editing) : this.props.setBugForm(!this.props.bugForm)}/>
-        <Header as="h1">Add New Bug</Header>
+        <Header as="h1">{this.props.bug_id ? 'Edit Bug' : 'Add New Bug' }</Header>
             <Form.Input
               label="Bug Title"
               name="title"
@@ -181,44 +204,57 @@ class ProductsForm extends React.Component {
               value={current_stage}
               onChange={this.handleSelectChange}
             />
-             <Form.Input
+             {/* <Form.Input
               label="Attach any helpful screenshots of the bug"
               name="screenShots"
               placeholder="Enter screenshots here"
               value={screenShots}
               onChange={this.handleChange}
-            />
-            <Form.Group widths="equal"><div style={{height:'5%'}}></div></Form.Group>
+            /> */}
+            <Label for='screenShots'>When should the bug be completed?</Label>
+            <Dropzone
+                onDrop={this.onDrop}
+                multiple={false}
+                value={screenShots}
+              >
+                {({ getRootProps, getInputProps, isDragActive }) => {
+                  return (
+                    <div
+                      {...getRootProps()}
+                      style={styles.dropzone}
+                    >
+                      <input {...getInputProps()} />
+                      {
+                        isDragActive ?
+                          <p>Drop files here...</p> :
+                          <p>Try dropping some files here, or click to select files to upload.</p>
+                      }
+                    </div>
+                  )
+                }}
+            </Dropzone>
             <Form.Input
               label="Who is the bug assigned to in this stage?"
               name="assignedTo"
+
               placeholder="Enter the name of a dev/QA"
               value={assignedTo}
               onChange={this.handleChange}
             />
             <Label for='date_assigned'>What day was the bug assigned?</Label>
             <DatePicker
-            //  label="What day was the bug assigned?"
-            //  name="date_assigned"
-            //  placeholder="Enter date bug was assigned"
              selected={date_assigned}
              onChange={this.handleDateAssignedTimeChange}
             />
             <div style={{height:'22px'}}></div>
             <Label for='date_work_began'>Enter date the work began on the bug</Label>
             <DatePicker
-            //  label="Enter date the work began on the bug"
-            //  name="date_work_began"
-            //  placeholder="What day did the dev begin work on the bug?"
              selected={date_work_began}
              onChange={this.handleDateWorkBeganTimeChange}
             />
             <div style={{height:'22px'}}></div>
             <Label for='dueDate'>When should the bug be completed?</Label>
             <DatePicker
-            //  label="When should the bug be completed?"
-            //  name="dueDate"
-            //  placeholder="Enter a future date"
              selected={dueDate}
              onChange={this.handleDueDateTimeChange}
              required
@@ -233,11 +269,11 @@ class ProductsForm extends React.Component {
 
 const styles = {
   divform: {
-    height: '100vh',
-    width: '100vw',
+    height: 'auto',
+    width: '100%',
     backgroundColor: '#e6e6e6', 
     position: 'absolute',
-    top: '0px',
+    top: '-10px',
     left: '0px',
     zIndex:'1',
     display: 'flex',
@@ -256,13 +292,23 @@ const styles = {
     flexDirection: 'column',
     overflowY: 'scroll',
     position:'relative',
-    top: '300px',
+    top: '30px',
 
   },
   formbutton: {
     justifySelf:'flex-end',
     alignSelf: 'flex-end',
   },
+  dropzone:{
+    height: "50px",
+    width: "240px",
+    border: "1px dashed black",
+    borderRadius: "5px",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    padding: "10px",
+  }
 }
 
 export default ProductsForm;

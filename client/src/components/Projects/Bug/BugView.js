@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Card, Header, Icon, Button } from 'semantic-ui-react'
+import { Card, Header, Icon, Button, Image } from 'semantic-ui-react'
 import Axios from 'axios'
 import Chats from './Chat/Chats'
 import BugForm from './BugForm'
@@ -34,7 +34,7 @@ export default function BugView(props) {
                 <Card.Content>Steps to Recreate: {props.steps}</Card.Content>
                 <Card.Content>Desired Result: {props.result}</Card.Content>
                 <Card.Content>Currently Assigned to: {props.assignedTo}</Card.Content>
-                <Card.Content>Screenshots: {props.screenShots}</Card.Content>
+                <Card.Content>Screenshots: <Image src={props.screenShots} style={{maxHeight: '150px', maxWidth:'150px'}}/></Card.Content>
                 <Card.Content>Due Date: {toHumanDate(props.dueDate)}</Card.Content>
                 <Card.Content>Date Created: {toHumanDate(props.created_at)}</Card.Content>
                 <Card.Content>Date Assigned: {toHumanDate(props.date_assigned)}</Card.Content>
@@ -74,12 +74,13 @@ export default function BugView(props) {
 
 const styles = {
     views: {
-        height: '100vh',
-        width: '100vw',
+        minHeight:'80vh',
+        height: '100%',
+        width: '100%',
         position: 'absolute',
         top: '0px',
         left: '0px',
-        backgroundColor: '#d6d6d6',
+        backgroundColor: '#e5e3eb',
         display: 'flex',
         justifyContent: 'space-around',
         alignItems: 'center',

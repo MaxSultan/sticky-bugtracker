@@ -78,7 +78,7 @@ const styles = {
     height: '100vh',
     width: '100vw',
     backgroundColor: '#e6e6e6', 
-    position: 'absolute',
+    position: 'fixed',
     top: '0px',
     left: '0px',
     zIndex:'1',
