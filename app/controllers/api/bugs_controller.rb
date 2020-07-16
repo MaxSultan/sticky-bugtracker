@@ -1,6 +1,6 @@
 class Api::BugsController < ApplicationController
-    before_action :set_bug, only: [:destroy, :update]
-    before_action :set_project, only: [:index, :create]
+    before_action :set_bug, only: [:destroy]
+    before_action :set_project, only: [:index, :create, :update]
     def index
         bugs = @project.bugs
         render json: bugs
@@ -8,7 +8,6 @@ class Api::BugsController < ApplicationController
 
     def create
         bug = @project.bugs.new(bug_query_params)
-    
         file = params[:file]
         
         if file
@@ -26,40 +25,30 @@ class Api::BugsController < ApplicationController
             render json: bug
         else
             render json: {errors: bug.errors, status: 422}
-        end 
+            end 
     end
     
     def update
+        @bug = @project.bugs.find(params[:id])
         @bug.update(bug_query_params)
-    #    @bug.title = params[:title] ? params[:title] :@bug.title
-    #    @bug.description = params[:description] ? params[:description] :@bug.description
-    #    @bug.steps = params[:steps] ? params[:steps] :@bug.steps
-    #    @bug.result = params[:result] ? params[:result] :@bug.result
-    #    @bug.assignedTo = params[:assignedTo] ? params[:assignedTo] :@bug.assignedTo
-    #    @bug.severity = params[:severity] ? params[:severity] :@bug.severity
-    #    @bug.startDate = params[:startDate] ? params[:startDate] :@bug.startDate
-    #    @bug.dueDate = params[:dueDate] ? params[:dueDate] :@bug.dueDate
-    #    @bug.date_assigned = params[:date_assigned] ? params[:date_assigned] :@bug.date_assigned
-    #    @bug.date_work_began = params[:date_work_began] ? params[:date_work_began] :@bug.date_work_began
-    #    @bug.status = params[:status] ? params[:status] :@bug.status
-    #    @bug.current_stage = params[:current_stage] ? params[:current_stage] :@bug.current_stage
-    
         file = params[:file]
 
-        if file
+        if file && file != "null"
             begin
               ext = File.extname(file.tempfile)
               cloud_image = Cloudinary::Uploader.upload(file, public_id: file.original_filename, secure: true, resource_type: :auto)
               @bug.screenShots = cloud_image['secure_url']
             rescue => e
+                debugger
               render json: { errors: e }, status: 422
               return
             end
         end
 
-        if bug.save
+        if @bug.save
             render json: @bug
         else
+            debugger
             render json: {errors: @bug.errors, status: 422}
         end 
     end

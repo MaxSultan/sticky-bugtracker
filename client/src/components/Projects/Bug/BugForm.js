@@ -14,12 +14,13 @@ class ProductsForm extends React.Component {
       result: this.props.initResult ? this.props.initResult : "", 
       assignedTo:this.props.initAssignedTo ? this.props.initAssignedTo : "", 
       severity:this.props.initSeverity ? this.props.initSeverity : "", 
-      screenShots:this.props.initScreenShots ? this.props.initScreenShots : "",
+      screenShots: null,
       dueDate: this.props.initDueDate ? new Date(this.props.initDueDate) : "",   
       date_assigned: this.props.init_date_assigned ? new Date(this.props.init_date_assigned) : "",  
       date_work_began: this.props.init_date_work_began ? new Date(this.props.init_date_work_began) : "",  
       status: this.props.initStatus ? this.props.initStatus : "",  
       current_stage: this.props.init_current_stage ? this.props.init_current_stage : "",  
+      screenShotUrl: this.props.screenShotUrl ? this.props.screenShotUrl : "",
   };
 
   resetValues = {
@@ -29,18 +30,19 @@ class ProductsForm extends React.Component {
     result:"", 
     assignedTo:"", 
     severity:"", 
-    screenShots:"",
+    screenShots: null,
     dueDate:"",
     date_assigned:"",
     date_work_began:"",
     status:"",
     current_stage:"", 
+    screenShotUrl:"",
   }
   state = { ...this.defaultValues };
   handleSubmit = (e) => {
     const {projectEditId, bug_id, bugForm, id} = this.props
     let data  = new FormData();
-    data.append('file', this.state.screenShots);
+    if (this.state.screenShots) data.append('file', this.state.screenShots);
     if(this.props.bug_id){
         axios.put(
           `/api/projects/${this.props.projectEditId}/bugs/${bug_id}?title=${this.state.title}&description=${this.state.description}&steps=${this.state.steps}&result=${this.state.result}&assignedTo=${this.state.assignedTo}&severity=${this.state.severity}&dueDate=${this.state.dueDate}&date_assigned=${this.state.date_assigned}&date_work_began=${this.state.date_work_began}&status=${this.state.status}&current_stage=${this.state.current_stage}`, data
@@ -86,6 +88,7 @@ class ProductsForm extends React.Component {
   onDrop = (file) => {
     this.setState({ ...this.state, screenShots: file[0] });
   }
+
 
   render() {
     const { 
