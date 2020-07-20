@@ -14,8 +14,7 @@ export default function Bug(props) {
     const status = () => {
         if (diffDays >= 30){
             return (
-                <Table.Row negative>
-                    {props.project_name && <Table.Cell>{props.project_name}</Table.Cell>}
+                <Table.Row negative style={{backgroundColor:'rgba(249,104,112, 0.4)', color:''}}>
                     <Table.Cell><Link onClick={() => setToggle(!toggle)}>{props.title}</Link></Table.Cell>
                     <Table.Cell>{props.severity}</Table.Cell>
                     <Table.Cell>{props.assignedTo}</Table.Cell>
@@ -26,8 +25,7 @@ export default function Bug(props) {
             )
         }else if (diffDays >= 7){
             return(
-                <Table.Row style={{backgroundColor: '#ffffe0', color:'#cccc00'}}>
-                    {props.project_name && <Table.Cell>{props.project_name}</Table.Cell>}
+                <Table.Row style={{backgroundColor: '#FFFFB7', color:'#cccc00'}}>
                     <Table.Cell><Link onClick={() => setToggle(!toggle)}>{props.title}</Link></Table.Cell>
                     <Table.Cell>{props.severity}</Table.Cell>
                     <Table.Cell>{props.assignedTo}</Table.Cell>

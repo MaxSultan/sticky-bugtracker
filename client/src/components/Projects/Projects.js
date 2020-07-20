@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
-import { Card, Button, Container, Menu, Header, Grid, } from 'semantic-ui-react';
-import { Link, Switch, Route } from 'react-router-dom';
+import { Container, Header,} from 'semantic-ui-react';
 import ProjectForm from './ProjectForm';
 import ProjectsNav from './ProjectsNav';
 import Project from './Project'
