@@ -35,7 +35,7 @@ function App() {
 
 const styles = {
   color: {
-    backgroundColor: '#d6d6e1', 
+    backgroundColor: '#E5E3EB', 
     minHeight: '100vh',
     minWidth: '100vw',
   }

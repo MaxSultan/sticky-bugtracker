@@ -1,9 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
-import { Container, Header,} from 'semantic-ui-react';
+import { Container, Header, Image, Icon, } from 'semantic-ui-react';
 import ProjectForm from './ProjectForm';
 import ProjectsNav from './ProjectsNav';
 import Project from './Project'
+import froggy_copy_no_letters from '../img/froggy_copy_no_letters.png'
 
 
 
@@ -51,9 +52,13 @@ const Projects = (props) => {
 
     return(
         <Container>
-            <ProjectsNav showForm={showForm} setShowForm={setShowForm}/>
+            {/* <ProjectsNav showForm={showForm} setShowForm={setShowForm}/> */}
             {showForm && <ProjectForm add={addProject} showForm={showForm} setShowForm={setShowForm} />}
-            <Header as='h1' textAlign='center'>Projects</Header>
+            <div style={{display:'flex', justifyContent:'space-between', alignItems:'center'}}>
+            <Header as='h1' style={styles.head}><strong>Projects</strong></Header>
+            <div style={styles.addBtn}><Icon style={styles.addIcon}name='add' size='huge' onClick={() => setShowForm(!showForm)}/></div>
+            </div>
+            <Image src={froggy_copy_no_letters} style={styles.img}/>
             <div style={styles.divGrid}>
               {renderProject()}
             </div>
@@ -68,5 +73,31 @@ const styles = {
     display:'flex',
     flexWrap:'wrap',
     justifyContent:'space-around',
+    maxWidth: '900px',
+    position:'relative',
+    right:'-250px',
+    margin:'20px',
+  },
+  head:{
+    fontSize:'70px',
+  },
+  img:{
+    maxHeight:'400px',
+    position: 'fixed',
+    left:'-224px',
+  },
+  addBtn:{
+    background: '#93A081',
+    border: '3px solid #41553F',
+    boxSizing: 'border-box',
+    borderRadius: '10px',
+    width: '70px',
+    height: '63px',
+    diplay:'flex',
+    justifyContent:'center',
+    alignItems:'center',
+  },
+  addIcon:{
+    color: '#101C17',
   }
 }

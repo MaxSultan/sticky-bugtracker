@@ -8,9 +8,9 @@ export default function Project(props) {
 
     const {p, deleteProject} = props
     return (
-        <Card key={`Project-${p.id}`}>
+        <Card key={`Project-${p.id}`} style={styles.card}>
             <Card.Content>
-                <Card.Header>{p.name }</Card.Header>
+                <Card.Header style={{fontSize:'35px', color:'#314231'}}><strong>{p.name}</strong></Card.Header>
                 <Card.Description>
                     {p.status}
                 </Card.Description>
@@ -19,8 +19,8 @@ export default function Project(props) {
                 <Button as={Link} to={`/project/${p.id}`} style={styles.button}>
                     View
                 </Button>
-                <Button onClick={()=> deleteProject(p.id)}>Delete</Button>
-                <Button onClick={()=> setEditForm(!editForm)} >Edit</Button>
+                <Button onClick={()=> deleteProject(p.id)} style={styles.whiteBtn}>Delete</Button>
+                <Button onClick={()=> setEditForm(!editForm)} style={styles.whiteBtn}>Edit</Button>
             </Card.Content>
             {editForm && <ProjectForm id={p.id} initName={p.name} initStatus={p.status} update={props.update} editForm={editForm} setEditForm={setEditForm}/>}
       </Card>
@@ -29,7 +29,16 @@ export default function Project(props) {
 
 const styles = { 
     button: {
-        backgroundColor: '#3f5164',
+        backgroundColor: '#41553F',
         color: '#d6d6e1',
+    },
+    card:{
+        margin:'20px',
+        border:'3px solid #909AA7',
+        backgroundColor:'#D6D6E1',
+        borderRadius:'10px',
+    },
+    whiteBtn:{
+        border:'1px solid #909AA7',
     }
 }
