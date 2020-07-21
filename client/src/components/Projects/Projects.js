@@ -56,7 +56,7 @@ const Projects = (props) => {
             {showForm && <ProjectForm add={addProject} showForm={showForm} setShowForm={setShowForm} />}
             <div style={{display:'flex', justifyContent:'space-between', alignItems:'center'}}>
             <Header as='h1' style={styles.head}><strong>Projects</strong></Header>
-            <div style={styles.addBtn}><Icon style={styles.addIcon}name='add' size='huge' onClick={() => setShowForm(!showForm)}/></div>
+            <div style={styles.addBtn}><Icon style={styles.addIcon}name='add' size='huge' color='#101C17' onClick={() => setShowForm(!showForm)}/></div>
             </div>
             <Image src={froggy_copy_no_letters} style={styles.img}/>
             <div style={styles.divGrid}>
@@ -73,7 +73,7 @@ const styles = {
     display:'flex',
     flexWrap:'wrap',
     justifyContent:'space-around',
-    maxWidth: '900px',
+    maxWidth: '960px',
     position:'relative',
     right:'-250px',
     margin:'20px',

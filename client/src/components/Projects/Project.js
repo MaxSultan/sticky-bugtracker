@@ -10,8 +10,8 @@ export default function Project(props) {
     return (
         <Card key={`Project-${p.id}`} style={styles.card}>
             <Card.Content>
-                <Card.Header style={{fontSize:'35px', color:'#314231'}}><strong>{p.name}</strong></Card.Header>
-                <Card.Description>
+                <Card.Header style={{fontSize:'32px', color:'#314231'}}><strong>{p.name}</strong></Card.Header>
+                <Card.Description style={{fontSize:'13px'}}>
                     {p.status}
                 </Card.Description>
                 </Card.Content>
@@ -33,7 +33,7 @@ const styles = {
         color: '#d6d6e1',
     },
     card:{
-        margin:'20px',
+        margin:'20px 0px',
         border:'3px solid #909AA7',
         backgroundColor:'#D6D6E1',
         borderRadius:'10px',
