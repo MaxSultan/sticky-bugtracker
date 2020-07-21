@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Table } from 'semantic-ui-react'
+import { Table, Container, Header, Select } from 'semantic-ui-react'
 import Axios from 'axios'
 import { Link } from 'react-router-dom'
 import BugView from './BugView'
@@ -8,6 +8,7 @@ import Bug from './Bug'
 export default function AllBugs() {
     const [bugs, setBugs] = useState([])
     const [toggle, setToggle] = useState(false)
+    const [filter1, setFilter1] = useState("")
 
     const getAllBugs = () => {
         Axios.get('/bugs/all').then(
@@ -19,8 +20,26 @@ export default function AllBugs() {
         getAllBugs()
     }, [])
 
+    const opts = [
+        {key:`AssignedTo`, value:'assignedTo', text:'Developer'},
+        {key:`Days Worked On`, value:`Days Worked On`, text:`Days Worked On`},
+        {key:`Severity`, value:`severity`, text:`Severity`},
+        {key:`Status`, value:`status`, text:`Status`},
+    ]
+
+    const getFilterTwoVals = () => {
+        console.log(filter1)
+        console.log(bugs.map(b => b.assigned_to))
+        // console.log(bugs.map(bug => ({key:`${bug.filter1}`, value:`${bug.filter1}`, text:`${bug.filter1}` })))
+       return  Array.from(new Set(bugs.map(bug => ({key:`${bug.filter1}`, value:`${bug.filter1}`, text:`${bug.filter1}` }))))
+    }
+
     return (
-        <Table celled>
+        <Container>
+            <Header as='h1'>All Bugs</Header>
+            <Header as='h3'>Filter By:</Header> <Select options={opts} onChange={(e)=>setFilter1(e.target.value), () => setToggle(true) }></Select>
+            {toggle && <Select options={() => getFilterTwoVals()} onChange={(e)=>setFilter1(e.target.value) }></Select>}
+        <Table celled style={{marginBottom:'20px'}}>
             <Table.Header>
                 <Table.Row>
                     <Table.HeaderCell>Project</Table.HeaderCell>
@@ -33,19 +52,9 @@ export default function AllBugs() {
             </Table.Header>
             <Table.Body>
             {bugs.map(b => <Bug {...b}/>)}
-                {/* {bugs.map(b => (
-                    <Table.Row>
-                    <Table.Cell><Link onClick={() => setToggle(!toggle)}>{b.title}</Link></Table.Cell>
-                    <Table.Cell>{b.project_name}</Table.Cell>
-                    <Table.Cell>{b.severity}</Table.Cell>
-                    <Table.Cell>{b.assignedTo}</Table.Cell>
-                    <Table.Cell>{b.diffDays}</Table.Cell>
-                    <Table.Cell>{b.current_stage}</Table.Cell>
-                    {toggle && <BugView {...b} setToggle={setToggle} toggle={toggle} delete={b.delete} update={b.update}/>}
-                    </Table.Row>
-                    ))} */}
             </Table.Body>
         </Table>
+        </Container>
     )
 }
 

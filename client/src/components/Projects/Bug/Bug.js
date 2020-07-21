@@ -15,6 +15,7 @@ export default function Bug(props) {
         if (diffDays >= 30){
             return (
                 <Table.Row negative style={{backgroundColor:'rgba(249,104,112, 0.4)', color:''}}>
+                    {props.project_name && <Table.Cell><Link to={`/project/${props.project_id}`}>{props.project_name}</Link></Table.Cell>}
                     <Table.Cell><Link onClick={() => setToggle(!toggle)}>{props.title}</Link></Table.Cell>
                     <Table.Cell>{props.severity}</Table.Cell>
                     <Table.Cell>{props.assignedTo}</Table.Cell>
@@ -26,6 +27,8 @@ export default function Bug(props) {
         }else if (diffDays >= 7){
             return(
                 <Table.Row style={{backgroundColor: '#FFFFB7', color:'#cccc00'}}>
+                    {console.log(props)}
+                    {props.project_name && <Table.Cell><Link to={`/project/${props.project_id}`}>{props.project_name}</Link></Table.Cell>}
                     <Table.Cell><Link onClick={() => setToggle(!toggle)}>{props.title}</Link></Table.Cell>
                     <Table.Cell>{props.severity}</Table.Cell>
                     <Table.Cell>{props.assignedTo}</Table.Cell>
@@ -37,7 +40,7 @@ export default function Bug(props) {
         }else{
             return (
                 <Table.Row >
-                    {props.project_name && <Table.Cell>{props.project_name}</Table.Cell>}
+                    {props.project_name && <Table.Cell><Link to={`/project/${props.project_id}`}>{props.project_name}</Link></Table.Cell>}
                     <Table.Cell><Link onClick={() => setToggle(!toggle)}>{props.title}</Link></Table.Cell>
                     <Table.Cell>{props.severity}</Table.Cell>
                     <Table.Cell>{props.assignedTo}</Table.Cell>
