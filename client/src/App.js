@@ -11,6 +11,7 @@ import Login from './components/Login';
 import Register from './components/Register';
 import FetchUser from './components/FetchUser'
 import ProtectedRoute from './components/ProtectedRoute';
+import BugView from './components/Projects/Bug/BugView';
 
 
 function App() {
@@ -24,7 +25,8 @@ function App() {
        <Route exact path="/login" component={Login} />
         <Route exact path="/register" component={Register} />
        <ProtectedRoute exact path='/projects' component={Projects}/>
-       <ProtectedRoute exact path='/project/:id' component={ProjectView}/>     
+       <ProtectedRoute exact path='/project/:id' component={ProjectView}/> 
+       <ProtectedRoute exact path='/projects/:project_id/bugs/:id' component={BugView}/>       
        <Route component={NoMatch}></Route>
      </Switch>
    </Container>
@@ -38,6 +40,8 @@ const styles = {
     backgroundColor: '#E5E3EB', 
     minHeight: '100vh',
     minWidth: '100vw',
+    height: 'auto',
+    width:'auto',
   }
 }
 

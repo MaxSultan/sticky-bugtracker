@@ -6,7 +6,7 @@ import Dropzone from 'react-dropzone'
 
 import "react-datepicker/dist/react-datepicker.css";
 
-class ProductsForm extends React.Component {
+class BugForm extends React.Component {
   defaultValues = { 
       title: this.props.initTitle ? this.props.initTitle : "", 
       description: this.props.initDescription ? this.props.initDescription : "", 
@@ -61,8 +61,8 @@ class ProductsForm extends React.Component {
               status: res.data.status,
               current_stage: res.data.current_stage, 
               }) 
-            this.props.update(res)
             this.props.setEditing(false)
+            this.props.getBug()
           })
     }else {
       e.preventDefault();
@@ -311,4 +311,4 @@ const styles = {
   }
 }
 
-export default ProductsForm;
+export default BugForm;

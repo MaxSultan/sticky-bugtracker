@@ -73,7 +73,7 @@ const styles = {
     display:'flex',
     flexWrap:'wrap',
     justifyContent:'space-around',
-    maxWidth: '960px',
+    maxWidth: '900px',
     position:'relative',
     right:'-250px',
     margin:'20px',
