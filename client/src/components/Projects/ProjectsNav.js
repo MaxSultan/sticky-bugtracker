@@ -1,5 +1,5 @@
 import React, { useState} from 'react'
-import { Menu } from 'semantic-ui-react'
+import { Menu, Icon } from 'semantic-ui-react'
 
 export default function ProjectsNav({ showForm, setShowForm}) {
   const [activeItem, setActiveItem] = useState('projects')
@@ -14,10 +14,9 @@ export default function ProjectsNav({ showForm, setShowForm}) {
           onClick={() => handleItemClick}
         />
         <Menu.Item
-          name='add'
           active={activeItem === 'add'}
           onClick={() => handleItemClick, () => setShowForm(!showForm)}
-        />
+        ><Icon name='add'/></Menu.Item>
          <Menu.Item
           name='filter projects by'
           active={activeItem === 'archived projects'}

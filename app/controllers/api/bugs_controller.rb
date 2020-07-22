@@ -1,10 +1,15 @@
 class Api::BugsController < ApplicationController
-    before_action :set_bug, only: [:destroy]
-    before_action :set_project, only: [:index, :create, :update]
+    before_action :set_bug, only: [:destroy, :show]
+    before_action :set_project, only: [:index, :create, :update, :show]
     def index
         bugs = @project.bugs
         render json: bugs
     end
+
+    def show
+        @bug = @project.bugs.find(params[:id])
+        render json: @bug
+    end 
 
     def create
         bug = @project.bugs.new(bug_query_params)

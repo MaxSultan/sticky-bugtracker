@@ -16,7 +16,6 @@ const NavBar = ({ props }) => {
         if(auth.authenticated){
             return (
                 <Menu.Menu position='right'>
-                  <Image src={froggy_copy_no_letters} style={{maxHeight:'40px'}}/>
                   <Menu.Item
                     name='logout'
                     onClick={ () => auth.handleLogout(history) }
@@ -47,6 +46,7 @@ const NavBar = ({ props }) => {
 
     return(
         <Menu pointing secondary {...props} auth={auth} style={styles.menu}>
+          <Image src={froggy_copy_no_letters} style={{maxHeight:'40px'}}/>
             <Link to='/'>
                 <Menu.Item
                 icon='home'

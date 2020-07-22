@@ -15,18 +15,24 @@ export default function Bug(props) {
         if (diffDays >= 30){
             return (
                 <Table.Row negative style={{backgroundColor:'rgba(249,104,112, 0.4)', color:''}}>
-                    <Table.Cell><Link onClick={() => setToggle(!toggle)}>{props.title}</Link></Table.Cell>
+                    <Table.Cell><Link to={{
+                        pathname: `/projects/${props.project_id}/bugs/${props.id}`,
+                        state: {project_id: props.project_id, id: props.id},
+                        }}>{props.title}</Link></Table.Cell>
                     <Table.Cell>{props.severity}</Table.Cell>
                     <Table.Cell>{props.assignedTo}</Table.Cell>
                     <Table.Cell>{diffDays}</Table.Cell>
                     <Table.Cell>{props.current_stage}</Table.Cell>
-                    {toggle && <BugView {...props} setToggle={setToggle} toggle={toggle} delete={props.delete} update={props.update}/>}
+                    {/* {toggle && <BugView {...props} setToggle={setToggle} toggle={toggle} delete={props.delete} update={props.update} diffDays={diffDays}/>} */}
                 </Table.Row>
             )
         }else if (diffDays >= 7){
             return(
                 <Table.Row style={{backgroundColor: '#FFFFB7', color:'#cccc00'}}>
-                    <Table.Cell><Link onClick={() => setToggle(!toggle)}>{props.title}</Link></Table.Cell>
+                    <Table.Cell><Link to={{
+                        pathname: `/projects/${props.project_id}/bugs/${props.id}`,
+                        state: {project_id: props.project_id, id: props.id},
+                        }}>{props.title}</Link></Table.Cell>
                     <Table.Cell>{props.severity}</Table.Cell>
                     <Table.Cell>{props.assignedTo}</Table.Cell>
                     <Table.Cell>{diffDays}</Table.Cell>
@@ -37,12 +43,15 @@ export default function Bug(props) {
         }else{
             return (
                 <Table.Row >
-                    <Table.Cell><Link onClick={() => setToggle(!toggle)}>{props.title}</Link></Table.Cell>
+                    <Table.Cell><Link to={{
+                        pathname: `/projects/${props.project_id}/bugs/${props.id}`,
+                        state: {project_id: props.project_id, id: props.id},
+                        }}>{props.title}</Link></Table.Cell>
                     <Table.Cell>{props.severity}</Table.Cell>
                     <Table.Cell>{props.assignedTo}</Table.Cell>
                     <Table.Cell>{diffDays}</Table.Cell>
                     <Table.Cell>{props.current_stage}</Table.Cell>
-                    {toggle && <BugView {...props} setToggle={setToggle} toggle={toggle} delete={props.delete} update={props.update}/>}
+                    {toggle && <BugView {...props} setToggle={setToggle} toggle={toggle} delete={props.delete}/>}
                 </Table.Row>
             )
         }
