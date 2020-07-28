@@ -32,6 +32,10 @@ class Api::ProjectsController < ApplicationController
         render json: project.destroy
     end 
 
+    def get_bug_count
+        render json: Project.all.map { |project| project.bugs.all.size}
+    end 
+
     private
     def project_params
         params.require(:project).permit(:name, :status)
