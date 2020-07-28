@@ -2,6 +2,7 @@
 import Chart from 'react-apexcharts'
 import React, { Component } from 'react'
 import Axios from 'axios'
+import { Loader } from 'semantic-ui-react';
 
 export default class AllBugsChart extends Component {
 
@@ -18,12 +19,14 @@ export default class AllBugsChart extends Component {
       },
       series: [{
         name: 'Number of active bugs',
-        data: [30, 40, 35, 50, 49, 60, 70, 91, 33]
+        data: []
       }],
+      loading: false
     }
   }
 
   componentDidMount() {
+    this.setState({loading: true})
     Axios.get(`/api/projects`)
     .then(res => this.setState({options:{xaxis:{categories: res.data.map(bug => bug.name)}}}))
     .catch(err => console.log(err))
@@ -32,10 +35,11 @@ export default class AllBugsChart extends Component {
     .then(res => this.setState({series: [{data: res.data}]
     }))
     .catch(err => console.log(err))
+    this.setState({loading: false})
   }
 
-render() {
-  return <Chart options={this.state.options} series={this.state.series} type="bar" width={500} height={320} />
-}
+  render() {
+  return this.state.loading ? <Loader/> : <Chart options={this.state.options} series={this.state.series} type="bar" width={500} height={320} />
+  }
 }
 
