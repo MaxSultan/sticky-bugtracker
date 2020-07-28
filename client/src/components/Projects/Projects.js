@@ -51,8 +51,7 @@ const Projects = (props) => {
       }
 
     return(
-        <Container>
-            {/* <ProjectsNav showForm={showForm} setShowForm={setShowForm}/> */}
+        <div>
             {showForm && <ProjectForm add={addProject} showForm={showForm} setShowForm={setShowForm} />}
             <div style={{display:'flex', justifyContent:'space-between', alignItems:'center'}}>
             <Header as='h1' style={styles.head}><strong>Projects</strong></Header>
@@ -62,7 +61,7 @@ const Projects = (props) => {
             <div style={styles.divGrid}>
               {renderProject()}
             </div>
-        </Container>
+        </div>
     )
 } 
 
@@ -72,14 +71,14 @@ const styles = {
   divGrid: {
     display:'flex',
     flexWrap:'wrap',
-    justifyContent:'space-around',
+    justifyContent:'space-between',
     maxWidth: '900px',
     position:'relative',
     right:'-250px',
     margin:'20px',
   },
   head:{
-    fontSize:'70px',
+    fontSize:'5em',
   },
   img:{
     maxHeight:'400px',
