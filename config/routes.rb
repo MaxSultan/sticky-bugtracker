@@ -6,6 +6,10 @@ Rails.application.routes.draw do
   end 
 
   namespace :api do
+    get 'projects/getBugNumbers', to: 'projects#get_bug_count' 
+  end 
+
+  namespace :api do
     resources :projects do
       resources :bugs do
         resources :chats

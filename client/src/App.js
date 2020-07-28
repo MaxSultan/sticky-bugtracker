@@ -13,7 +13,7 @@ import FetchUser from './components/FetchUser'
 import ProtectedRoute from './components/ProtectedRoute';
 import BugView from './components/Projects/Bug/BugView';
 import Archives from './components/Archives';
-import Reports from './components/Reports';
+import Reports from './components/Reports/Reports';
 
 
 function App() {

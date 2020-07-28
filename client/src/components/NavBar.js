@@ -11,8 +11,6 @@ const NavBar = ({ props }) => {
     const history = useHistory()
 
     const rightNavItems = () => {
-        // const { auth: { user, handleLogout}, location, } = props;
-    
         if(auth.authenticated){
             return (
                 <Menu.Menu position='right'>
@@ -44,9 +42,10 @@ const NavBar = ({ props }) => {
         }
     }
 
-    return(
-        <Menu pointing secondary {...props} auth={auth} style={styles.menu}>
-          <Image src={froggy_copy_no_letters} style={{maxHeight:'40px'}}/>
+    const leftNavItems = () => {
+      if(auth.authenticated){
+        return(
+          <>
             <Link to='/'>
                 <Menu.Item
                 icon='home'
@@ -72,6 +71,14 @@ const NavBar = ({ props }) => {
                 active={location.pathname === '/archives'}
                 />
             </Link>
+            </>
+        )}  else {return null;}
+    }
+
+    return(
+      <Menu pointing secondary {...props} auth={auth} style={styles.menu}>
+      <Image src={froggy_copy_no_letters} style={{maxHeight:'40px'}}/>
+            {leftNavItems()}
             {rightNavItems()}
         </Menu>
     )
