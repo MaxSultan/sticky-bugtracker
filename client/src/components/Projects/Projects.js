@@ -2,7 +2,6 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import { Container, Header, Image, Icon, } from 'semantic-ui-react';
 import ProjectForm from './ProjectForm';
-import ProjectsNav from './ProjectsNav';
 import Project from './Project'
 import froggy_copy_no_letters from '../img/froggy_copy_no_letters.png'
 
