@@ -24,6 +24,14 @@
   color: white;
 }
 
+.change {
+  background-color: #B8BCCF;
+}
+
+.change:nth-child(odd) {
+  background-color: #D6D6E1;
+}
+
 .App-link {
   color: #61dafb;
 }

@@ -3,13 +3,15 @@ import { Comment } from 'semantic-ui-react'
 
 export default function Message(props) {
     return (
-        <Comment style={styles.bubble}>
+        <Comment style={styles.bubble} className='change'>
             <Comment.Avatar as='a' src='' />
             <Comment.Content>
-            <Comment.Author as='a'>{props.username}</Comment.Author>
+            <div style={styles.apart}>
+                <Comment.Author as='a'>{props.username}</Comment.Author>
                 <Comment.Metadata>
-                    <span>{props.postTime}</span>
+                    <div>{props.postTime}</div>
                 </Comment.Metadata>
+            </div>
                 <Comment.Text>{props.content}</Comment.Text>
             </Comment.Content>
         </Comment>
@@ -18,14 +20,15 @@ export default function Message(props) {
 
 const styles = {
     bubble: {
-        backgroundColor: 'blue',
-        padding: '5px',
-        borderRadius: '20px',
+        padding: '1em',
         margin: '10px',
-        color: 'white',
         whiteSpace: 'wrap',
-        maxWidth: '240px',
+        maxWidth: '100%',
         textOverflow: 'elipses',
         wordWrap:'break-word'
+    },
+    apart: {
+        display: 'flex',
+        justifyContent: 'space-between',
     }
 }

@@ -9,7 +9,8 @@ export default function Chats(props) {
     const [content, setContent] = useState('')
     const {user} = useContext(AuthContext)
     var today = new Date();
-    var time = today.getHours() + ":" + today.getMinutes();
+    var time = ((today.getHours()>12)?(today.getHours()-12):today.getHours()) +":"+ ((today.getMinutes() < 10)?"0":"") + today.getMinutes() + ((today.getHours()>12)? ' pm' : ' am')
+    var date = today.getDate() +'/'+ (today.getMonth()+1) +'/'+ today.getFullYear()
 
     const getMessages = (project_id, bug_id) => {
         Axios.get(`/api/projects/${project_id}/bugs/${bug_id}/chats`)
@@ -31,28 +32,29 @@ export default function Chats(props) {
     },[])
 
     const handleSubmit = () => {
-        addMessage(props.project_id, props.bug_id, {username: user.email, content: content, postTime: time})
+        addMessage(props.project_id, props.bug_id, {username: user.email, content: content, postTime: `${time} ${date}`})
         setContent('')
     }
 
     return (
         <div style={styles.chatBackground}>
-            chats
+            <h1 style={{textAlign:'center'}}><strong>chats</strong></h1>
             <div>
-            {messages.map(m => <Message {...m}/>)}
+            {messages.map(m => <Message className='message' {...m}/>)}
             </div>
             <Form style={styles.chatContainer} onSubmit={() => handleSubmit()}>
-                <Form.Group>
+                <Form.Group widths='equal' style={{padding:'1em'}}>
                     <Form.Input
+                    attached='left'
                     name='content'
                     value={content}
                     onChange={(e) => setContent(e.target.value)}/>
                     <Button 
+                    attached="right"
                     icon='add' 
                     name='add'
-                    size='big' 
-                    color='red'
-                    circular='true' 
+                    onClick={()=> handleSubmit()} 
+                    style={{backgroundColor:'#F96870'}}
                     />
                 </Form.Group>
             </Form>
@@ -62,15 +64,13 @@ export default function Chats(props) {
 
 const styles = {
     chatContainer: {
-        width: '250px',
-        height: '400px',
+        width: '100%',
+        height: '100%',
     },
     chatBackground:{
-        backgroundColor:'black',
         padding: '20px',
         borderRadius: '50px',
         overflowY: 'scroll',
-        maxHeight: '500px',
         width:'auto',
         margin: '20px',
     }

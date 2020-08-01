@@ -18,7 +18,9 @@ export default function BugAtAGlance(props) {
 const styles = {
     glance: {
        backgroundColor:'#B8BCCF',
-       padding: '30px',
-       borderRadius:'30px', 
+       padding: '2em',
+       borderRadius:'1em', 
+       width:'auto',
+       display: 'inline-block',
     }
 }
