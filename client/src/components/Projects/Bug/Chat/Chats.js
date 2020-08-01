@@ -37,22 +37,23 @@ export default function Chats(props) {
 
     return (
         <div style={styles.chatBackground}>
-            chats
+            <h1 style={{textAlign:'center'}}><strong>chats</strong></h1>
             <div>
-            {messages.map(m => <Message {...m}/>)}
+            {messages.map(m => <Message className='message' {...m}/>)}
             </div>
             <Form style={styles.chatContainer} onSubmit={() => handleSubmit()}>
-                <Form.Group>
+                <Form.Group widths='equal' style={{padding:'1em'}}>
                     <Form.Input
+                    attached='left'
                     name='content'
                     value={content}
                     onChange={(e) => setContent(e.target.value)}/>
                     <Button 
+                    attached="right"
                     icon='add' 
                     name='add'
-                    size='big' 
-                    color='red'
-                    circular='true' 
+                    onClick={()=> handleSubmit()} 
+                    style={{backgroundColor:'#F96870'}}
                     />
                 </Form.Group>
             </Form>
@@ -62,15 +63,13 @@ export default function Chats(props) {
 
 const styles = {
     chatContainer: {
-        width: '250px',
-        height: '400px',
+        width: '100%',
+        height: '100%',
     },
     chatBackground:{
-        backgroundColor:'black',
         padding: '20px',
         borderRadius: '50px',
         overflowY: 'scroll',
-        maxHeight: '500px',
         width:'auto',
         margin: '20px',
     }
