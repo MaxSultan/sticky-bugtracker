@@ -9,7 +9,8 @@ export default function Chats(props) {
     const [content, setContent] = useState('')
     const {user} = useContext(AuthContext)
     var today = new Date();
-    var time = today.getHours() + ":" + today.getMinutes();
+    var time = ((today.getHours()>12)?(today.getHours()-12):today.getHours()) +":"+ ((today.getMinutes() < 10)?"0":"") + today.getMinutes() + ((today.getHours()>12)? ' pm' : ' am')
+    var date = today.getDate() +'/'+ (today.getMonth()+1) +'/'+ today.getFullYear()
 
     const getMessages = (project_id, bug_id) => {
         Axios.get(`/api/projects/${project_id}/bugs/${bug_id}/chats`)
@@ -31,7 +32,7 @@ export default function Chats(props) {
     },[])
 
     const handleSubmit = () => {
-        addMessage(props.project_id, props.bug_id, {username: user.email, content: content, postTime: time})
+        addMessage(props.project_id, props.bug_id, {username: user.email, content: content, postTime: `${time} ${date}`})
         setContent('')
     }
 

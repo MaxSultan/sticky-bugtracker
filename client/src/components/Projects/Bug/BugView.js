@@ -44,7 +44,6 @@ export default function BugView(props) {
             </div>
             <div style={styles.format}>
                 <div style={{maxWidth:'50%'}}>
-                    <p style={{marginLeft:'12px'}}>Status: {currentBug.status}<br/>Severity: {currentBug.severity}<br/> Current Stage: {currentBug.current_stage}</p>
                     <h3>Description: {currentBug.description}</h3>
                     <h3>Steps to Recreate: {currentBug.steps}</h3>
                     <h3>Desired Result: {currentBug.result}</h3>
@@ -72,7 +71,7 @@ export default function BugView(props) {
                     <div>
                         <Button style={styles.buttons} onClick={() => setEditing(!editing)}>Edit</Button>
                         <Button style={styles.buttons} onClick={() => deleteBugFromDb(currentBug.project_id, currentBug.id)}>Delete</Button>
-                        <Button style={styles.buttons} onClick={() => toggleChat(!chat)}>View Chat</Button>
+                        <Button style={styles.buttons} onClick={() => toggleChat(!chat)}>{chat ? 'Hide Chat' : 'View Chat'}</Button>
                     </div>
                 </h3>
                 <hr/>

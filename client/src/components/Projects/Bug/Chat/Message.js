@@ -6,10 +6,12 @@ export default function Message(props) {
         <Comment style={styles.bubble} className='change'>
             <Comment.Avatar as='a' src='' />
             <Comment.Content>
-            <Comment.Author as='a'>{props.username}</Comment.Author>
+            <div style={styles.apart}>
+                <Comment.Author as='a'>{props.username}</Comment.Author>
                 <Comment.Metadata>
-                    <span>{props.postTime}</span>
+                    <div>{props.postTime}</div>
                 </Comment.Metadata>
+            </div>
                 <Comment.Text>{props.content}</Comment.Text>
             </Comment.Content>
         </Comment>
@@ -24,5 +26,9 @@ const styles = {
         maxWidth: '100%',
         textOverflow: 'elipses',
         wordWrap:'break-word'
+    },
+    apart: {
+        display: 'flex',
+        justifyContent: 'space-between',
     }
 }
