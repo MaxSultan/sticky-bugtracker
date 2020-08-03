@@ -50,7 +50,7 @@ const Projects = (props) => {
       }
 
     return(
-        <div>
+        <div style={{minHeight:'100vh', backgroundColor:'#E5E3EB'}}>
             {showForm && <ProjectForm add={addProject} showForm={showForm} setShowForm={setShowForm} />}
             <div style={{display:'flex', justifyContent:'space-between', alignItems:'center'}}>
             <Header as='h1' style={styles.head}><strong>Projects</strong></Header>
