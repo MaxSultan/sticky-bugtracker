@@ -32,8 +32,7 @@ export default class AllBugsChart extends Component {
     .catch(err => console.log(err))
 
     Axios.get('/api/projects/getBugNumbers')
-    .then(res => this.setState({series: [{data: res.data}]
-    }))
+    .then(res => this.setState({series: [{data: res.data}]}))
     .catch(err => console.log(err))
     this.setState({loading: false})
   }
