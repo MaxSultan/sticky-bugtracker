@@ -11,13 +11,13 @@ export default class BugsByDateChart extends React.Component {
           // date work began is less than 7 days away from today 
             series: [{
               name: '< 1 week of work',
-              data: [44, 55, 57, 56, 61, 58, 63]
+              data: []
             }, {
               name: '7-30 days of work',
-              data: [76, 85, 101, 98, 87, 105, 91]
+              data: []
             }, {
               name: '30+ days of work',
-              data: [35, 41, 0, 26, 45, 48, 52]
+              data: []
             }],
             options: {
               chart: {
