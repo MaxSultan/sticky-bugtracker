@@ -6,7 +6,8 @@ Rails.application.routes.draw do
   end 
 
   namespace :api do
-    get 'projects/getBugNumbers', to: 'projects#get_bug_count' 
+    get 'projects/getBugNumbers', to: 'projects#get_bug_count'
+    get 'projects/bugsByDaysWorked', to: 'projects#bugs_by_days_worked' 
   end 
 
   namespace :api do

@@ -2,7 +2,6 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import { Container, Header, Image, Icon, } from 'semantic-ui-react';
 import ProjectForm from './ProjectForm';
-import ProjectsNav from './ProjectsNav';
 import Project from './Project'
 import froggy_copy_no_letters from '../img/froggy_copy_no_letters.png'
 
@@ -51,7 +50,7 @@ const Projects = (props) => {
       }
 
     return(
-        <div>
+        <div style={{minHeight:'100vh', backgroundColor:'#E5E3EB'}}>
             {showForm && <ProjectForm add={addProject} showForm={showForm} setShowForm={setShowForm} />}
             <div style={{display:'flex', justifyContent:'space-between', alignItems:'center'}}>
             <Header as='h1' style={styles.head}><strong>Projects</strong></Header>
@@ -75,7 +74,6 @@ const styles = {
     maxWidth: '900px',
     position:'relative',
     right:'-250px',
-    margin:'20px',
   },
   head:{
     fontSize:'5em',
@@ -84,9 +82,10 @@ const styles = {
     maxHeight:'400px',
     position: 'fixed',
     left:'-224px',
+    backgroundColor: '#e5e3eb',
   },
   addBtn:{
-    background: '#93A081',
+    backgroundColor: '#93A081',
     border: '3px solid #41553F',
     boxSizing: 'border-box',
     borderRadius: '10px',

@@ -10,6 +10,7 @@ export default class AllBugsChart extends Component {
     super(props);
     this.state = {
       options: {
+        colors:['#3f5164', '#4c5358', '#101c17'],
         chart: {
           id: 'apexchart-example'
         },
@@ -32,8 +33,7 @@ export default class AllBugsChart extends Component {
     .catch(err => console.log(err))
 
     Axios.get('/api/projects/getBugNumbers')
-    .then(res => this.setState({series: [{data: res.data}]
-    }))
+    .then(res => this.setState({series: [{data: res.data}]}))
     .catch(err => console.log(err))
     this.setState({loading: false})
   }
