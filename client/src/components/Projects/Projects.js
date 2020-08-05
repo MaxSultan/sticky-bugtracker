@@ -74,7 +74,6 @@ const styles = {
     maxWidth: '900px',
     position:'relative',
     right:'-250px',
-    margin:'20px',
   },
   head:{
     fontSize:'5em',
@@ -83,9 +82,10 @@ const styles = {
     maxHeight:'400px',
     position: 'fixed',
     left:'-224px',
+    backgroundColor: '#e5e3eb',
   },
   addBtn:{
-    background: '#93A081',
+    backgroundColor: '#93A081',
     border: '3px solid #41553F',
     boxSizing: 'border-box',
     borderRadius: '10px',

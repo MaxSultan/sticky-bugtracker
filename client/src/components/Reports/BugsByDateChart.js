@@ -7,11 +7,9 @@ export default class BugsByDateChart extends React.Component {
         super(props);
 
         this.state = {
-          // i need an axios call that will return a number of all bugs where the 
-          // date work began is less than 7 days away from today 
             series: [{
               name: '< 1 week of work',
-              data: []
+              data: [],
             }, {
               name: '7-30 days of work',
               data: []
@@ -20,6 +18,7 @@ export default class BugsByDateChart extends React.Component {
               data: []
             }],
             options: {
+                colors:['#93a081', '#4c5358', '#101c17'],
               chart: {
                 type: 'bar',
                 height: 350
@@ -32,7 +31,7 @@ export default class BugsByDateChart extends React.Component {
                 },
               },
               dataLabels: {
-                enabled: false
+                enabled: false,
               },
               stroke: {
                 show: true,
@@ -48,7 +47,7 @@ export default class BugsByDateChart extends React.Component {
                 }
               },
               fill: {
-                opacity: 1
+                opacity: 1,
               },
               tooltip: {
                 y: {

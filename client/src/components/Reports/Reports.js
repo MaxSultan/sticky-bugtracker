@@ -10,7 +10,7 @@ export default function Reports() {
             <div>
                 <Header as='h3'>Total Bugs by Project</Header>
                 <AllBugsChart/>
-                <Header as='h3'>Dopest Chart Ever</Header>
+                <Header as='h3'>Bugs by Project and Days Worked on</Header>
                 <BugsByDateChart/>
             </div>
         </div>
