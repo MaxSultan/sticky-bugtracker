@@ -25,7 +25,7 @@ function App() {
      <Switch>
        <ProtectedRoute exact path='/' component={Home}/>
        <Route exact path="/login" component={Login} />
-        <Route exact path="/register" component={Register} />
+       <Route exact path="/register" component={Register} />
        <ProtectedRoute exact path='/projects' component={Projects}/>
        <ProtectedRoute exact path='/project/:id' component={ProjectView}/> 
        <ProtectedRoute exact path='/projects/:project_id/bugs/:id' component={BugView}/>
