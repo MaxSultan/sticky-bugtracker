@@ -42,7 +42,6 @@ export default class AuthProvider extends Component {
           })
       }
       
-
     render() {
         return (
            <AuthContext.Provider 

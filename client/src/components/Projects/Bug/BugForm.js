@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Header, Icon, Label, } from "semantic-ui-react";
+import { Form, Header, Icon, Label, Loader, } from "semantic-ui-react";
 import axios from 'axios';
 import DatePicker from "react-datepicker";
 import Dropzone from 'react-dropzone'
@@ -36,7 +36,7 @@ class BugForm extends React.Component {
     status:"",
     current_stage:"", 
   }
-  state = { ...this.defaultValues };
+  state = { ...this.defaultValues, loading: false};
   handleSubmit = (e) => {
     const {projectEditId, bug_id, bugForm, id} = this.props
     let data  = new FormData();
@@ -100,7 +100,6 @@ class BugForm extends React.Component {
     this.setState({ ...this.state, screenShots: file[0] });
   }
 
-
   render() {
     const { 
         title, 
@@ -142,7 +141,7 @@ class BugForm extends React.Component {
       {key: 'f', value:'fixed', text: 'fixed'},
     ]
 
-    return (
+    return this.state.loading ? <Loader/> : (
       <div style={styles.divform}>
         <Form onSubmit={this.handleSubmit} style={styles.formform}>
         <Icon style={styles.formbutton} name='close' onClick={() => this.props.bug_id ? this.props.setEditing(!this.props.editing) : this.props.setBugForm(!this.props.bugForm)}/>
@@ -204,13 +203,6 @@ class BugForm extends React.Component {
               value={current_stage}
               onChange={this.handleSelectChange}
             />
-             {/* <Form.Input
-              label="Attach any helpful screenshots of the bug"
-              name="screenShots"
-              placeholder="Enter screenshots here"
-              value={screenShots}
-              onChange={this.handleChange}
-            /> */}
             <Label for='screenShots'>When should the bug be completed?</Label>
             <Dropzone
                 onDrop={this.onDrop}
@@ -233,13 +225,13 @@ class BugForm extends React.Component {
                   )
                 }}
             </Dropzone>
-            <Form.Input
+            <Form.Select
               label="Who is the bug assigned to in this stage?"
               name="assignedTo"
-
+              options={this.props.devOptions}
               placeholder="Enter the name of a dev/QA"
               value={assignedTo}
-              onChange={this.handleChange}
+              onChange={this.handleSelectChange}
             />
             <Label for='date_assigned'>What day was the bug assigned?</Label>
             <DatePicker
