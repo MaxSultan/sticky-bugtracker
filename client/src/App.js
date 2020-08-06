@@ -14,6 +14,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 import BugView from './components/Projects/Bug/BugView';
 import Archives from './components/Archives';
 import Reports from './components/Reports/Reports';
+import Profile from './components/Profile/Profile';
 
 
 function App() {
@@ -30,7 +31,8 @@ function App() {
        <ProtectedRoute exact path='/project/:id' component={ProjectView}/> 
        <ProtectedRoute exact path='/projects/:project_id/bugs/:id' component={BugView}/>
        <ProtectedRoute exact path='/reports' component={Reports}/>
-       <ProtectedRoute exact path='/archives' component={Archives}/>       
+       <ProtectedRoute exact path='/archives' component={Archives}/>
+       <ProtectedRoute exact path='/profile' component={Profile}/>       
        <Route component={NoMatch}></Route>
      </Switch>
    </Container>
