@@ -62,6 +62,10 @@ class Api::BugsController < ApplicationController
         render json: @bug.destroy
     end 
 
+    def all_bugs
+        render json: Bug.all
+    end 
+
     private
 
     def set_bug
