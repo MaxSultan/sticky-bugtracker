@@ -71,7 +71,7 @@ const styles = {
         padding: '20px',
         borderRadius: '50px',
         overflowY: 'scroll',
-        width:'auto',
+        width:'60vw',
         margin: '20px',
     }
 }

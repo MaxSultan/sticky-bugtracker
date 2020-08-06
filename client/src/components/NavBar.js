@@ -14,6 +14,7 @@ const NavBar = ({ props }) => {
         if(auth.authenticated){
             return (
                 <Menu.Menu position='right'>
+                  <h3 style={{marginTop:'auto', marginBottom:'auto'}}> {auth.user.name}</h3>
                   <Menu.Item
                     name='logout'
                     onClick={ () => auth.handleLogout(history) }

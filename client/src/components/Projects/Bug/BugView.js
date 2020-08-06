@@ -37,23 +37,26 @@ export default function BugView(props) {
 
     return (
         <div style={styles.views}>
-        <div>
-            <div style={styles.grid}>
-            <Header as='h1' style={{fontSize:'70px'}}><strong>{currentBug.title}</strong></Header>
-            <Icon name='close' onClick={() => props.history.goBack()} style={{marginTop:'5px'}}/>
-            </div>
-            <div style={styles.format}>
-                <div style={{maxWidth:'50%'}}>
-                    <h3>Description: {currentBug.description}</h3>
-                    <h3>Steps to Recreate: {currentBug.steps}</h3>
-                    <h3>Desired Result: {currentBug.result}</h3>
-                    <h3>Currently Assigned to: {currentBug.assignedTo}</h3>
-                    <h3>Screenshots: {currentBug.screenShots !== null ? <Button onClick={() => setShowImage(!showImage)}>View Screenshots</Button> : "No Screenshots"} </h3>
-                    {showImage && <div style={styles.imgContainer}>
-                    <div style={styles.imgHeader}><Icon name='window close' onClick={() => setShowImage(false)}/></div>
-                    <Image src={currentBug.screenShots} style={{height: '80vh', width:'80vw'}}/>
-                </div>}
+            <div>
+                <div style={styles.grid}>
+                <Header as='h1' style={{fontSize:'70px'}}><strong>{currentBug.title}</strong></Header>
+                <Icon name='close' onClick={() => props.history.goBack()} style={{marginTop:'5px'}}/>
                 </div>
+                <div style={styles.format}>
+                    <div style={{maxWidth:'50%'}}>
+                        <h3>Description: {currentBug.description}</h3>
+                        <h3>Steps to Recreate: {currentBug.steps}</h3>
+                        <h3>Desired Result: {currentBug.result}</h3>
+                        <h3>Currently Assigned to: {currentBug.assignedTo}</h3>
+                        <h3>Screenshots: {currentBug.screenShots !== null ? <Button onClick={() => setShowImage(!showImage)}>View Screenshots</Button> : "No Screenshots"} </h3>
+                        {showImage && 
+                        <div style={styles.imgContainer}>
+                            <div style={styles.imgHeader}>
+                                <Icon name='window close' onClick={() => setShowImage(false)}/>
+                            </div>
+                        <Image src={currentBug.screenShots} style={{height: '80vh', width:'80vw'}}/>
+                        </div>}
+                    </div>
                     <BugAtAGlance
                     assignedTo={currentBug.assignedTo} 
                     severity={currentBug.severity} 
@@ -68,34 +71,34 @@ export default function BugView(props) {
                 <h3>Date Assigned: {toHumanDate(currentBug.date_assigned)}</h3>
                 <h3>Date Work Began: {toHumanDate(currentBug.date_work_began)}</h3>
                 <h3 extra>
-                    <div>
-                        <Button style={styles.buttons} onClick={() => setEditing(!editing)}>Edit</Button>
-                        <Button style={styles.buttons} onClick={() => deleteBugFromDb(currentBug.project_id, currentBug.id)}>Delete</Button>
-                        <Button style={styles.buttons} onClick={() => toggleChat(!chat)}>{chat ? 'Hide Chat' : 'View Chat'}</Button>
-                    </div>
+                <div>
+                    <Button style={styles.buttons} onClick={() => setEditing(!editing)}>Edit</Button>
+                    <Button style={styles.buttons} onClick={() => deleteBugFromDb(currentBug.project_id, currentBug.id)}>Delete</Button>
+                    <Button style={styles.buttons} onClick={() => toggleChat(!chat)}>{chat ? 'Hide Chat' : 'View Chat'}</Button>
+                </div>
                 </h3>
                 <hr/>
                 {chat && <Chats project_id={currentBug.project_id} bug_id={currentBug.id}/>}
-        </div>
-        {editing && <BugForm 
-        bug_id={currentBug.id} 
-        projectEditId={currentBug.project_id}
-        initTitle={currentBug.title}
-        initSeverity={currentBug.severity}
-        initDescription={currentBug.description}
-        initSteps={currentBug.steps}
-        initResult={currentBug.result}
-        initAssignedTo={currentBug.assignedTo}
-        initScreenShots={currentBug.screenShots}
-        initDueDate={currentBug.dueDate}
-        init_date_assigned={currentBug.date_assigned}
-        init_date_work_began={currentBug.date_work_began}
-        initStatus={currentBug.status}
-        init_current_stage={currentBug.current_stage}
-        editing={editing}
-        setEditing={setEditing}
-        getBug={getBug}
-        />}
+            </div>
+            {editing && <BugForm 
+            bug_id={currentBug.id} 
+            projectEditId={currentBug.project_id}
+            initTitle={currentBug.title}
+            initSeverity={currentBug.severity}
+            initDescription={currentBug.description}
+            initSteps={currentBug.steps}
+            initResult={currentBug.result}
+            initAssignedTo={currentBug.assignedTo}
+            initScreenShots={currentBug.screenShots}
+            initDueDate={currentBug.dueDate}
+            init_date_assigned={currentBug.date_assigned}
+            init_date_work_began={currentBug.date_work_began}
+            initStatus={currentBug.status}
+            init_current_stage={currentBug.current_stage}
+            editing={editing}
+            setEditing={setEditing}
+            getBug={getBug}
+            />}
        </div>
     )
 }
@@ -140,6 +143,7 @@ const styles = {
     },
     format:{
         display: 'flex',
-        justifyContent:'space-between'
+        justifyContent:'space-between',
+        width: '60vw',
     }
 }
