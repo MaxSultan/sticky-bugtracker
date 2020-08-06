@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { AuthContext } from '../../providers/AuthProvider';
 import { Header } from 'semantic-ui-react'
+import GetIndividualDevsBugs from './GetIndividualDevsBugs';
 
 export default function Profile() {
     const auth = useContext(AuthContext)
