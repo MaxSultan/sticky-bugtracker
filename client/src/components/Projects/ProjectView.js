@@ -8,6 +8,7 @@ export default function ProductView(props){
     const [product, setProduct] = useState({})
     const [bugs, setBugs] = useState([])
     const [bugForm, setBugForm] = useState(false)
+    const [developers, setDevelopers] = useState([])
 
     useEffect(()=> {
         Axios.get(`/api/projects/${props.match.params.id}`)
@@ -17,6 +18,14 @@ export default function ProductView(props){
         Axios.get(`/api/projects/${props.match.params.id}/bugs`)
         .then(res => {
             setBugs(res.data)
+        })
+        .catch(err => console.log(err))
+
+        Axios.get('/api/users')
+        .then(res => {
+          setDevelopers(res.data.map(user => {
+            return ({key: user.name, value: user.name , text: user.name }) 
+            }))
         })
         .catch(err => console.log(err))
     },[])
@@ -49,7 +58,7 @@ export default function ProductView(props){
                 </Table.Body>
                 </Table>
                 <Button style={{backgroundColor:'#58694e', color:'#d6d6e1'}}onClick={()=> setBugForm(!bugForm)}>Add New Bug</Button>
-                {bugForm && <BugForm add={addBug} bugForm={bugForm} setBugForm={setBugForm} id={props.match.params.id}/>}
+                {bugForm && <BugForm add={addBug} bugForm={bugForm} setBugForm={setBugForm} id={props.match.params.id} devOptions={developers}/>}
                 <br/>
                 <br/>
                 <Button style={styles.button} onClick={() => props.history.push('/projects')}>Back</Button>
