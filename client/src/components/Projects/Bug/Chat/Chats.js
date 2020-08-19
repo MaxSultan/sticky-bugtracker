@@ -48,13 +48,12 @@ export default function Chats(props) {
                     attached='left'
                     name='content'
                     value={content}
-                    onChange={(e) => setContent(e.target.value)}/>
-                    <Button 
-                    attached="right"
-                    icon='add' 
-                    name='add'
-                    onClick={()=> handleSubmit()} 
-                    style={{backgroundColor:'#F96870'}}
+                    onChange={(e) => setContent(e.target.value)}
+                    action={{
+                        backgroundColor: 'pink',
+                        labelPosition:'right',
+                        icon: 'add',
+                    }}
                     />
                 </Form.Group>
             </Form>
