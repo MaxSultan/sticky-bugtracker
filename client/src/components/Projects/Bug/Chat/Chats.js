@@ -48,7 +48,9 @@ export default function Chats(props) {
                     attached='left'
                     name='content'
                     value={content}
-                    onChange={(e) => setContent(e.target.value)}/>
+                    onChange={(e) => setContent(e.target.value)}
+                    icon='add'
+                    />
                     <Button 
                     attached="right"
                     icon='add' 

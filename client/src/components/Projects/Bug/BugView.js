@@ -62,7 +62,7 @@ export default function BugView(props) {
                     severity={currentBug.severity} 
                     status={currentBug.status} 
                     current_stage={currentBug.current_stage} 
-                    diffDay={currentBug.diffDays}
+                    diffDays={props.location.state.diffDays}
                     date_assigned={toHumanDate(currentBug.date_assigned)}
                     />
                 </div>
