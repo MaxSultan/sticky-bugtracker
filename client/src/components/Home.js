@@ -1,6 +1,7 @@
 import React from 'react';
 import { Image, Container, Button, Icon, Input } from 'semantic-ui-react';
 import froggy from './img/froggy.png'
+import { Link } from 'react-router-dom';
 
 
 const Home = (props) => {
@@ -16,9 +17,14 @@ const Home = (props) => {
                 <Button>Search</Button>
             </div>
             <div style={styles.btnContainer}>
-                <Button style={styles.button}>Add Project<br/>
-                    <Icon size='big' name='add'/>
-                </Button>
+                <Link to={{
+                    pathname:'/projects',
+                    form: true
+                }}>
+                    <Button style={styles.button}>Add Project<br/>
+                        <Icon size='big' name='add'/>
+                    </Button>
+                </Link>
                 <Button style={styles.button}>Add Project</Button>
                 <Button style={styles.button}>Edit Profile</Button>
             </div>

@@ -4,14 +4,17 @@ import { Container, Header, Image, Icon, } from 'semantic-ui-react';
 import ProjectForm from './ProjectForm';
 import Project from './Project'
 import froggy_copy_no_letters from '../img/froggy_copy_no_letters.png'
+import { useLocation } from 'react-router-dom';
 
 
 
 const Projects = (props) => {
+    const location = useLocation()
     const [projects, setProjects] = useState([])
-    const [showForm, setShowForm] = useState(false)
+    const [showForm, setShowForm] = useState(location.form ? true : false)
 
     
+
     useEffect(()=>{
         axios.get('/api/projects')
         .then( res => setProjects(res.data))
