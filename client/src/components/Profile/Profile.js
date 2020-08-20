@@ -1,10 +1,14 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { AuthContext } from '../../providers/AuthProvider';
-import { Header, Image } from 'semantic-ui-react'
+import { Header, Image, Button } from 'semantic-ui-react'
 import GetIndividualDevsBugs from './GetIndividualDevsBugs';
+import EditProfile from './EditProfile';
+import { useLocation } from 'react-router-dom';
 
 export default function Profile() {
     const auth = useContext(AuthContext)
+    const location = useLocation()
+    const [editProfile, setEditProfile] = useState(location.form ? true : false)
     return (
         <div>
             <Header as='h1' style={{fontSize:'5em'}}><strong>Your Profile</strong></Header>
@@ -17,6 +21,8 @@ export default function Profile() {
                 </div>
                 <Image style={{backgroundColor:'black', height:'14em', width:'14em', borderRadius: '2em'}}/>
             </div>
+            <Button onClick={() => setEditProfile(!editProfile)}>Edit Profile</Button>
+            {editProfile && <EditProfile setEditProfile={setEditProfile}/>}
             <GetIndividualDevsBugs/>
         </div>
     )

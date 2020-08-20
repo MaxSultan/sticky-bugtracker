@@ -41,6 +41,16 @@ export default class AuthProvider extends Component {
             console.log(res);
           })
       }
+
+      handleProfileEdit = (user) => {
+        axios.put("/api/auth", user)
+        .then( res => {
+          this.setState({ user: res.data.data, });
+        })
+        .catch( res => {
+          console.log(res);
+        })
+      }
       
     render() {
         return (
@@ -51,6 +61,7 @@ export default class AuthProvider extends Component {
             handleRegister: this.handleRegister,
             handleLogin: this.handleLogin,
             handleLogout: this.handleLogout,
+            handleProfileEdit: this.handleProfileEdit,
             setUser: (user) => this.setState({ user, }) 
            }}>
                {this.props.children}
