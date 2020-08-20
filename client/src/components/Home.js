@@ -12,21 +12,36 @@ const Home = (props) => {
                 <Image src={froggy} style={{maxHeight:'200px'}}/>
             </div>
             <div style={styles.margin}>
-                <Input size={'massive'}/>
+                <Input size={'large'}/>
                 <br/>
-                <Button>Search</Button>
+                <br/>
+                <Button style={{backgroundColor:'#F96870'}}>Search</Button>
             </div>
             <div style={styles.btnContainer}>
                 <Link to={{
                     pathname:'/projects',
                     form: true
                 }}>
-                    <Button style={styles.button}>Add Project<br/>
-                        <Icon size='big' name='add'/>
+                    <Button style={styles.button}>
+                        <h1>Add Project</h1>
+                        <Icon size='big' name='add' style={{marginLeft:'.5em'}}/>
                     </Button>
                 </Link>
-                <Button style={styles.button}>Add Project</Button>
-                <Button style={styles.button}>Edit Profile</Button>
+                <Link to='/reports'>
+                    <Button style={styles.button}>
+                        <h1>View Reports</h1>
+                        <Icon size='big' name='chart line' style={{marginLeft:'.5em'}}/>
+                    </Button>
+                </Link>
+                <Link to={{
+                    pathname:'/profile',
+                    form: true
+                }}>
+                    <Button style={styles.button}>
+                        <h1>Edit Profile</h1>
+                        <Icon size='big' name='edit' style={{marginLeft:'.5em'}}/>
+                    </Button>
+                </Link>
             </div>
         </Container>
     )
@@ -43,7 +58,10 @@ const styles = {
         width: '7em',
         fontSize:'2em',
         borderRadius:'20px',
-        textAlign:'center',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent:'center',
     },
     btnContainer: {
         display:'flex',
