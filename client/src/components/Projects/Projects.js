@@ -12,6 +12,7 @@ const Projects = (props) => {
     const location = useLocation()
     const [projects, setProjects] = useState([])
     const [showForm, setShowForm] = useState(location.form ? true : false)
+    const [toggleAddBtn, setToggleAddBtn] = useState(false)
 
     useEffect(()=>{
         axios.get('/api/projects')
@@ -55,7 +56,18 @@ const Projects = (props) => {
             {showForm && <ProjectForm add={addProject} showForm={showForm} setShowForm={setShowForm} />}
             <div style={{display:'flex', justifyContent:'space-between', alignItems:'center'}}>
             <Header as='h1' style={styles.head}><strong>Projects</strong></Header>
-            <div style={styles.addBtn}><Icon style={styles.addIcon}name='add' size='huge' color='#101C17' onClick={() => setShowForm(!showForm)}/></div>
+            <div 
+            className={toggleAddBtn ? 'addBtnHover' : 'addBtn'} 
+            onMouseEnter={() => setToggleAddBtn(true)} 
+            onMouseLeave={()=> setToggleAddBtn(false)}
+            >
+              <Icon 
+              style={toggleAddBtn ? styles.addIconHover : styles.addIcon} 
+              name='add' 
+              size='huge' 
+              color='#101C17' 
+              onClick={() => setShowForm(!showForm)}/>
+            </div>
             </div>
             <Image src={froggy_copy_no_letters} style={styles.img}/>
             <div style={styles.divGrid}>
@@ -84,18 +96,11 @@ const styles = {
     position: 'fixed',
     left:'-224px',
   },
-  addBtn:{
-    backgroundColor: '#93A081',
-    border: '3px solid #41553F',
-    boxSizing: 'border-box',
-    borderRadius: '10px',
-    width: '70px',
-    height: '63px',
-    diplay:'flex',
-    justifyContent:'center',
-    alignItems:'center',
-  },
   addIcon:{
     color: '#101C17',
+  },
+  addIconHover:{
+    color: '#101C17',
+    fontWeight:'700'
   }
 }

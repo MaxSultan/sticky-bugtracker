@@ -1,3 +1,23 @@
+.addBtn{
+  background: linear-gradient(#93A081, #58694e);
+  border: 3px solid #41553F;
+  box-sizing: border-box;
+  border-radius: 10px;
+  width: 5em;
+  height: 4.5em;
+  cursor:pointer;
+}
+
+.addBtnHover{
+  background: linear-gradient(#58694e, #41553f);
+  border: 3px solid #41553F;
+  box-sizing: border-box;
+  border-radius: 10px;
+  width: 5em;
+  height: 4.5em;
+  cursor:pointer;
+}
+
 .App {
   text-align: center;
 }

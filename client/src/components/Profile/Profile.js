@@ -4,6 +4,7 @@ import { Header, Image, Button } from 'semantic-ui-react'
 import GetIndividualDevsBugs from './GetIndividualDevsBugs';
 import EditProfile from './EditProfile';
 import { useLocation } from 'react-router-dom';
+import defautImg from '../img/default_profile.jpg'
 
 export default function Profile() {
     const auth = useContext(AuthContext)
@@ -19,7 +20,7 @@ export default function Profile() {
                     <h3>Company: {auth.user.company}</h3>
                     <h3>Role: {auth.user.role}</h3>
                 </div>
-                <Image style={{backgroundColor:'black', height:'14em', width:'14em', borderRadius: '2em'}}/>
+                <Image style={{backgroundColor:'black', height:'14em', width:'14em', borderRadius: '2em'}} src={auth.image ? auth.image : defautImg}/>
             </div>
             <Button onClick={() => setEditProfile(!editProfile)}>Edit Profile</Button>
             {editProfile && <EditProfile setEditProfile={setEditProfile}/>}
@@ -36,6 +37,6 @@ const style= {
         padding: '2em',
         borderRadius: '2em',
         margin: '4em',
-        backgroundColor: "#B8BCCF"
+        background: "linear-gradient(#B8BCCF, #667582)"
     }
 }
