@@ -34,9 +34,9 @@ const styles = {
     },
     card:{
         margin:'20px 0px',
-        border:'3px solid #909AA7',
-        backgroundColor:'#D6D6E1',
-        borderRadius:'10px',
+        border:'2px solid #909AA7',
+        background:'linear-gradient(#ffffff, #D6D6E1)',
+        borderRadius:'20px',
     },
     whiteBtn:{
         border:'1px solid #909AA7',
