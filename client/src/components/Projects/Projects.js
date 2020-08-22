@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
-import { Container, Header, Image, Icon, } from 'semantic-ui-react';
+import { Header, Image, Icon, } from 'semantic-ui-react';
 import ProjectForm from './ProjectForm';
 import Project from './Project'
 import froggy_copy_no_letters from '../img/froggy_copy_no_letters.png'
@@ -12,8 +12,6 @@ const Projects = (props) => {
     const location = useLocation()
     const [projects, setProjects] = useState([])
     const [showForm, setShowForm] = useState(location.form ? true : false)
-
-    
 
     useEffect(()=>{
         axios.get('/api/projects')
@@ -53,7 +51,7 @@ const Projects = (props) => {
       }
 
     return(
-        <div style={{minHeight:'100vh', backgroundColor:'#E5E3EB'}}>
+        <div style={{minHeight:'100vh',}}>
             {showForm && <ProjectForm add={addProject} showForm={showForm} setShowForm={setShowForm} />}
             <div style={{display:'flex', justifyContent:'space-between', alignItems:'center'}}>
             <Header as='h1' style={styles.head}><strong>Projects</strong></Header>
@@ -85,7 +83,6 @@ const styles = {
     maxHeight:'400px',
     position: 'fixed',
     left:'-224px',
-    backgroundColor: '#e5e3eb',
   },
   addBtn:{
     backgroundColor: '#93A081',

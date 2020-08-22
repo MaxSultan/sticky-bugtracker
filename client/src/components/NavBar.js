@@ -15,12 +15,18 @@ const NavBar = ({ props }) => {
             return (
                 <Menu.Menu position='right'>
                   <Link to='/profile' style={{marginTop:'auto', marginBottom:'auto'}}>
-                    <Menu.Item active={location.pathname === '/profile'}> 
+                    <Menu.Item 
+                      color='yellow'
+                      active={location.pathname === '/profile'} 
+                      style={styles.white}
+                    > 
                       {auth.user.name}
                     </Menu.Item>
                   </Link>
                   <Link>
                   <Menu.Item
+                    color='yellow'
+                    style={styles.white}
                     name='logout'
                     onClick={ () => auth.handleLogout(history) }
                   />
@@ -32,6 +38,8 @@ const NavBar = ({ props }) => {
                 <Menu.Menu position='right'>
                   <Link to='/login'>
                     <Menu.Item
+                      color='yellow'
+                      style={styles.white}
                       id='login'
                       name='login'
                       active={location.pathname === '/login'}
@@ -39,6 +47,8 @@ const NavBar = ({ props }) => {
                   </Link>
                   <Link to='/register'>
                     <Menu.Item
+                      color='yellow'
+                      style={styles.white}
                       id='register'
                       name='register'
                       active={location.pathname === '/register'}
@@ -55,6 +65,8 @@ const NavBar = ({ props }) => {
           <>
             <Link to='/'>
                 <Menu.Item
+                color='yellow'
+                style={styles.white}
                 icon='home'
                 id='Home'
                 active={location.pathname === '/'}
@@ -62,18 +74,24 @@ const NavBar = ({ props }) => {
             </Link>
             <Link to='/projects'>
                 <Menu.Item
+                color='yellow'
+                style={styles.white}
                 icon='bug'
                 active={location.pathname === '/projects'}
                 />
             </Link>
             <Link to='/reports'>
                 <Menu.Item
+                color='yellow'
+                style={styles.white}
                 icon='chart line'
                 active={location.pathname === '/reports'}
                 />
             </Link>
             <Link to='/archives'>
                 <Menu.Item
+                color='yellow'
+                style={styles.white}
                 icon='box'
                 active={location.pathname === '/archives'}
                 />
@@ -93,7 +111,10 @@ const NavBar = ({ props }) => {
 
 const styles = {
   menu: {
-    backgroundColor: '#93a081'
+    background: 'linear-gradient(#58694e, #41553f)',
+  },
+  white: {
+    color: 'white'
   }
 }
 

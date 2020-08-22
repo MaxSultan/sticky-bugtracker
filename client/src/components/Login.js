@@ -72,7 +72,7 @@ const styles = {
         justifyContent: 'center'
     },
     left: {
-        backgroundColor: '#667582',
+        background: 'linear-gradient(#667582, #3f5164)',
         borderRadius: '1em',
         width:'40%',
         display:'flex',
@@ -83,7 +83,7 @@ const styles = {
         marginRight:'.5em'
     },
     right:{
-        backgroundColor: '#41553F',
+        background: 'linear-gradient(#93a081,#41553F)',
         borderRadius: '1em',
         width:'40%',
         display:'flex',

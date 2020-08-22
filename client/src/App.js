@@ -43,7 +43,7 @@ function App() {
 
 const styles = {
   color: {
-    backgroundColor: '#E5E3EB', 
+    background: 'linear-gradient(#E5E3EB, #b8bccf)', 
     minHeight: '100vh',
     minWidth: '100vw',
     height: 'auto',
