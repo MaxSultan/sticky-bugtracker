@@ -1,12 +1,14 @@
 import React from 'react';
 import { Image, Container, Button, Icon, Input } from 'semantic-ui-react';
 import froggy from './img/froggy.png'
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'
+import gray_frog from './img/froggy_gray_flip.png'
 
 
 const Home = (props) => {
     return(
         <Container>
+            <Image src={gray_frog} style={{opacity:'0.3', position:'fixed', zIndex:'0', right:'-200px', height:'120vh'}}/>
             <div style={styles.header}>
                 <h1 style={{fontSize:'5em'}}>Home</h1>
                 <Image src={froggy} style={{maxHeight:'200px'}}/>
@@ -51,6 +53,7 @@ const styles = {
     header: {
         display:'flex',
         justifyContent:'space-between',
+        zIndex:'2',
     },
     button: {
         backgroundColor:'#667582',
@@ -62,14 +65,19 @@ const styles = {
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent:'center',
+        zIndex:'3',
+        boxShadow:'5px 5px 3px #101c17',
+        position:'relative',
     },
     btnContainer: {
         display:'flex',
         justifyContent:'space-around',
+        zIndex:'2',
     },
     margin:{
         marginBottom:'3em',
         marginTop: '-1em',
+        zIndex:'2'
     }
 }
 
