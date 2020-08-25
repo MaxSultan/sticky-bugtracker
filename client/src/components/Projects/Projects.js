@@ -52,8 +52,9 @@ const Projects = (props) => {
       }
 
     return(
-        <div style={{minHeight:'100vh',}}>
-            {showForm && <ProjectForm add={addProject} showForm={showForm} setShowForm={setShowForm} />}
+      <>
+      {showForm && <ProjectForm add={addProject} showForm={showForm} setShowForm={setShowForm} />}
+        <div className={showForm ? "shrink" : "growContainer"}>
             <div style={{display:'flex', justifyContent:'space-between', alignItems:'center'}}>
             <Header as='h1' style={styles.head}><strong>Projects</strong></Header>
             <div 
@@ -69,11 +70,12 @@ const Projects = (props) => {
               onClick={() => setShowForm(!showForm)}/>
             </div>
             </div>
-            <Image src={froggy_copy_no_letters} style={styles.img}/>
+            <Image src={froggy_copy_no_letters} style={styles.img} className={showForm ? 'frogImgHover':'frogImg'}/>
             <div style={styles.divGrid}>
               {renderProject()}
             </div>
         </div>
+      </>
     )
 } 
 
@@ -102,5 +104,8 @@ const styles = {
   addIconHover:{
     color: '#101C17',
     fontWeight:'700'
-  }
+  },
+  container:{
+    minHeight:'100vh',
+  },
 }

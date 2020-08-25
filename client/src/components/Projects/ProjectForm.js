@@ -77,7 +77,7 @@ const styles = {
   divform: {
     height: '100vh',
     width: '100vw',
-    backgroundColor: '#e6e6e6', 
+    backgroundColor: 'transparent', 
     position: 'fixed',
     top: '0px',
     left: '0px',
@@ -96,7 +96,7 @@ const styles = {
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'column',
-
+    borderRadius:'10px',
   },
   formbutton: {
     justifySelf:'flex-end',

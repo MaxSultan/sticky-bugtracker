@@ -56,11 +56,40 @@
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
+.growContainer{
+  min-height: 100vh;
+  animation-name: grow;
+  animation-duration: 1s;
+}
+
+.grow{
+  animation-name: grow;
+  animation-duration: 1s;
+}
+
+.shrink{
+  animation-name: shrink;
+  animation-duration: 1s;
+  animation-fill-mode: forwards; 
+}
+
+@keyframes grow {
   from {
-    transform: rotate(0deg);
+    -webkit-transform:scale(.8);
+    opacity: 0.3;
   }
   to {
-    transform: rotate(360deg);
+    -webkit-transform:scale(1);
+    opacity:1;
+  }
+}
+
+@keyframes shrink {
+  from {
+      -webkit-transform:scale(1);
+  }
+  to {
+      -webkit-transform:scale(.8);
+      opacity:0.3;
   }
 }

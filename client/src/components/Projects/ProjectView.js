@@ -39,7 +39,8 @@ export default function ProductView(props){
     }
 
     return(
-        <div style={styles.contain}>
+        <>
+        <div style={styles.contain} className={bugForm ? 'shrink' : 'grow'}>
             <Segment style={styles.contain}>
                 <Header as='h1' textAlign='center'>{product.name}</Header>
                 <h3>Bugs</h3>
@@ -58,13 +59,13 @@ export default function ProductView(props){
                 </Table.Body>
                 </Table>
                 <Button style={{backgroundColor:'#58694e', color:'#d6d6e1'}}onClick={()=> setBugForm(!bugForm)}>Add New Bug</Button>
-                {bugForm && <BugForm add={addBug} bugForm={bugForm} setBugForm={setBugForm} id={props.match.params.id} devOptions={developers}/>}
                 <br/>
                 <br/>
                 <Button style={styles.button} onClick={() => props.history.push('/projects')}>Back</Button>
             </Segment>
-
         </div>
+        {bugForm && <BugForm add={addBug} bugForm={bugForm} setBugForm={setBugForm} id={props.match.params.id} devOptions={developers}/>}
+        </>
     )
 }
 
