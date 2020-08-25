@@ -263,7 +263,6 @@ const styles = {
   divform: {
     height: 'auto',
     width: '100%',
-    backgroundColor: '#e6e6e6', 
     position: 'absolute',
     top: '-10px',
     left: '0px',
@@ -282,7 +281,6 @@ const styles = {
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'column',
-    overflowY: 'scroll',
     position:'relative',
     top: '30px',
 
