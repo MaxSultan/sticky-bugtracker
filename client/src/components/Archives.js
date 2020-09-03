@@ -1,17 +1,22 @@
 import React, { useEffect, useState } from 'react'
-import {Header} from 'semantic-ui-react'
-import { useLocation } from 'react-router-dom';
+import { Header, Table, } from 'semantic-ui-react'
+import { useLocation, Link } from 'react-router-dom';
 import axios from 'axios';
 import Project from './Projects/Project';
 
 export default function Archives() {
     const location = useLocation()
     const [projects, setProjects] = useState([])
+    const [archivedBugs, setArchivedBugs] = useState([])
 
     useEffect(()=>{
         axios.get('/api/projects')
         .then( res => setProjects(res.data.filter(project => project.status.toString() == 'inactive')))
         .catch( err => console.log(err))
+
+        axios.get("/api/bugs/all_project")
+        .then(res => setArchivedBugs(res.data.filter(b => b.status == "complete" && b.current_stage == "fixed")))
+        .catch(err => console.log(err))
     },[])
 
     const deleteProject = (project_id) => {
@@ -40,12 +45,56 @@ export default function Archives() {
         return projects.map(p => <Project p={p} update={updateProject} deleteProject={deleteProject}/>)
       }
 
+      const renderBugs = () => {
+        if (archivedBugs.length <= 0)
+        return <h2>No Bugs</h2>
+      return archivedBugs.map(bug => (
+        <Table.Row>
+        <Table.Cell>{bug.project_name}</Table.Cell>
+        <Table.Cell><Link to={{
+            pathname: `/projects/${bug.project_id}/bugs/${bug.id}`,
+            state: {
+                project_id: bug.project_id, 
+                id: bug.id,
+                // diffDays: diffDays,
+                developers: bug.developers
+            },
+            }}>{bug.title}</Link></Table.Cell>
+
+        <Table.Cell>{bug.severity}</Table.Cell>
+        <Table.Cell>{bug.assignedTo}</Table.Cell>
+        {/* <Table.Cell>{diffDays}</Table.Cell> */}
+        <Table.Cell>4</Table.Cell>
+        <Table.Cell>{bug.current_stage}</Table.Cell>
+    </Table.Row>
+      ))
+      }
+
     return (
         <div>
             <Header as='h1' style={{fontSize:'5em'}}><strong>Archives</strong></Header>
             <div style={styles.divGrid}>
               {renderProject()}
             </div>
+            <section>
+            <Table celled>
+            <Table.Header>
+                <Table.Row>
+                    <Table.HeaderCell>Project</Table.HeaderCell>
+                    <Table.HeaderCell>Title</Table.HeaderCell>
+                    <Table.HeaderCell>Severity</Table.HeaderCell>
+                    <Table.HeaderCell>Assigned to:</Table.HeaderCell>
+                    <Table.HeaderCell>Days worked on:</Table.HeaderCell>
+                    <Table.HeaderCell>Current Stage</Table.HeaderCell>
+                </Table.Row>
+            </Table.Header>
+            <Table.Body>
+            {renderBugs()}
+            </Table.Body>
+        </Table>
+
+              
+            </section>
         </div>
     )
 }
