@@ -58,7 +58,7 @@ export default function ProjectView(props){
                 </Table.Row>
                 </Table.Header>
                 <Table.Body>
-                {bugs.map(b => <Bug {...b} delete={deleteBug}/>)}
+                {bugs.map(b => <Bug {...b} delete={deleteBug} developers={developers}/>)}
                 </Table.Body>
                 </Table>
                 <Button style={{backgroundColor:'#58694e', color:'#d6d6e1'}}onClick={()=> setBugForm(!bugForm)}>Add New Bug</Button>
