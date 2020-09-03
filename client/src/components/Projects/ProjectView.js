@@ -19,7 +19,7 @@ export default function ProjectView(props){
 
         Axios.get(`/api/projects/${props.match.params.id}/bugs`)
         .then(res => {
-            setBugs(res.data)
+            setBugs(res.datares.data.filter(b => b.status !== "complete" && b.current_stage !== "fixed"))
         })
         .catch(err => console.log(err))
 
