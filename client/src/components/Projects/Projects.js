@@ -16,7 +16,7 @@ const Projects = (props) => {
 
     useEffect(()=>{
         axios.get('/api/projects')
-        .then( res => setProjects(res.data))
+        .then( res => setProjects(res.data.filter(project => project.status.toString() !== 'inactive')))
         .catch( err => console.log(err))
     },[])
 
@@ -39,7 +39,7 @@ const Projects = (props) => {
         if (p.id == project_id) 
           return res.data
         return p
-      })
+      }).filter(p => p.status !== "inactive")
       setProjects(updatedProjects)
     })
       .catch(err => console.log(err))

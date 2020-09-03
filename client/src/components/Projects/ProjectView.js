@@ -1,18 +1,20 @@
 import React, {useState, useEffect} from 'react';
 import Axios from 'axios';
-import { Segment, Header, Button, Table } from 'semantic-ui-react';
+import { Segment, Header, Button, Table, Loader } from 'semantic-ui-react';
 import Bug from './Bug/Bug';
 import BugForm from './Bug/BugForm';
 
-export default function ProductView(props){
-    const [product, setProduct] = useState({})
+export default function ProjectView(props){
+    const [project, setProject] = useState({})
     const [bugs, setBugs] = useState([])
     const [bugForm, setBugForm] = useState(false)
     const [developers, setDevelopers] = useState([])
+    const [loading, setLoading] = useState(false)
 
     useEffect(()=> {
+        setLoading(true)
         Axios.get(`/api/projects/${props.match.params.id}`)
-        .then(res => setProduct(res.data))
+        .then(res => setProject(res.data))
         .catch(err => console.log(err))
 
         Axios.get(`/api/projects/${props.match.params.id}/bugs`)
@@ -28,6 +30,7 @@ export default function ProductView(props){
             }))
         })
         .catch(err => console.log(err))
+        setLoading(false)
     },[])
 
     const addBug = (bugObj) => {
@@ -38,11 +41,11 @@ export default function ProductView(props){
         setBugs(bugs.filter(b => b.id !== id))
     }
 
-    return(
+    return loading ? <Loader/> : (
         <>
         <div style={styles.contain} className={bugForm ? 'shrink' : 'grow'}>
             <Segment style={styles.contain}>
-                <Header as='h1' textAlign='center'>{product.name}</Header>
+                <Header as='h1' textAlign='center'>{project.name}</Header>
                 <h3>Bugs</h3>
                 <Table celled>
                 <Table.Header>
@@ -61,7 +64,7 @@ export default function ProductView(props){
                 <Button style={{backgroundColor:'#58694e', color:'#d6d6e1'}}onClick={()=> setBugForm(!bugForm)}>Add New Bug</Button>
                 <br/>
                 <br/>
-                <Button style={styles.button} onClick={() => props.history.push('/projects')}>Back</Button>
+                <Button style={styles.button} onClick={() => props.history.goBack()}>Back</Button>
             </Segment>
         </div>
         {bugForm && <BugForm add={addBug} bugForm={bugForm} setBugForm={setBugForm} id={props.match.params.id} devOptions={developers}/>}
