@@ -36,6 +36,10 @@ class Api::ProjectsController < ApplicationController
         render json: Project.all.map { |project| project.bugs.all.size}
     end 
 
+    def get_active_bug_count
+        render json: Project.all.select {|project| project.status != "inactive" }.map { |project| project.bugs.select{|bug| bug.status != "complete" && bug.current_stage != "fixed"}.size}
+    end 
+
     def bugs_by_days_worked
         less_than_7_days_bugs = Project.all.map {|project| project.bugs.count {|bug| bug.date_work_began > Date.today - 5}} 
         seven_to_30_days_bugs = Project.all.map {|project| project.bugs.count {|bug| bug.date_work_began <= Date.today - 5 &&  bug.date_work_began >= Date.today - 30}}
