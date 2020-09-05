@@ -80,6 +80,7 @@ export default function BugView(props) {
                 <hr/>
                 {chat && <Chats project_id={currentBug.project_id} bug_id={currentBug.id}/>}
             </div>
+            {console.log(props.developers)}
             {editing && <BugForm 
             bug_id={currentBug.id} 
             projectEditId={currentBug.project_id}
@@ -98,6 +99,7 @@ export default function BugView(props) {
             editing={editing}
             setEditing={setEditing}
             getBug={getBug}
+            devOptions={props.location.state.developers}
             />}
        </div>
     )

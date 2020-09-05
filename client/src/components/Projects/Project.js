@@ -5,8 +5,8 @@ import ProjectForm from './ProjectForm'
 
 export default function Project(props) {
     const [editForm, setEditForm] =  useState(false)
-
     const {p, deleteProject} = props
+
     return (
         <Card key={`Project-${p.id}`} style={styles.card}>
             <Card.Content>

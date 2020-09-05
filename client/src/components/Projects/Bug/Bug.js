@@ -19,13 +19,13 @@ export default function Bug(props) {
                             project_id: props.project_id, 
                             id: props.id,
                             diffDays: diffDays,
+                            developers: props.developers
                         },
                         }}>{props.title}</Link></Table.Cell>
                     <Table.Cell>{props.severity}</Table.Cell>
                     <Table.Cell>{props.assignedTo}</Table.Cell>
                     <Table.Cell>{diffDays}</Table.Cell>
                     <Table.Cell>{props.current_stage}</Table.Cell>
-                    {/* {toggle && <BugView {...props} setToggle={setToggle} toggle={toggle} delete={props.delete} update={props.update} diffDays={diffDays}/>} */}
                 </Table.Row>
             )
         }else if (diffDays >= 7){
@@ -37,13 +37,13 @@ export default function Bug(props) {
                             project_id: props.project_id, 
                             id: props.id,
                             diffDays: diffDays,
+                            developers: props.developers
                         },
                         }}>{props.title}</Link></Table.Cell>
                     <Table.Cell>{props.severity}</Table.Cell>
                     <Table.Cell>{props.assignedTo}</Table.Cell>
                     <Table.Cell>{diffDays}</Table.Cell>
                     <Table.Cell>{props.current_stage}</Table.Cell>
-                    {toggle && <BugView {...props} setToggle={setToggle} toggle={toggle} delete={props.delete} update={props.update}/>}
                 </Table.Row>
             )
         }else{
@@ -55,13 +55,13 @@ export default function Bug(props) {
                             project_id: props.project_id, 
                             id: props.id,
                             diffDays: diffDays,
+                            developers: props.developers
                         },
                         }}>{props.title}</Link></Table.Cell>
                     <Table.Cell>{props.severity}</Table.Cell>
                     <Table.Cell>{props.assignedTo}</Table.Cell>
                     <Table.Cell>{diffDays}</Table.Cell>
                     <Table.Cell>{props.current_stage}</Table.Cell>
-                    {toggle && <BugView {...props} setToggle={setToggle} toggle={toggle} delete={props.delete}/>}
                 </Table.Row>
             )
         }

@@ -66,6 +66,10 @@ class Api::BugsController < ApplicationController
         render json: Bug.all
     end 
 
+    def all 
+        render json: Bug.get_bug_with_project
+    end
+
     private
 
     def set_bug

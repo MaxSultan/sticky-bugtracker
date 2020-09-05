@@ -1,5 +1,6 @@
 import React from 'react'
 import AllBugsChart from './AllBugsChart'
+import ActiveBugsChart from './ActiveBugsChart'
 import { Header } from 'semantic-ui-react'
 import BugsByDateChart from './BugsByDateChart'
 
@@ -10,6 +11,8 @@ export default function Reports() {
             <div>
                 <Header as='h3'>Total Bugs by Project</Header>
                 <AllBugsChart/>
+                <Header as='h3'>Active Bugs in Active Projects</Header>
+                <ActiveBugsChart/>
                 <Header as='h3'>Bugs by Project and Days Worked on</Header>
                 <BugsByDateChart/>
             </div>
