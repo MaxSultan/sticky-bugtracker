@@ -10,7 +10,7 @@ export default class AllBugsChart extends Component {
     super(props);
     this.state = {
       options: {
-        colors:['#3f5164', '#4c5358', '#101c17'],
+        colors:['#4c5358', '#101c17'],
         chart: {
           id: 'apexchart-example'
         },
