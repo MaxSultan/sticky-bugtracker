@@ -70,7 +70,7 @@ export default class BugsByDateChart extends React.Component {
             console.log(res.data)
             this.setState({series: [{data: res.data.seven_less},{data: res.data.seven_thirty},{data: res.data.thirty_more}]})
         })
-        .catch(err => console.log(err))
+        .catch(err => console.log(err.message))
     }
 
     render() {

@@ -38,7 +38,7 @@ class Api::ProjectsController < ApplicationController
 
     def bugs_by_days_worked
         less_than_7_days_bugs = Project.all.map {|project| project.bugs.count {|bug| bug.date_work_began > Date.today - 5}} 
-        seven_to_30_days_bugs = Project.all.map {|project| project.bugs.count {|bug| bug.date_work_began <= Date.today - 5 &&  bug.date_work_began >= Date.today - 30}}
+        seven_to_30_days_bugs = Project.all.map {|project| project.bugs.count {|bug| bug.date_work_began <= Date.today - 5 && bug.date_work_began >= Date.today - 30}}
         thirty_plus_days_bugs = Project.all.map {|project| project.bugs.count {|bug| bug.date_work_began < Date.today - 30}}
         render json: {seven_less: less_than_7_days_bugs, seven_thirty: seven_to_30_days_bugs, thirty_more: thirty_plus_days_bugs}
     end 
