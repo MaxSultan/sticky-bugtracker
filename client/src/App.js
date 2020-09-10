@@ -11,7 +11,7 @@ import Login from './components/Login';
 import Register from './components/Register';
 import FetchUser from './components/FetchUser'
 import ProtectedRoute from './components/ProtectedRoute';
-import BugView from './components/Projects/Bug/BugView';
+import BugView from './components/Bug/BugView';
 import Archives from './components/Archives';
 import Reports from './components/Reports/Reports';
 import Profile from './components/Profile/Profile';

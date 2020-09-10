@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Header, Icon, Button, Image } from 'semantic-ui-react'
 import Axios from 'axios'
-import Chats from './Chat/Chats'
+import Chats from '../Chat/Chats'
 import BugForm from './BugForm'
 import BugAtAGlance from './BugAtAGlance'
 import DeleteConfirmation from '../Projects/DeleteConfirmation'

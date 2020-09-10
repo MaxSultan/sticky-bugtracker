@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react'
 import { Form, Button, Icon } from 'semantic-ui-react'
 import Axios from 'axios'
 import Message from './Message'
-import { AuthContext } from '../../../../providers/AuthProvider'
+import { AuthContext } from '../../providers/AuthProvider'
 
 export default function Chats(props) {
     const [messages, setMessages] = useState([])
