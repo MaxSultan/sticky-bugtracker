@@ -2,9 +2,11 @@ import React, {useState} from 'react'
 import { Card, Button } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import ProjectForm from './ProjectForm'
+import DeleteConfirmation from './DeleteConfirmation'
 
 export default function Project(props) {
     const [editForm, setEditForm] =  useState(false)
+    const [confirmDelete, setConfirmDelete] = useState(false)
     const {p, deleteProject} = props
 
     return (
@@ -19,10 +21,27 @@ export default function Project(props) {
                 <Button as={Link} to={`/project/${p.id}`} style={styles.button}>
                     View
                 </Button>
-                <Button onClick={()=> deleteProject(p.id)} style={styles.whiteBtn}>Delete</Button>
+                <Button onClick={()=> setConfirmDelete(true)} style={styles.whiteBtn}>Delete</Button>
                 <Button onClick={()=> setEditForm(!editForm)} style={styles.whiteBtn}>Edit</Button>
             </Card.Content>
-            {editForm && <ProjectForm id={p.id} initName={p.name} initStatus={p.status} update={props.update} editForm={editForm} setEditForm={setEditForm}/>}
+            {editForm && 
+                <ProjectForm 
+                id={p.id} 
+                initName={p.name} 
+                initStatus={p.status} 
+                update={props.update} 
+                editForm={editForm} 
+                setEditForm={setEditForm}
+                />
+            }
+            {confirmDelete && 
+                <DeleteConfirmation 
+                deleteProject ={deleteProject} 
+                id={p.id} 
+                name={p.name} 
+                setConfirmDelete={setConfirmDelete}
+                />
+            }
       </Card>
     )
 }

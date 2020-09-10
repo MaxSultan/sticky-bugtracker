@@ -64,7 +64,7 @@ export default function ProjectView(props){
                 <Button style={{backgroundColor:'#58694e', color:'#d6d6e1'}}onClick={()=> setBugForm(!bugForm)}>Add New Bug</Button>
                 <br/>
                 <br/>
-                <Button style={styles.button} onClick={() => props.history.goBack()}>Back</Button>
+                <Button style={styles.button} onClick={() => props.history.push('/projects')}>projects</Button>
             </Segment>
         </div>
         {bugForm && <BugForm add={addBug} bugForm={bugForm} setBugForm={setBugForm} id={props.match.params.id} devOptions={developers}/>}

@@ -3,7 +3,6 @@ import { Form, Header, Icon, Label, Loader, } from "semantic-ui-react";
 import axios from 'axios';
 import DatePicker from "react-datepicker";
 import Dropzone from 'react-dropzone'
-
 import "react-datepicker/dist/react-datepicker.css";
 
 class BugForm extends React.Component {
@@ -46,7 +45,6 @@ class BugForm extends React.Component {
           `/api/projects/${this.props.projectEditId}/bugs/${bug_id}?title=${this.state.title}&description=${this.state.description}&steps=${this.state.steps}&result=${this.state.result}&assignedTo=${this.state.assignedTo}&severity=${this.state.severity}&dueDate=${this.state.dueDate}&date_assigned=${this.state.date_assigned}&date_work_began=${this.state.date_work_began}&status=${this.state.status}&current_stage=${this.state.current_stage}`, data
           )
           .then(res => {
-            console.log(res)
             this.setState({
               title: res.data.title, 
               description: res.data.description, 

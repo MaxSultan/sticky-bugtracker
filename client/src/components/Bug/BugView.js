@@ -4,12 +4,14 @@ import Axios from 'axios'
 import Chats from './Chat/Chats'
 import BugForm from './BugForm'
 import BugAtAGlance from './BugAtAGlance'
+import DeleteConfirmation from '../Projects/DeleteConfirmation'
 
 export default function BugView(props) {
     const [chat, toggleChat] = useState(false)
     const [editing, setEditing] = useState(false)
     const [showImage, setShowImage] = useState(false)
     const [currentBug, setCurrentBug] = useState({})
+    const [confirmBugDelete, setConfirmBugDelete] = useState(false)
 
     const getBug = () => {
         Axios.get(`/api/projects/${props.location.state.project_id}/bugs/${props.location.state.id}`)
@@ -73,14 +75,22 @@ export default function BugView(props) {
                 <h3 extra>
                 <div>
                     <Button style={styles.buttons} onClick={() => setEditing(!editing)}>Edit</Button>
-                    <Button style={styles.buttons} onClick={() => deleteBugFromDb(currentBug.project_id, currentBug.id)}>Delete</Button>
+                    <Button style={styles.buttons} onClick={() => setConfirmBugDelete(!confirmBugDelete)}>Delete</Button>
                     <Button style={styles.buttons} onClick={() => toggleChat(!chat)}>{chat ? 'Hide Chat' : 'View Chat'}</Button>
                 </div>
                 </h3>
                 <hr/>
                 {chat && <Chats project_id={currentBug.project_id} bug_id={currentBug.id}/>}
+                {confirmBugDelete && 
+                    <DeleteConfirmation 
+                    id={currentBug.id}
+                    project_id={currentBug.project_id}
+                    name={currentBug.title} 
+                    setConfirmBugDelete={setConfirmBugDelete}
+                    deleteBug={deleteBugFromDb}
+                    />
+                }
             </div>
-            {console.log(props.developers)}
             {editing && <BugForm 
             bug_id={currentBug.id} 
             projectEditId={currentBug.project_id}
@@ -110,7 +120,6 @@ const styles = {
         minHeight:'80vh',
         height: '100%',
         width: '100%',
-        backgroundColor: '#e5e3eb',
         display: 'flex',
         justifyContent: 'space-around',
         alignItems: 'center',
