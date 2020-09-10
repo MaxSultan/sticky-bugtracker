@@ -9,7 +9,18 @@ export default function Project(props) {
     const [confirmDelete, setConfirmDelete] = useState(false)
     const {p, deleteProject} = props
 
+    const deleting = () => {
+        props.setAnimate(true)
+        setConfirmDelete(true)
+    }
+
+    const editing = () => {
+        props.setAnimate(true)
+        setEditForm(!editForm)
+    }
+
     return (
+        <>
         <Card key={`Project-${p.id}`} style={styles.card}>
             <Card.Content>
                 <Card.Header style={{fontSize:'32px', color:'#314231'}}><strong>{p.name}</strong></Card.Header>
@@ -21,10 +32,11 @@ export default function Project(props) {
                 <Button as={Link} to={`/project/${p.id}`} style={styles.button}>
                     View
                 </Button>
-                <Button onClick={()=> setConfirmDelete(true)} style={styles.whiteBtn}>Delete</Button>
-                <Button onClick={()=> setEditForm(!editForm)} style={styles.whiteBtn}>Edit</Button>
+                <Button onClick={()=> deleting()} style={styles.whiteBtn}>Delete</Button>
+                <Button onClick={()=> editing()} style={styles.whiteBtn}>Edit</Button>
             </Card.Content>
-            {editForm && 
+      </Card>
+      {editForm && 
                 <ProjectForm 
                 id={p.id} 
                 initName={p.name} 
@@ -32,6 +44,7 @@ export default function Project(props) {
                 update={props.update} 
                 editForm={editForm} 
                 setEditForm={setEditForm}
+                setAnimate={props.setAnimate}
                 />
             }
             {confirmDelete && 
@@ -40,9 +53,10 @@ export default function Project(props) {
                 id={p.id} 
                 name={p.name} 
                 setConfirmDelete={setConfirmDelete}
+                setAnimate={props.setAnimate}
                 />
             }
-      </Card>
+      </>
     )
 }
 

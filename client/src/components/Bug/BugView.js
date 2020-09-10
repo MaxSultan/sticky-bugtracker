@@ -12,6 +12,7 @@ export default function BugView(props) {
     const [showImage, setShowImage] = useState(false)
     const [currentBug, setCurrentBug] = useState({})
     const [confirmBugDelete, setConfirmBugDelete] = useState(false)
+    const [animate, setAnimate] = useState(false)
 
     const getBug = () => {
         Axios.get(`/api/projects/${props.location.state.project_id}/bugs/${props.location.state.id}`)
@@ -37,9 +38,14 @@ export default function BugView(props) {
         return newDate
     }
 
+    const deleting = () => {
+        setAnimate(true)
+        setConfirmBugDelete(!confirmBugDelete)
+    }
+
     return (
         <div style={styles.views}>
-            <div>
+            <div className={animate ? "shrink" : "grow"}>
                 <div style={styles.grid}>
                 <Header as='h1' style={{fontSize:'70px'}}><strong>{currentBug.title}</strong></Header>
                 <Icon name='close' onClick={() => props.history.goBack()} style={{marginTop:'5px'}}/>
@@ -75,22 +81,23 @@ export default function BugView(props) {
                 <h3 extra>
                 <div>
                     <Button style={styles.buttons} onClick={() => setEditing(!editing)}>Edit</Button>
-                    <Button style={styles.buttons} onClick={() => setConfirmBugDelete(!confirmBugDelete)}>Delete</Button>
+                    <Button style={styles.buttons} onClick={() => deleting()}>Delete</Button>
                     <Button style={styles.buttons} onClick={() => toggleChat(!chat)}>{chat ? 'Hide Chat' : 'View Chat'}</Button>
                 </div>
                 </h3>
                 <hr/>
                 {chat && <Chats project_id={currentBug.project_id} bug_id={currentBug.id}/>}
-                {confirmBugDelete && 
+            </div>
+            {confirmBugDelete && 
                     <DeleteConfirmation 
                     id={currentBug.id}
                     project_id={currentBug.project_id}
                     name={currentBug.title} 
                     setConfirmBugDelete={setConfirmBugDelete}
                     deleteBug={deleteBugFromDb}
+                    setAnimate={setAnimate}
                     />
                 }
-            </div>
             {editing && <BugForm 
             bug_id={currentBug.id} 
             projectEditId={currentBug.project_id}

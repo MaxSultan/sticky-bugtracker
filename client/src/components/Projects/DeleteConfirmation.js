@@ -9,14 +9,19 @@ const DeleteConfirmation = (props) => {
             props.setConfirmBugDelete(false)
         }else{
             props.deleteProject(props.id)
+            props.setAnimate(false)
             props.setConfirmDelete(false)
         }
     }
 
     const cancelPressed = () => {
-        return props.project_id? 
-            props.setConfirmBugDelete(false) : 
+        if(props.project_id) {
+            props.setAnimate(false)
+            props.setConfirmBugDelete(false) 
+        }else{
+            props.setAnimate(false)
             props.setConfirmDelete(false)
+        }   
     }
 
     return(

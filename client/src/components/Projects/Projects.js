@@ -13,6 +13,7 @@ const Projects = (props) => {
     const [projects, setProjects] = useState([])
     const [showForm, setShowForm] = useState(location.form ? true : false)
     const [toggleAddBtn, setToggleAddBtn] = useState(false)
+    const [animate, setAnimate] = useState(false)
 
     useEffect(()=>{
         axios.get('/api/projects')
@@ -48,13 +49,18 @@ const Projects = (props) => {
     const renderProject = () => {
         if (Projects.length <= 0)
           return <h2>No Projects</h2>
-        return projects.map(p => <Project p={p} update={updateProject} deleteProject={deleteProject}/>)
+        return projects.map(p => <Project p={p} update={updateProject} deleteProject={deleteProject} setAnimate={setAnimate}/>)
       }
+
+    const adding = () => {
+      setAnimate(!animate)
+      setShowForm(!showForm)
+    }
 
     return(
       <>
-      {showForm && <ProjectForm add={addProject} showForm={showForm} setShowForm={setShowForm} />}
-        <div className={showForm ? "shrink" : "growContainer"}>
+      {showForm && <ProjectForm add={addProject} showForm={showForm} setShowForm={setShowForm} setAnimate={setAnimate}/>}
+        <div className={animate ? "shrink" : "growContainer"}>
             <div style={{display:'flex', justifyContent:'space-between', alignItems:'center'}}>
             <Header as='h1' style={styles.head}><strong>Projects</strong></Header>
             <div 
@@ -67,10 +73,10 @@ const Projects = (props) => {
               name='add' 
               size='huge' 
               color='#101C17' 
-              onClick={() => setShowForm(!showForm)}/>
+              onClick={() => adding()}/>
             </div>
             </div>
-            <Image src={froggy_copy_no_letters} style={styles.img} className={showForm ? 'frogImgHover':'frogImg'}/>
+            <Image src={froggy_copy_no_letters} style={styles.img} className={animate ? 'frogImgHover':'frogImg'}/>
             <div style={styles.divGrid}>
               {renderProject()}
             </div>
