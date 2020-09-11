@@ -93,3 +93,10 @@
       opacity:0.3;
   }
 }
+
+.projectForm{
+  opacity: 1 !important;
+  animation-name: grow;
+  animation-duration: 1s;
+  animation-fill-mode: forwards; 
+}

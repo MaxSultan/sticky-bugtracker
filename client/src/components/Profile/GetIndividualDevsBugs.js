@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react'
 import { AuthContext } from '../../providers/AuthProvider';
 import Axios from 'axios'
-import Bug from '../Projects/Bug/Bug';
+import Bug from '../Bug/Bug';
 import { Table } from 'semantic-ui-react';
 
 export default function GetIndividualDevsBugs() {

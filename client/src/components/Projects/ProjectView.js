@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import Axios from 'axios';
 import { Segment, Header, Button, Table, Loader } from 'semantic-ui-react';
-import Bug from './Bug/Bug';
-import BugForm from './Bug/BugForm';
+import Bug from '../Bug/Bug';
+import BugForm from '../Bug/BugForm';
 
 export default function ProjectView(props){
     const [project, setProject] = useState({})
@@ -64,7 +64,7 @@ export default function ProjectView(props){
                 <Button style={{backgroundColor:'#58694e', color:'#d6d6e1'}}onClick={()=> setBugForm(!bugForm)}>Add New Bug</Button>
                 <br/>
                 <br/>
-                <Button style={styles.button} onClick={() => props.history.goBack()}>Back</Button>
+                <Button style={styles.button} onClick={() => props.history.push('/projects')}>Back to Projects</Button>
             </Segment>
         </div>
         {bugForm && <BugForm add={addBug} bugForm={bugForm} setBugForm={setBugForm} id={props.match.params.id} devOptions={developers}/>}

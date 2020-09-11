@@ -9,6 +9,7 @@ class ProductsForm extends React.Component {
   handleSubmit = (e) => {
     if(this.props.id){
       this.props.update(this.props.id, {name: this.state.name, status: this.state.status})
+      
       this.props.setEditForm(false)
     } else {
       e.preventDefault();
@@ -20,6 +21,7 @@ class ProductsForm extends React.Component {
       .catch(err => console.log(err))
     }
     this.setState({ name: '', status: '' });
+    return this.props.setAnimate ? this.props.setAnimate(false) : null
   }
 
   handleChange = (e) => {
@@ -33,8 +35,11 @@ class ProductsForm extends React.Component {
 
   handleClose = () => {
     if(this.props.setEditForm){
+      this.props.setAnimate(false)
       this.props.setEditForm(false)
-    }else {this.props.setShowForm(false)}
+    }else {
+      this.props.setAnimate(false)
+      this.props.setShowForm(false)}
   }
 
   render() {
@@ -45,7 +50,7 @@ class ProductsForm extends React.Component {
       {key: 'p', value:'paused', text: 'paused'},
      ]
     return (
-      <div style={styles.divform}>
+      <div style={styles.divform} className="projectForm">
         <Form onSubmit={this.handleSubmit} style={styles.formform}>
         <Icon style={styles.formbutton} name='close' onClick={() => this.handleClose()}/>
         <Header as="h1">{this.props.id ? 'Edit Project' : 'Add New Project'}</Header>

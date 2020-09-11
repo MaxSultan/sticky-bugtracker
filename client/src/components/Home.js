@@ -22,7 +22,8 @@ const Home = (props) => {
             <div style={styles.btnContainer}>
                 <Link to={{
                     pathname:'/projects',
-                    form: true
+                    form: true,
+                    animate: true
                 }}>
                     <Button style={styles.button}>
                         <h1>Add Project</h1>
@@ -37,7 +38,7 @@ const Home = (props) => {
                 </Link>
                 <Link to={{
                     pathname:'/profile',
-                    form: true
+                    form: true,
                 }}>
                     <Button style={styles.button}>
                         <h1>Edit Profile</h1>

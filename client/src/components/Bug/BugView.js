@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from 'react'
 import { Header, Icon, Button, Image } from 'semantic-ui-react'
 import Axios from 'axios'
-import Chats from './Chat/Chats'
+import Chats from '../Chat/Chats'
 import BugForm from './BugForm'
 import BugAtAGlance from './BugAtAGlance'
+import DeleteConfirmation from '../Projects/DeleteConfirmation'
 
 export default function BugView(props) {
     const [chat, toggleChat] = useState(false)
     const [editing, setEditing] = useState(false)
     const [showImage, setShowImage] = useState(false)
     const [currentBug, setCurrentBug] = useState({})
+    const [confirmBugDelete, setConfirmBugDelete] = useState(false)
+    const [animate, setAnimate] = useState(false)
 
     const getBug = () => {
         Axios.get(`/api/projects/${props.location.state.project_id}/bugs/${props.location.state.id}`)
@@ -35,9 +38,14 @@ export default function BugView(props) {
         return newDate
     }
 
+    const deleting = () => {
+        setAnimate(true)
+        setConfirmBugDelete(!confirmBugDelete)
+    }
+
     return (
         <div style={styles.views}>
-            <div>
+            <div className={animate ? "shrink" : "grow"}>
                 <div style={styles.grid}>
                 <Header as='h1' style={{fontSize:'70px'}}><strong>{currentBug.title}</strong></Header>
                 <Icon name='close' onClick={() => props.history.goBack()} style={{marginTop:'5px'}}/>
@@ -73,14 +81,23 @@ export default function BugView(props) {
                 <h3 extra>
                 <div>
                     <Button style={styles.buttons} onClick={() => setEditing(!editing)}>Edit</Button>
-                    <Button style={styles.buttons} onClick={() => deleteBugFromDb(currentBug.project_id, currentBug.id)}>Delete</Button>
+                    <Button style={styles.buttons} onClick={() => deleting()}>Delete</Button>
                     <Button style={styles.buttons} onClick={() => toggleChat(!chat)}>{chat ? 'Hide Chat' : 'View Chat'}</Button>
                 </div>
                 </h3>
                 <hr/>
                 {chat && <Chats project_id={currentBug.project_id} bug_id={currentBug.id}/>}
             </div>
-            {console.log(props.developers)}
+            {confirmBugDelete && 
+                    <DeleteConfirmation 
+                    id={currentBug.id}
+                    project_id={currentBug.project_id}
+                    name={currentBug.title} 
+                    setConfirmBugDelete={setConfirmBugDelete}
+                    deleteBug={deleteBugFromDb}
+                    setAnimate={setAnimate}
+                    />
+                }
             {editing && <BugForm 
             bug_id={currentBug.id} 
             projectEditId={currentBug.project_id}
@@ -110,7 +127,6 @@ const styles = {
         minHeight:'80vh',
         height: '100%',
         width: '100%',
-        backgroundColor: '#e5e3eb',
         display: 'flex',
         justifyContent: 'space-around',
         alignItems: 'center',
