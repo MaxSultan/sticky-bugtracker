@@ -15,8 +15,8 @@ export default class AuthProvider extends Component {
             this.setState({ user: res.data.data, });
             history.push("/");
           })
-        .catch( res => {
-          console.log(res);
+        .catch(err => {
+          alert(err);
         })
       }
       
@@ -26,8 +26,8 @@ export default class AuthProvider extends Component {
             this.setState({ user: res.data.data, });
             history.push("/");
           })
-          .catch( res => {
-            console.log(res);
+          .catch(err => {
+            alert("Incorrect Email or Password. Please try again");
           })
       }
       
@@ -37,8 +37,8 @@ export default class AuthProvider extends Component {
             this.setState({ user: null, });
             history.push('/login');
           })
-          .catch( res => {
-            console.log(res);
+          .catch(err => {
+            alert(err);
           })
       }
 
