@@ -35,7 +35,7 @@ class ProductsForm extends React.Component {
 
   handleClose = () => {
     if(this.props.setEditForm){
-      this.props.setAnimate(false)
+      if(this.props.setAnimate) this.props.setAnimate(false)
       this.props.setEditForm(false)
     }else {
       this.props.setAnimate(false)

@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react'
 import { Header, Table, } from 'semantic-ui-react'
 import { useLocation, Link } from 'react-router-dom';
 import axios from 'axios';
-import Project from './Projects/Project';
-import ProjectForm from './Projects/ProjectForm'
-import DeleteConfirmation from './Projects/DeleteConfirmation';
+import Project from '../Projects/Project';
+import ProjectForm from '../Projects/ProjectForm'
+import DeleteConfirmation from '../Projects/DeleteConfirmation';
+import ArchiveDescription from './ArchiveDescription';
 
 export default function Archives() {
     const location = useLocation()
@@ -17,6 +18,7 @@ export default function Archives() {
     const [deleteName, setDeleteName] = useState('')
     const [deleteId, setDeleteId] = useState('')
     const [deleting, setDeleting] = useState(false)
+    const [archiveDescription, setArchiveDescription] = useState(false)
 
     useEffect(()=>{
         axios.get('/api/projects')
@@ -95,8 +97,16 @@ export default function Archives() {
     return (
       <>
         <div>
-            <Header as='h1' style={{fontSize:'5em'}}><strong>Archives</strong></Header>
-            <div style={styles.divGrid}>
+            <Header 
+              as='h1' 
+              style={{fontSize:'5em'}} 
+              onMouseEnter={()=> setArchiveDescription(true)}
+              onMouseLeave={()=> setArchiveDescription(false)}
+            >
+              <strong>Archives</strong>
+            </Header>
+            {archiveDescription && <ArchiveDescription/>}
+            <div style={styles.divGrid} >
               {renderProject()}
             </div>
             <section>
