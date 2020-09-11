@@ -9,7 +9,7 @@ const DeleteConfirmation = (props) => {
             props.setConfirmBugDelete(false)
         }else{
             props.deleteProject(props.id)
-            props.setAnimate(false)
+            if(props.setAnimate) props.setAnimate(false)
             props.setConfirmDelete(false)
         }
     }
@@ -19,7 +19,7 @@ const DeleteConfirmation = (props) => {
             props.setAnimate(false)
             props.setConfirmBugDelete(false) 
         }else{
-            props.setAnimate(false)
+            if (props.setAnimate) props.setAnimate(false)
             props.setConfirmDelete(false)
         }   
     }

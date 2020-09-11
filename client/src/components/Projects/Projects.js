@@ -5,6 +5,7 @@ import ProjectForm from './ProjectForm';
 import Project from './Project'
 import froggy_copy_no_letters from '../img/froggy_copy_no_letters.png'
 import { useLocation } from 'react-router-dom';
+import DeleteConfirmation from './DeleteConfirmation';
 
 
 
@@ -13,7 +14,14 @@ const Projects = (props) => {
     const [projects, setProjects] = useState([])
     const [showForm, setShowForm] = useState(location.form ? true : false)
     const [toggleAddBtn, setToggleAddBtn] = useState(false)
-    const [animate, setAnimate] = useState(false)
+    const [animate, setAnimate] = useState(location.animate ? true : false)
+    const [deleteName, setDeleteName] = useState('')
+    const [deleteId, setDeleteId] = useState('')
+    const [deleting, setDeleting] = useState(false)
+    const [editing, setEditing] = useState(false)
+    const [editId, setEditId] = useState('')
+    const [editName, setEditName] = useState('')
+    const [editStatus, setEditStatus] = useState('')
 
     useEffect(()=>{
         axios.get('/api/projects')
@@ -22,8 +30,7 @@ const Projects = (props) => {
     },[])
 
     const addProject = (projectObj) => {
-        console.log(projectObj)
-        setProjects([projectObj, ...projects])
+        if (projectObj.status != "inactive") setProjects([projectObj, ...projects])
     }
 
     const deleteProject = (project_id) => {
@@ -49,7 +56,7 @@ const Projects = (props) => {
     const renderProject = () => {
         if (Projects.length <= 0)
           return <h2>No Projects</h2>
-        return projects.map(p => <Project p={p} update={updateProject} deleteProject={deleteProject} setAnimate={setAnimate}/>)
+        return projects.map(p => <Project {...p} update={updateProject} deleteProject={deleteProject} setAnimate={setAnimate} deleteFunction={deleteFunction} editFunction={editFunction}/>)
       }
 
     const adding = () => {
@@ -57,8 +64,43 @@ const Projects = (props) => {
       setShowForm(!showForm)
     }
 
+    const deleteFunction = (id, name) => {
+      setDeleteId(id)
+      setDeleteName(name)
+      setAnimate(true)
+      setDeleting(true)
+    }
+
+    const editFunction = (id, name, status) => {
+      setEditId(id)
+      setEditName(name)
+      setEditStatus(status)
+      setAnimate(true)
+      setEditing(true)
+    }
+    
     return(
       <>
+      {editing && 
+        <ProjectForm 
+          id={editId} 
+          initName={editName} 
+          initStatus={editStatus} 
+          update={updateProject} 
+          editForm={editing} 
+          setEditForm={setEditing}
+          setAnimate={setAnimate}
+        />
+      }
+      {deleting && 
+        <DeleteConfirmation
+          deleteProject={deleteProject}
+          id={deleteId} 
+          name={deleteName} 
+          setConfirmDelete={setDeleting}
+          setAnimate={setAnimate}
+        />
+      }
       {showForm && <ProjectForm add={addProject} showForm={showForm} setShowForm={setShowForm} setAnimate={setAnimate}/>}
         <div className={animate ? "shrink" : "growContainer"}>
             <div style={{display:'flex', justifyContent:'space-between', alignItems:'center'}}>

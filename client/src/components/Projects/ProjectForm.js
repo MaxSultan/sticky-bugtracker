@@ -21,7 +21,7 @@ class ProductsForm extends React.Component {
       .catch(err => console.log(err))
     }
     this.setState({ name: '', status: '' });
-    this.props.setAnimate(false)
+    return this.props.setAnimate ? this.props.setAnimate(false) : null
   }
 
   handleChange = (e) => {
